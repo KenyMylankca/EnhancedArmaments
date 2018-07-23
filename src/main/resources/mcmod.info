@@ -1,0 +1,16 @@
+[
+	{
+	"modid": "enhancedarmanents",
+	"name": "Enhanced Armanents",
+	"description": "An enhanced, unique leveling system.",
+	"version": "1.0.0",
+	"mcversion": "1.12.2",
+	"url": "",
+	"updateUrl": "",
+	"authorList": ["JanneSoon"],
+	"credits": "TheXFactor117",
+	"logoFile": "assets/enhancedarmanents/logo/logo.png",
+	"screenshots": [],
+	"dependencies": []
+	}
+]

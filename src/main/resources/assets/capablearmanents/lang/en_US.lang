@@ -1,0 +1,67 @@
+key.enhancedarmanents=Enhanced Armanents
+key.gui.weapon_interface=Armanent Leveling Key
+
+enhancedarmanents.rarity.DEFAULT=Default
+enhancedarmanents.rarity.BASIC=Basic
+enhancedarmanents.rarity.UNCOMMON=Uncommon
+enhancedarmanents.rarity.RARE=Rare
+enhancedarmanents.rarity.ULTRA_RARE=Ultra Rare
+enhancedarmanents.rarity.LEGENDARY=Legendary
+enhancedarmanents.rarity.ARCHAIC=Archaic
+
+enhancedarmanents.ability.FIRE=Fire
+enhancedarmanents.ability.FROST=Frost
+enhancedarmanents.ability.POISON=Poison
+enhancedarmanents.ability.INNATE=Innate
+enhancedarmanents.ability.BOMBASTIC=Bombastic
+enhancedarmanents.ability.VOID=Void
+enhancedarmanents.ability.ILLUMINATION=Illumination
+enhancedarmanents.ability.ETHEREAL=Ethereal
+enhancedarmanents.ability.BLOODTHIRST=Bloodthirst
+enhancedarmanents.ability.MOLTEN=Molten
+enhancedarmanents.ability.FROZEN=Frozen
+enhancedarmanents.ability.TOXIC=Toxic
+enhancedarmanents.ability.ABSORB=Absorb
+enhancedarmanents.ability.BEASTIAL=Beastial
+enhancedarmanents.ability.REMEDIAL=Remedial
+enhancedarmanents.ability.HARDENED=Hardened
+
+enhancedarmanents.ability.type.active=Active
+enhancedarmanents.ability.type.passive=Passive
+
+enhancedarmanents.abilities.info.FIRE=Sets enemies on fire for a short time.
+enhancedarmanents.abilities.info.FROST=Stuns enemies, freezing them in place for a short time.
+enhancedarmanents.abilities.info.POISON=Poisons enemies for a short time.
+enhancedarmanents.abilities.info.INNATE=Causes enemies to bleed.
+enhancedarmanents.abilities.info.BOMBASTIC=Explodes target entitys area. May harm you too.
+enhancedarmanents.abilities.info.VOID=Small chance at dealing a large amount of damage by respect to enemy's hp.
+enhancedarmanents.abilities.info.ILLUMINATION=Weakens enemies.
+enhancedarmanents.abilities.info.ETHEREAL=If you kill a target, your weapon will be repaired.
+enhancedarmanents.abilities.info.BLOODTHIRST=Heals the user back a portion of the damage dealt.
+enhancedarmanents.abilities.info.MOLTEN=Sets enemies on fire for a short time.
+enhancedarmanents.abilities.info.FROZEN=Stuns enemies, freezing them in place for a short time.
+enhancedarmanents.abilities.info.TOXIC=Poisons enemies for a short time.
+enhancedarmanents.abilities.info.ABSORB=Player regenerates health fast for a short time.
+enhancedarmanents.abilities.info.BEASTIAL=At low health, the player receives a damage buff.
+enhancedarmanents.abilities.info.REMEDIAL=Your armor will regenerate your HP every 6 seconds.
+enhancedarmanents.abilities.info.HARDENED=A chance at negating all of the damage to be dealt.
+enhancedarmanents.abilities.info.duration=Duration
+enhancedarmanents.abilities.info.chance=Chance
+enhancedarmanents.abilities.info.count=Count
+enhancedarmanents.abilities.info.bleedingspeed=Bleeding Speed
+enhancedarmanents.abilities.info.explosionintensity=Explosion Intensity
+enhancedarmanents.abilities.info.damagepercentage=Damage Percentage
+enhancedarmanents.abilities.info.durability=Repair Amount
+enhancedarmanents.abilities.info.seconds=seconds
+enhancedarmanents.abilities.info.heal_amount=Heal Amount
+
+enhancedarmanents.misc.level=Level
+enhancedarmanents.misc.max=Max
+enhancedarmanents.misc.experience=Experience
+enhancedarmanents.misc.durability=Durability
+enhancedarmanents.misc.abilities=Abilities
+enhancedarmanents.misc.abilities.shift=Abilities (Shift)
+enhancedarmanents.misc.rarity=Rarity
+enhancedarmanents.misc.tier=Tier
+enhancedarmanents.misc.abilities.tokens=Ability Tokens
+enhancedarmanents.misc.abilities.purchased=Purchased Abilities
