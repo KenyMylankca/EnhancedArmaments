@@ -62,7 +62,7 @@ public class WPCommandExpLevel extends CommandBase
 	public static void AddLevel(EntityPlayer player, String count) throws UsageException
 	{	
 		int c = Integer.parseInt(count);
-		if(c < 1) throw new UsageException("Rarity ID must be bigger than 0!");
+		if(c < 1) throw new UsageException("Level count must be bigger than 0!");
 		
 		if (((player.getHeldItemMainhand().getItem() instanceof ItemBow) || (player.getHeldItemMainhand().getItem() instanceof ItemSword) ||
 			 (player.getHeldItemMainhand().getItem() instanceof ItemAxe) || (player.getHeldItemMainhand().getItem() instanceof ItemHoe) ||
