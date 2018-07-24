@@ -136,7 +136,7 @@ public class EventLivingHurt
 	}
 	
 	/**
-	 * Called everytime an enemy is hurt. Used to add rarity bonuses, such as dealing more damage or adding more experience.
+	 * Called everytime an enemy is hurt. Used to add dealing more damage or getting less damage.
 	 * @param nbt
 	 */
 	private void useRarity(LivingHurtEvent event, ItemStack stack, NBTTagCompound nbt)
@@ -146,68 +146,6 @@ public class EventLivingHurt
 		
 		if (rarity != Rarity.DEFAULT)
 		{
-			int var1; // bonus experience chance
-			int var2; // bonus experience amount
-			int var3; // durability mitigation chance
-			int var4; // durability mitigated amount
-			
-			// damage boosts and bonus experience
-			switch (rarity)
-			{
-				// 5% chance of dealing 1.25x damage and 5% chance of gaining additional points of experience
-				case UNCOMMON:
-					var1 = (int) (Math.random() * 20);
-					var2 = (int) (Math.random() * 1);
-					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
-					// durability
-					var3 = (int) (Math.random() * 20);
-					var4 = (int) (Math.random() * 1);
-					if (var3 == 0) stack.setItemDamage(stack.getItemDamage() - var4);
-					break;
-				// 7.7% chance of dealing 1.5x damage and 7.7% chance of gaining additional points of experience
-				case RARE:
-					var1 = (int) (Math.random() * 13);
-					var2 = (int) (Math.random() * 2);
-					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
-					// durability
-					var3 = (int) (Math.random() * 13);
-					var4 = (int) (Math.random() * 2);
-					if (var3 == 0) stack.setItemDamage(stack.getItemDamage() - var4);
-					break;
-				// 10% chance of dealing 2x damage and 10% chance of gaining additional points of experience
-				case ULTRA_RARE:
-					var1 = (int) (Math.random() * 10);
-					var2 = (int) (Math.random() * 3);
-					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
-					// durability
-					var3 = (int) (Math.random() * 10);
-					var4 = (int) (Math.random() * 3);
-					if (var3 == 0) stack.setItemDamage(stack.getItemDamage() - var4);
-					break;
-				// 14% chance of dealing 2.5x damage and 14% chance of gaining additional points of experience
-				case LEGENDARY:
-					var1 = (int) (Math.random() * 7);
-					var2 = (int) (Math.random() * 5);
-					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
-					// durability
-					var3 = (int) (Math.random() * 7);
-					var4 = (int) (Math.random() * 5);
-					if (var3 == 0) stack.setItemDamage(stack.getItemDamage() - var4);
-					break;
-				// 20% chance of dealing 3x damage and 20% chance of gaining additional points of experience
-				case ARCHAIC:
-					var1 = (int) (Math.random() * 5);
-					var2 = (int) (Math.random() * 10);
-					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
-					// durability
-					var3 = (int) (Math.random() * 5);
-					var4 = (int) (Math.random() * 10);
-					if (var3 == 0) stack.setItemDamage(stack.getItemDamage() - var4);
-					break;
-				default:
-					break;
-			}
-			
 			if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemHoe || stack.getItem() instanceof ItemBow)
 				event.setAmount((float) (event.getAmount() + (event.getAmount() * damageMultiplier)));
 			else if (stack.getItem() instanceof ItemArmor)
