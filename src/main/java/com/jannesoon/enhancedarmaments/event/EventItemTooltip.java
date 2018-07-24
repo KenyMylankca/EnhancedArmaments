@@ -132,7 +132,8 @@ public class EventItemTooltip
 			
 			double damage = damageModifier.getAmount();
 			
-			tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (+" + rarity.getEffect() + ")");
+			if(rarity.getEffect() != 0)
+				tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (+" + rarity.getEffect() + ")");
 		}
 		if (tooltip.indexOf("When on head:") != -1 || tooltip.indexOf("When on body:") != -1 || tooltip.indexOf("When on legs:") != -1 || tooltip.indexOf("When on feet:") != -1)
 		{
