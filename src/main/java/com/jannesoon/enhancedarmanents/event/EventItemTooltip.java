@@ -97,7 +97,7 @@ public class EventItemTooltip
 							{
 								if (ability.hasAbility(nbt))
 								{
-									tooltip.add(ability.getColor() + ability.getName(nbt));
+									tooltip.add("-" + ability.getColor() + ability.getName(nbt));
 								}
 							}
 						}
@@ -107,7 +107,7 @@ public class EventItemTooltip
 							{
 								if (ability.hasAbility(nbt))
 								{
-									tooltip.add(ability.getColor() + ability.getName(nbt));
+									tooltip.add("-" + ability.getColor() + ability.getName(nbt));
 								}
 							}
 						}
