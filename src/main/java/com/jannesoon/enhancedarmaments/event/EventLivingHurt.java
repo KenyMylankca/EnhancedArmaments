@@ -41,7 +41,7 @@ public class EventLivingHurt
 		if (event.getSource().getTrueSource() instanceof EntityPlayer && !(event.getSource().getTrueSource() instanceof FakePlayer))
 		{
 			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
-			EntityLivingBase enemy = event.getEntityLiving();
+			EntityLivingBase target = event.getEntityLiving();
 			ItemStack stack = player.inventory.getCurrentItem();
 			
 			if (stack != null && (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemHoe))
@@ -52,7 +52,7 @@ public class EventLivingHurt
 				{
 					updateExperience(nbt);
 					useRarity(event, stack, nbt);
-					useWeaponAbilities(event, player, enemy, nbt);
+					useWeaponAbilities(event, player, target, nbt);
 					updateLevel(player, stack, nbt);
 				}
 			}
@@ -64,7 +64,7 @@ public class EventLivingHurt
 				{
 					updateExperience(nbt);
 					useRarity(event, stack, nbt);
-					useWeaponAbilities(event, player, enemy, nbt);
+					useWeaponAbilities(event, player, target, nbt);
 					updateLevel(player, stack, nbt);
 				}
 			}
@@ -72,7 +72,7 @@ public class EventLivingHurt
 		else if (event.getSource().getTrueSource() instanceof EntityLivingBase && event.getEntityLiving() instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-			EntityLivingBase enemy = (EntityLivingBase) event.getSource().getTrueSource();
+			EntityLivingBase target = (EntityLivingBase) event.getSource().getTrueSource();
 			
 			for (ItemStack stack : player.inventory.armorInventory)
 			{
@@ -86,7 +86,7 @@ public class EventLivingHurt
 						{
 							updateExperience(nbt);
 							useRarity(event, stack, nbt);
-							useArmorAbilities(event, player, enemy, nbt);
+							useArmorAbilities(event, player, target, nbt);
 							updateLevel(player, stack, nbt);
 						}
 					}
@@ -99,7 +99,7 @@ public class EventLivingHurt
 			
 			if (arrow.shootingEntity instanceof EntityLivingBase && event.getEntityLiving() instanceof EntityPlayer)
 			{
-				EntityLivingBase enemy = (EntityLivingBase) arrow.shootingEntity;
+				EntityLivingBase target = (EntityLivingBase) arrow.shootingEntity;
 				EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 				
 				for (ItemStack stack : player.inventory.armorInventory)
@@ -114,7 +114,7 @@ public class EventLivingHurt
 							{
 								updateExperience(nbt);
 								useRarity(event, stack, nbt);
-								useArmorAbilities(event, player, enemy, nbt);
+								useArmorAbilities(event, player, target, nbt);
 								updateLevel(player, stack, nbt);
 							}
 						}
@@ -125,7 +125,7 @@ public class EventLivingHurt
 	}
 	
 	/**
-	 * Called everytime an enemy is hurt. Used to add experience to weapons dealing damage.
+	 * Called everytime a target is hurt. Used to add experience to weapons dealing damage.
 	 * @param nbt
 	 */
 	private void updateExperience(NBTTagCompound nbt)
@@ -142,7 +142,7 @@ public class EventLivingHurt
 	}
 	
 	/**
-	 * Called everytime an enemy is hurt. Used to add dealing more damage or getting less damage.
+	 * Called everytime a target is hurt. Used to add dealing more damage or getting less damage.
 	 * @param nbt
 	 */
 	private void useRarity(LivingHurtEvent event, ItemStack stack, NBTTagCompound nbt)
@@ -163,50 +163,50 @@ public class EventLivingHurt
 	}
 	
 	/**
-	 * Called everytime an enemy is hurt. Used to use the current abilities a weapon might have.
+	 * Called everytime a target is hurt. Used to use the current abilities a weapon might have.
 	 * @param event
 	 * @param player
-	 * @param enemy
+	 * @param target
 	 * @param nbt
 	 */
-	private void useWeaponAbilities(LivingHurtEvent event, EntityPlayer player, EntityLivingBase enemy, NBTTagCompound nbt)
+	private void useWeaponAbilities(LivingHurtEvent event, EntityPlayer player, EntityLivingBase target, NBTTagCompound nbt)
 	{
-		if (enemy != null)
+		if (target != null)
 		{
 			// active
 			if (Ability.FIRE.hasAbility(nbt) && (int) (Math.random() * Config.firechance) == 0)
 			{
 				double multiplier = (Ability.FIRE.getLevel(nbt) + Ability.FIRE.getLevel(nbt)*4)/4;
-				enemy.setFire((int) (multiplier));
+				target.setFire((int) (multiplier));
 			}
 			
 			if (Ability.FROST.hasAbility(nbt) && (int) (Math.random() * Config.frostchance) == 0)
 			{
 				double multiplier = (Ability.FROST.getLevel(nbt) + Ability.FROST.getLevel(nbt)*4)/3;
-				enemy.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, (int) (20 * multiplier), 10));
+				target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, (int) (20 * multiplier), 10));
 			}
 			
 			if (Ability.POISON.hasAbility(nbt) && (int) (Math.random() * Config.poisonchance) == 0)
 			{
 				double multiplier = (Ability.POISON.getLevel(nbt) + Ability.POISON.getLevel(nbt)*4)/2;
-				enemy.addPotionEffect(new PotionEffect(MobEffects.POISON, (int) (20 * multiplier), Ability.POISON.getLevel(nbt)));
+				target.addPotionEffect(new PotionEffect(MobEffects.POISON, (int) (20 * multiplier), Ability.POISON.getLevel(nbt)));
 			}
 			
 			if (Ability.INNATE.hasAbility(nbt) && (int) (Math.random() * Config.innatechance) == 0)
 			{
 				double multiplier = (Ability.INNATE.getLevel(nbt) + Ability.INNATE.getLevel(nbt)*4)/3;
-				enemy.addPotionEffect(new PotionEffect(MobEffects.WITHER, (int) (20 * multiplier), Ability.INNATE.getLevel(nbt)));
+				target.addPotionEffect(new PotionEffect(MobEffects.WITHER, (int) (20 * multiplier), Ability.INNATE.getLevel(nbt)));
 			}
 
 			if (Ability.BOMBASTIC.hasAbility(nbt) && (int) (Math.random() * Config.bombasticchance) == 0)
 			{
 				double multiplierD = (Ability.BOMBASTIC.getLevel(nbt) + Ability.BOMBASTIC.getLevel(nbt)*4)/4;
 				float multiplier = (float)multiplierD;
-				World world = enemy.getEntityWorld();
+				World world = target.getEntityWorld();
 					
-					if (enemy instanceof EntityLivingBase && !(enemy instanceof EntityAnimal))
+					if (target instanceof EntityLivingBase && !(target instanceof EntityAnimal))
 					{
-						world.createExplosion(enemy, enemy.lastTickPosX, enemy.lastTickPosY, enemy.lastTickPosZ, multiplier, true);
+						world.createExplosion(target, target.lastTickPosX, target.lastTickPosY, target.lastTickPosZ, multiplier, true);
 					}
 			}
 			
@@ -218,14 +218,14 @@ public class EventLivingHurt
 				else if (Ability.VOID.getLevel(nbt) == 2) multiplier = 0.42F;
 				else if (Ability.VOID.getLevel(nbt) == 3) multiplier = 0.63F;
 
-				float damage = enemy.getMaxHealth() * multiplier;
+				float damage = target.getMaxHealth() * multiplier;
 				event.setAmount(damage);
 			}
 			
 			// passive
 			if (Ability.ILLUMINATION.hasAbility(nbt))
 			{
-				enemy.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, (int) (20 * 6), Ability.ILLUMINATION.getLevel(nbt)));
+				target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, (int) (20 * 6), Ability.ILLUMINATION.getLevel(nbt)));
 			}
 			
 			if (Ability.BLOODTHIRST.hasAbility(nbt))
@@ -236,27 +236,27 @@ public class EventLivingHurt
 		}
 	}
 	
-	private void useArmorAbilities(LivingHurtEvent event, EntityPlayer player, EntityLivingBase enemy, NBTTagCompound nbt)
+	private void useArmorAbilities(LivingHurtEvent event, EntityPlayer player, EntityLivingBase target, NBTTagCompound nbt)
 	{
-		if (enemy != null)
+		if (target != null)
 		{
 			// active
 			if (Ability.MOLTEN.hasAbility(nbt) && (int) (Math.random() * Config.moltenchance) == 0)
 			{
 				double multiplier = (Ability.MOLTEN.getLevel(nbt) + Ability.MOLTEN.getLevel(nbt)*5)/4 ;
-				enemy.setFire((int) (multiplier));
+				target.setFire((int) (multiplier));
 			}
 			
 			if (Ability.FROZEN.hasAbility(nbt) && (int) (Math.random() * Config.frozenchance) == 0)
 			{
 				double multiplier = (Ability.FROZEN.getLevel(nbt) + Ability.FROZEN.getLevel(nbt)*5)/6 ;
-				enemy.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, (int) (20 * multiplier), 10));
+				target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, (int) (20 * multiplier), 10));
 			}
 			
 			if (Ability.TOXIC.hasAbility(nbt) && (int) (Math.random() * Config.toxicchance) == 0)
 			{
 				double multiplier = (Ability.TOXIC.getLevel(nbt) + Ability.TOXIC.getLevel(nbt)*4)/4 ;
-				enemy.addPotionEffect(new PotionEffect(MobEffects.POISON, (int) (20 * multiplier), Ability.TOXIC.getLevel(nbt)));
+				target.addPotionEffect(new PotionEffect(MobEffects.POISON, (int) (20 * multiplier), Ability.TOXIC.getLevel(nbt)));
 			}
 			
 			if (Ability.ABSORB.hasAbility(nbt) && (int) (Math.random() * Config.absorbchance) == 0)
@@ -280,7 +280,7 @@ public class EventLivingHurt
 	}
 	
 	/**
-	 * Called everytime an enemy is hurt. Used to check whether or not the weapon should level up.
+	 * Called everytime a target is hurt. Used to check whether or not the weapon should level up.
 	 * @param player
 	 * @param stack
 	 * @param nbt

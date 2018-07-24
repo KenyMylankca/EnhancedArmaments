@@ -28,10 +28,8 @@ import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * A simple Minecraft mod focused on the aspect of leveling certain areas
- * of the game. In its simplest state, it will add weapon leveling systems
- * on top of armor, bow, and enemy leveling in the near future. On top of
- * that, other interesting leveling systems are planned to enhance the
- * overall feel of Minecraft, while sticking to a primarily vanilla feel.
+ * of the game. On top of that, other interesting leveling systems are
+ * planned to enhance the overall feel of Minecraft.
  */
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class EnhancedArmaments 

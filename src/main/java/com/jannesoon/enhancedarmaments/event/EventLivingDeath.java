@@ -19,7 +19,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
- * Updates weapon information when killing an enemy with a valid weapon. Used to update experience,
+ * Updates weapon information when killing a target with a valid weapon. Used to update experience,
  * level, abilities, and so on.
  *
  */
@@ -89,7 +89,7 @@ public class EventLivingDeath
 		}
 	}
 	/**
-	 * Called everytime an enemy dies. Adds bonus experience based on how much health the enemy had.
+	 * Called everytime a target dies. Adds bonus experience based on how much health the target had.
 	 * @param event
 	 * @param nbt
 	 */
@@ -99,14 +99,14 @@ public class EventLivingDeath
 		{
 			if (event.getEntityLiving() instanceof EntityLivingBase)
 			{
-				EntityLivingBase enemy = event.getEntityLiving();
+				EntityLivingBase target = event.getEntityLiving();
 				int bonusExperience = 0;
 				
-				if (enemy.getMaxHealth() <= 10) bonusExperience = 3;
-				else if (enemy.getMaxHealth() > 10 && enemy.getMaxHealth() <= 20) bonusExperience = 9;
-				else if (enemy.getMaxHealth() > 20 && enemy.getMaxHealth() <= 50) bonusExperience = 20;
-				else if (enemy.getMaxHealth() > 50 && enemy.getMaxHealth() <= 100) bonusExperience = 55;
-				else if (enemy.getMaxHealth() > 100) bonusExperience = 80;
+				if (target.getMaxHealth() <= 10) bonusExperience = 3;
+				else if (target.getMaxHealth() > 10 && target.getMaxHealth() <= 20) bonusExperience = 9;
+				else if (target.getMaxHealth() > 20 && target.getMaxHealth() <= 50) bonusExperience = 20;
+				else if (target.getMaxHealth() > 50 && target.getMaxHealth() <= 100) bonusExperience = 55;
+				else if (target.getMaxHealth() > 100) bonusExperience = 80;
 				
 				Experience.setExperience(nbt, Experience.getExperience(nbt) + bonusExperience);
 			}
@@ -114,7 +114,7 @@ public class EventLivingDeath
 	}
 	
 	/**
-	 * Called everytime an enemy dies. Used to update the level of the weapon.
+	 * Called everytime a target dies. Used to update the level of the weapon.
 	 * @param player
 	 * @param stack
 	 * @param nbt
