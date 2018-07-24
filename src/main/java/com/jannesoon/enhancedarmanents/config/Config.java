@@ -10,7 +10,6 @@ import net.minecraftforge.common.config.Property;
 
 public class Config 
 {
-	// configuration files
 	private static Configuration main;
 	private static Configuration abilities;
 	private static Configuration abilitychances;
@@ -73,12 +72,11 @@ public class Config
 	public static int absorbchance = 7;
 	public static int hardenedchance = 10;
 	
-	
-	
 	/*
 	 * RARITIES
 	 */
 	
+	//rarity chances
 	public static double basicChance = 0.5D;
 	public static double uncommonChance = 0.2D;
 	public static double rareChance = 0.12D;
@@ -86,6 +84,7 @@ public class Config
 	public static double legendaryChance = 0.03D;
 	public static double archaicChance = 0.01D;
 	
+	//rarity effect
 	public static double basicDamage = 0;
 	public static double uncommonDamage = 0.3D;
 	public static double rareDamage = 0.7D;
@@ -117,17 +116,17 @@ public class Config
 		List<String> propOrder = Lists.newArrayList();
 		Property prop;
 		
-		/*
-		 * Overall
-		 */
+		/**
+		Overall
+		*/
 		prop = main.get(category, "enemyLeveling", enemyLeveling);
 		prop.setComment("Determines whether or not Enemy Leveling will be enabled. Default: true");
 		enemyLeveling = prop.getBoolean();
 		propOrder.add(prop.getName());
 		
-		/*
-		 * Experience
-		 */
+		/**
+		Experience
+		*/
 		prop = main.get(category, "maxLevel", maxLevel);
 		prop.setComment("Sets the maximum level cap for weapons and armor. Default: 10");
 		maxLevel = prop.getInt();
@@ -148,9 +147,9 @@ public class Config
 		expMultiplier = prop.getInt();
 		propOrder.add(prop.getName());
 		
-		/*
-		 * Miscellaneous
-		 */
+		/**
+		Miscellaneous
+		*/
 		prop = main.get(category, "showDurabilityInTooltip", showDurability);
 		prop.setComment("Determines whether or not durability will be displayed in tooltips. Default: true");
 		showDurability = prop.getBoolean();
@@ -176,9 +175,9 @@ public class Config
 		List<String> propOrder = Lists.newArrayList();
 		Property prop;
 		
-		/*
-		 * Abilities
-		 */
+		/**
+		Abilities
+		*/
 		// weapons
 		prop = abilities.get(category, "fireAbility", fire);
 		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
@@ -326,7 +325,6 @@ public class Config
 		hardenedchance = prop.getInt();
 		propOrder.add(prop.getName());
 		
-		
 		abilitychances.setCategoryPropertyOrder(category, propOrder);
 		abilitychances.save();
 	}
@@ -337,9 +335,9 @@ public class Config
 		List<String> propOrder = Lists.newArrayList();
 		Property prop;
 
-		/*
-		 * Chances 
-		 */
+		/**
+		Chances 
+		*/
 		prop = rarities.get(category, "basicChance", basicChance);
 		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.5");
 		basicChance = prop.getDouble();
@@ -370,9 +368,9 @@ public class Config
 		archaicChance = prop.getDouble();
 		propOrder.add(prop.getName());
 		
-		/*
-		 * Damage Multipliers
-		 */
+		/**
+		Damage Multipliers
+		*/
 		prop = rarities.get(category, "basicDamage", basicDamage);
 		prop.setComment("Sets the damage multiplier for the given rarity. Default: 0");
 		basicDamage = prop.getDouble();

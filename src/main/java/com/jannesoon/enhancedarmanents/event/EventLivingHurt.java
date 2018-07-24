@@ -145,12 +145,10 @@ public class EventLivingHurt
 		double damageMultiplier = rarity.getEffect();
 		
 		if (rarity != Rarity.DEFAULT)
-		{
 			if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemHoe || stack.getItem() instanceof ItemBow)
 				event.setAmount((float) (event.getAmount() + (event.getAmount() * damageMultiplier)));
 			else if (stack.getItem() instanceof ItemArmor)
 				event.setAmount((float) (event.getAmount() / (1.0F + (damageMultiplier/5.2F))));
-		}
 	}
 	
 	/**

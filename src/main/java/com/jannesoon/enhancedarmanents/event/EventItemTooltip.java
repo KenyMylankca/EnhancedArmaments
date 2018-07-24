@@ -64,14 +64,7 @@ public class EventItemTooltip
 					
 					changeTooltips(tooltip, stack, rarity);
 					
-					// add tooltips
-					// formatting
-					tooltip.add("");
-					tooltip.add(rarity.getColor() + "---------------");
-					tooltip.add("");
-					
-					// rarity
-					tooltip.add(rarity.getColor() + TextFormatting.ITALIC + I18n.format("enhancedarmanents.rarity." + rarity.getName()));
+				// add tooltips
 					
 					// level
 					if (level >= Config.maxLevel)
@@ -95,7 +88,7 @@ public class EventItemTooltip
 					tooltip.add("");
 					if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
 					{
-						tooltip.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + I18n.format("enhancedarmanents.misc.abilities"));
+						tooltip.add(rarity.getColor() + "" + TextFormatting.ITALIC + I18n.format("enhancedarmanents.misc.abilities"));
 						tooltip.add("");
 						
 						if (item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemHoe || item instanceof ItemBow)
@@ -120,12 +113,7 @@ public class EventItemTooltip
 						}
 					}
 					else
-						tooltip.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + I18n.format("enhancedarmanents.misc.abilities.shift"));
-					
-					// formatting
-					tooltip.add("");
-					tooltip.add(rarity.getColor() + "---------------");
-					tooltip.add("");
+						tooltip.add(rarity.getColor() + "" + TextFormatting.ITALIC + I18n.format("enhancedarmanents.misc.abilities.shift"));
 				}
 			}
 		}
@@ -133,6 +121,9 @@ public class EventItemTooltip
 	
 	private void changeTooltips(ArrayList<String> tooltip, ItemStack stack, Rarity rarity)
 	{	
+		// rarity after the name
+		tooltip.set(0, stack.getDisplayName() + rarity.getColor() + " (" + TextFormatting.ITALIC + I18n.format("enhancedarmanents.rarity." + rarity.getName()) + ")");
+		
 		if (tooltip.indexOf("When in main hand:") != -1)
 		{
 			Multimap<String, AttributeModifier> map = stack.getItem().getAttributeModifiers(EntityEquipmentSlot.MAINHAND, stack);
@@ -141,35 +132,19 @@ public class EventItemTooltip
 			
 			double damage = damageModifier.getAmount();
 			
-			switch (rarity)
-			{
-				case BASIC:
-					int basicD = (int) (Config.basicDamage * (damage + 1F));
-					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (+" + basicD + ")");
-					break;
-				case UNCOMMON:
-					int uncommonD = (int) (Config.uncommonDamage * (damage + 1F));
-					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (+" + uncommonD + ")");
-					break;
-				case RARE:
-					int rareD = (int) (Config.rareDamage * (damage + 1F));
-					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (+" + rareD + ")");
-					break;
-				case ULTRA_RARE:
-					int ultrarareD = (int) (Config.ultraRareDamage * (damage + 1F));
-					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (+" + ultrarareD + ")");
-					break;
-				case LEGENDARY:
-					int legendaryD = (int) (Config.legendaryDamage * (damage + 1F));
-					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (+" + legendaryD + ")");
-					break;
-				case ARCHAIC:
-					int archaicD = (int) (Config.archaicDamage * (damage + 1F));
-					tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (+" + archaicD + ")");
-					break;
-				default:
-					break;
-			}
+			tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (+" + rarity.getEffect() + ")");
+		}
+		if (tooltip.indexOf("When on head:") != -1 || tooltip.indexOf("When on body:") != -1 || tooltip.indexOf("When on legs:") != -1 || tooltip.indexOf("When on feet:") != -1)
+		{
+			String p = String.format("%.2f", 100-(100/(1.0F + (rarity.getEffect()/5.2F))));
+			float percentage = Float.valueOf(p);
+			int line = 2;
+			if(tooltip.indexOf("When on head:") != -1) line = tooltip.indexOf("When on head:");
+			if(tooltip.indexOf("When on body:") != -1) line = tooltip.indexOf("When on body:");
+			if(tooltip.indexOf("When on legs:") != -1) line = tooltip.indexOf("When on legs:");
+			if(tooltip.indexOf("When on feet:") != -1) line = tooltip.indexOf("When on feet:");
+			if(percentage != 0)
+				tooltip.add(line + 1," " + TextFormatting.BLUE + "+" + rarity.getColor() + percentage + TextFormatting.BLUE + "% " + I18n.format("enhancedarmanents.misc.rarity.armorreduction"));
 		}
 	}
 }
