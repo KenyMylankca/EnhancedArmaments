@@ -12,7 +12,6 @@ import com.jannesoon.enhancedarmaments.init.ModEvents;
 import com.jannesoon.enhancedarmaments.network.PacketGuiAbility;
 import com.jannesoon.enhancedarmaments.proxies.CommonProxy;
 import com.jannesoon.enhancedarmaments.util.GuiHandler;
-import com.jannesoon.enhancedarmaments.util.Reference;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -31,12 +30,18 @@ import net.minecraftforge.fml.relauncher.Side;
  * of the game. On top of that, other interesting leveling systems are
  * planned to enhance the overall feel of Minecraft.
  */
-@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
+@Mod(modid = EnhancedArmaments.MODID, name = EnhancedArmaments.NAME, version = EnhancedArmaments.VERSION)
 public class EnhancedArmaments 
 {
-	@SidedProxy(clientSide = Reference.CLIENT, serverSide = Reference.COMMON)
+	public static final String MODID = "enhancedarmaments";
+	public static final String NAME = "Enhanced Armaments";
+	public static final String VERSION = "1.1.1";
+	public static final String COMMON = "com.jannesoon.enhancedarmaments.proxies.CommonProxy";
+	public static final String CLIENT = "com.jannesoon.enhancedarmaments.proxies.ClientProxy";
+	
+	@SidedProxy(clientSide = EnhancedArmaments.CLIENT, serverSide = EnhancedArmaments.COMMON)
 	public static CommonProxy proxy;
-	@Instance(Reference.MODID)
+	@Instance(EnhancedArmaments.MODID)
 	public static EnhancedArmaments instance;
 	public static final Logger LOGGER = LogManager.getLogger("EnhancedArmaments");
 	public static SimpleNetworkWrapper network;
@@ -45,7 +50,7 @@ public class EnhancedArmaments
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		configDir = new File(event.getModConfigurationDirectory() + "/" + Reference.MODID);
+		configDir = new File(event.getModConfigurationDirectory() + "/" + EnhancedArmaments.MODID);
 		configDir.mkdirs();
 		Config.init(configDir);
 		
