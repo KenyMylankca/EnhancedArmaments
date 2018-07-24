@@ -1,7 +1,5 @@
 package com.jannesoon.enhancedarmaments.event;
 
-import com.jannesoon.enhancedarmaments.capabilities.CapabilityEnemyLevel;
-import com.jannesoon.enhancedarmaments.capabilities.IEnemyLevel;
 import com.jannesoon.enhancedarmaments.config.Config;
 import com.jannesoon.enhancedarmaments.leveling.Ability;
 import com.jannesoon.enhancedarmaments.leveling.Experience;
@@ -102,7 +100,6 @@ public class EventLivingDeath
 			if (event.getEntityLiving() instanceof EntityLivingBase)
 			{
 				EntityLivingBase enemy = event.getEntityLiving();
-				IEnemyLevel enemyLevel = enemy.getCapability(CapabilityEnemyLevel.ENEMY_LEVEL_CAP, null);
 				int bonusExperience = 0;
 				
 				if (enemy.getMaxHealth() <= 10) bonusExperience = 3;
@@ -110,18 +107,6 @@ public class EventLivingDeath
 				else if (enemy.getMaxHealth() > 20 && enemy.getMaxHealth() <= 50) bonusExperience = 20;
 				else if (enemy.getMaxHealth() > 50 && enemy.getMaxHealth() <= 100) bonusExperience = 55;
 				else if (enemy.getMaxHealth() > 100) bonusExperience = 80;
-				
-				if (enemyLevel != null && enemyLevel.getEnemyLevel() > 0)
-				{
-					int level = enemyLevel.getEnemyLevel();
-					
-					if (level == 1) bonusExperience *= 0;
-					else if (level == 2) bonusExperience *= 1;
-					else if (level == 3) bonusExperience *= 1.2D;
-					else if (level == 4) bonusExperience *= 2;
-					else if (level == 5) bonusExperience *= 2.2D;
-					else if (level == 6) bonusExperience *= 3;
-				}
 				
 				Experience.setExperience(nbt, Experience.getExperience(nbt) + bonusExperience);
 			}

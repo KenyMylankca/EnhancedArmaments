@@ -5,12 +5,10 @@ import java.io.File;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.jannesoon.enhancedarmaments.capabilities.CapabilityEnemyLevel;
 import com.jannesoon.enhancedarmaments.commands.WPCommandExpLevel;
 import com.jannesoon.enhancedarmaments.commands.WPCommandRarity;
 import com.jannesoon.enhancedarmaments.config.Config;
 import com.jannesoon.enhancedarmaments.init.ModEvents;
-import com.jannesoon.enhancedarmaments.network.PacketEnemyLevel;
 import com.jannesoon.enhancedarmaments.network.PacketGuiAbility;
 import com.jannesoon.enhancedarmaments.proxies.CommonProxy;
 import com.jannesoon.enhancedarmaments.util.GuiHandler;
@@ -56,12 +54,8 @@ public class EnhancedArmaments
 		ModEvents.registerEvents();
 		proxy.preInit();
 		
-		if (Config.enemyLeveling)
-			CapabilityEnemyLevel.register();
-		
 		network = NetworkRegistry.INSTANCE.newSimpleChannel("enhancedarmaments");
 		network.registerMessage(PacketGuiAbility.Handler.class, PacketGuiAbility.class, 0, Side.SERVER);
-		network.registerMessage(PacketEnemyLevel.Handler.class, PacketEnemyLevel.class, 1, Side.CLIENT);
 	}
 	
 	@EventHandler

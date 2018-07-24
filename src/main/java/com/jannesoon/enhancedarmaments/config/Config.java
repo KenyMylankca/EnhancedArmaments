@@ -19,9 +19,6 @@ public class Config
 	 * MAIN
 	 */
 	
-	// overall
-	public static boolean enemyLeveling = true;
-	
 	// experience
 	public static int maxLevel = 10;
 	public static int level1Exp = 40;
@@ -119,14 +116,6 @@ public class Config
 		Property prop;
 		
 		/**
-		Overall
-		*/
-		prop = main.get(category, "enemyLeveling", enemyLeveling);
-		prop.setComment("Determines whether or not Enemy Leveling will be enabled. Default: true");
-		enemyLeveling = prop.getBoolean();
-		propOrder.add(prop.getName());
-		
-		/**
 		Experience
 		*/
 		prop = main.get(category, "maxLevel", maxLevel);
@@ -160,11 +149,6 @@ public class Config
 		prop = main.get(category, "itemBlacklist", itemBlacklist);
 		prop.setComment("Items in this blacklist will not gain the leveling systems. Useful for very powerful items or potential conflicts. Style should be 'modid:item'");
 		itemBlacklist = prop.getStringList();
-		propOrder.add(prop.getName());
-		
-		prop = main.get(category, "enemyLevelStringPosition", stringPosition);
-		prop.setComment("Determines the location of the enemy level display. Can either be 'default', 'topleft', 'topright', 'bottomleft', 'bottomright', or 'cursor'. Default: 'default'");
-		stringPosition = prop.getString();
 		propOrder.add(prop.getName());
 		
 		main.setCategoryPropertyOrder(category, propOrder);
