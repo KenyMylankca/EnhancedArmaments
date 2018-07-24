@@ -129,15 +129,15 @@ public class EventItemTooltip
 			Multimap<String, AttributeModifier> map = stack.getItem().getAttributeModifiers(EntityEquipmentSlot.MAINHAND, stack);
 			Collection<AttributeModifier> damageCollection = map.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
 			AttributeModifier damageModifier = (AttributeModifier) damageCollection.toArray()[0];
-			
-			double damage = damageModifier.getAmount();
+			double damage = damageModifier.getAmount() + 1;
+			String d = String.format("%.2f", damage * rarity.getEffect());
 			
 			if(rarity.getEffect() != 0)
-				tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (+" + rarity.getEffect() + ")");
+				tooltip.set(tooltip.indexOf("When in main hand:") + 2, tooltip.get(tooltip.indexOf("When in main hand:") + 2) + rarity.getColor() + " (+" + d + ")");
 		}
 		if (tooltip.indexOf("When on head:") != -1 || tooltip.indexOf("When on body:") != -1 || tooltip.indexOf("When on legs:") != -1 || tooltip.indexOf("When on feet:") != -1)
 		{
-			String p = String.format("%.2f", 100-(100/(1.0F + (rarity.getEffect()/5.2F))));
+			String p = String.format("%.2f", 100-(100/(1.0F + (rarity.getEffect()/4F))));
 			float percentage = Float.valueOf(p);
 			int line = 2;
 			if(tooltip.indexOf("When on head:") != -1) line = tooltip.indexOf("When on head:");

@@ -1,5 +1,8 @@
 package com.jannesoon.enhancedarmaments.event;
 
+import java.util.Collection;
+
+import com.google.common.collect.Multimap;
 import com.jannesoon.enhancedarmaments.config.Config;
 import com.jannesoon.enhancedarmaments.leveling.Ability;
 import com.jannesoon.enhancedarmaments.leveling.Experience;
@@ -7,10 +10,13 @@ import com.jannesoon.enhancedarmaments.leveling.Rarity;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.MobEffects;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemBow;
@@ -142,13 +148,18 @@ public class EventLivingHurt
 	private void useRarity(LivingHurtEvent event, ItemStack stack, NBTTagCompound nbt)
 	{
 		Rarity rarity = Rarity.getRarity(nbt);
-		double damageMultiplier = rarity.getEffect();
 		
 		if (rarity != Rarity.DEFAULT)
 			if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemHoe || stack.getItem() instanceof ItemBow)
-				event.setAmount((float) (event.getAmount() + (event.getAmount() * damageMultiplier)));
+			{
+				Multimap<String, AttributeModifier> map = stack.getItem().getAttributeModifiers(EntityEquipmentSlot.MAINHAND, stack);
+				Collection<AttributeModifier> damageCollection = map.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
+				AttributeModifier damageModifier = (AttributeModifier) damageCollection.toArray()[0];
+				double damage = damageModifier.getAmount();
+				event.setAmount((float) (event.getAmount() + damage * rarity.getEffect()));
+			}
 			else if (stack.getItem() instanceof ItemArmor)
-				event.setAmount((float) (event.getAmount() / (1.0F + (damageMultiplier/5.2F))));
+				event.setAmount((float) (event.getAmount() / (1.0F + (rarity.getEffect()/4F))));
 	}
 	
 	/**
