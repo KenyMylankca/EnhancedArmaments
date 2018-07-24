@@ -10,25 +10,27 @@ import net.minecraft.util.text.TextFormatting;
 
 public enum Rarity 
 {
-	DEFAULT("", 0, 0.0),
-	BASIC(TextFormatting.WHITE, 0xFFFFFF, Config.basicChance),
-	UNCOMMON(TextFormatting.DARK_GREEN, 0x00AA00, Config.uncommonChance),
-	RARE(TextFormatting.AQUA, 0x55FFFF, Config.rareChance),
-	ULTRA_RARE(TextFormatting.DARK_PURPLE, 0xAA00AA, Config.ultraRareChance),
-	LEGENDARY(TextFormatting.GOLD, 0xFFAA00, Config.legendaryChance),
-	ARCHAIC(TextFormatting.LIGHT_PURPLE, 0xFF55FF, Config.archaicChance);
+	DEFAULT("", 0, 0.0, 0.0),
+	BASIC(TextFormatting.WHITE, 0xFFFFFF, Config.basicChance, Config.basicDamage),
+	UNCOMMON(TextFormatting.DARK_GREEN, 0x00AA00, Config.uncommonChance, Config.uncommonDamage),
+	RARE(TextFormatting.AQUA, 0x55FFFF, Config.rareChance, Config.rareDamage),
+	ULTRA_RARE(TextFormatting.DARK_PURPLE, 0xAA00AA, Config.ultraRareChance, Config.ultraRareDamage),
+	LEGENDARY(TextFormatting.GOLD, 0xFFAA00, Config.legendaryChance, Config.legendaryDamage),
+	ARCHAIC(TextFormatting.LIGHT_PURPLE, 0xFF55FF, Config.archaicChance, Config.archaicDamage);
 	
 	private String color;
 	private int hex;
 	private double weight;
+	private double effect;
 	private static final Rarity[] RARITIES = Rarity.values();
 	private static final RandomCollection<Rarity> RANDOM_RARITIES = new RandomCollection<Rarity>();
 	
-	Rarity(Object color, int hex, double weight)
+	Rarity(Object color, int hex, double weight, double effect)
 	{
 		this.color = color.toString();
 		this.hex = hex;
 		this.weight = weight;
+		this.effect = effect;
 	}
 	
 	/**
@@ -78,6 +80,11 @@ public enum Rarity
 	public int getHex()
 	{
 		return hex;
+	}
+	
+	public double getEffect()
+	{
+		return effect;
 	}
 
 	static

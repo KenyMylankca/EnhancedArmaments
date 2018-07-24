@@ -142,7 +142,7 @@ public class EventLivingHurt
 	private void useRarity(LivingHurtEvent event, ItemStack stack, NBTTagCompound nbt)
 	{
 		Rarity rarity = Rarity.getRarity(nbt);
-		double damageMultiplier = 1F;
+		double damageMultiplier = rarity.getEffect();
 		
 		if (rarity != Rarity.DEFAULT)
 		{
@@ -158,7 +158,6 @@ public class EventLivingHurt
 				case UNCOMMON:
 					var1 = (int) (Math.random() * 20);
 					var2 = (int) (Math.random() * 1);
-					damageMultiplier = Config.uncommonDamage;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					// durability
 					var3 = (int) (Math.random() * 20);
@@ -169,7 +168,6 @@ public class EventLivingHurt
 				case RARE:
 					var1 = (int) (Math.random() * 13);
 					var2 = (int) (Math.random() * 2);
-					damageMultiplier = Config.rareDamage;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					// durability
 					var3 = (int) (Math.random() * 13);
@@ -180,7 +178,6 @@ public class EventLivingHurt
 				case ULTRA_RARE:
 					var1 = (int) (Math.random() * 10);
 					var2 = (int) (Math.random() * 3);
-					damageMultiplier = Config.ultraRareDamage;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					// durability
 					var3 = (int) (Math.random() * 10);
@@ -191,7 +188,6 @@ public class EventLivingHurt
 				case LEGENDARY:
 					var1 = (int) (Math.random() * 7);
 					var2 = (int) (Math.random() * 5);
-					damageMultiplier = Config.legendaryDamage;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					// durability
 					var3 = (int) (Math.random() * 7);
@@ -202,7 +198,6 @@ public class EventLivingHurt
 				case ARCHAIC:
 					var1 = (int) (Math.random() * 5);
 					var2 = (int) (Math.random() * 10);
-					damageMultiplier = Config.archaicDamage;
 					if (var1 == 0) Experience.setExperience(nbt, Experience.getExperience(nbt) + var2);
 					// durability
 					var3 = (int) (Math.random() * 5);
