@@ -146,13 +146,18 @@ public class EventLivingHurt
 		Rarity rarity = Rarity.getRarity(nbt);
 		
 		if (rarity != Rarity.DEFAULT)
-			if (EAUtils.canEnhanceWeapon(stack.getItem()))
+			if (EAUtils.canEnhanceMelee(stack.getItem()))
 			{
 				Multimap<String, AttributeModifier> map = stack.getItem().getAttributeModifiers(EntityEquipmentSlot.MAINHAND, stack);
 				Collection<AttributeModifier> damageCollection = map.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
 				AttributeModifier damageModifier = (AttributeModifier) damageCollection.toArray()[0];
 				double damage = damageModifier.getAmount();
 				event.setAmount((float) (event.getAmount() + damage * rarity.getEffect()));
+			}
+			else if(EAUtils.canEnhanceRanged(stack.getItem()))
+			{
+				float newdamage = (float) (event.getAmount() + (event.getAmount() * rarity.getEffect()/3));
+				event.setAmount(newdamage);
 			}
 			else if (EAUtils.canEnhanceArmor(stack.getItem()))
 				event.setAmount((float) (event.getAmount() / (1.0F + (rarity.getEffect()/4F))));
