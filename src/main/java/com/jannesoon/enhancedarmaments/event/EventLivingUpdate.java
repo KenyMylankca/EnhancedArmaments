@@ -6,16 +6,12 @@ import com.jannesoon.enhancedarmaments.config.Config;
 import com.jannesoon.enhancedarmaments.leveling.Ability;
 import com.jannesoon.enhancedarmaments.leveling.Experience;
 import com.jannesoon.enhancedarmaments.leveling.Rarity;
+import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -37,11 +33,11 @@ public class EventLivingUpdate
 				
 				if (!player.world.isRemote)
 				{
-					for (ItemStack stck : player.inventory.armorInventory)
+					for (ItemStack stack : player.inventory.armorInventory)
 					{
-						if (stck != null && stck.getItem() instanceof ItemArmor)
+						if (stack != null && EAUtils.canEnhanceArmor(stack.getItem()))
 						{
-							NBTTagCompound nbtcompound = stck.getTagCompound();
+							NBTTagCompound nbtcompound = stack.getTagCompound();
 							float heal=Ability.REMEDIAL.getLevel(nbtcompound);
 							if (Ability.REMEDIAL.hasAbility(nbtcompound))
 								if(this.count < 120)
@@ -61,7 +57,7 @@ public class EventLivingUpdate
 						{
 							Item item = main.get(i).getItem();
 							
-							if (item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemHoe || item instanceof ItemArmor || item instanceof ItemBow)
+							if (EAUtils.canEnhance(item))
 							{
 								ItemStack stack = main.get(i);
 								NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);

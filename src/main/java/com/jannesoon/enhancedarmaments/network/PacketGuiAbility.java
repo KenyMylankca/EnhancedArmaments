@@ -2,16 +2,12 @@ package com.jannesoon.enhancedarmaments.network;
 
 import com.jannesoon.enhancedarmaments.leveling.Ability;
 import com.jannesoon.enhancedarmaments.leveling.Experience;
+import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.WorldServer;
@@ -63,7 +59,7 @@ public class PacketGuiAbility implements IMessage
 						{
 							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 							
-							if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemHoe || stack.getItem() instanceof ItemBow)
+							if (EAUtils.canEnhanceWeapon(stack.getItem()))
 							{	
 								if (Ability.WEAPONS.get(message.index).hasAbility(nbt))
 								{
@@ -76,7 +72,7 @@ public class PacketGuiAbility implements IMessage
 									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.WEAPONS.get(message.index).getTier());
 								}
 							}
-							else if (stack.getItem() instanceof ItemArmor)
+							else if (EAUtils.canEnhanceArmor(stack.getItem()))
 							{
 								if (Ability.ARMOR.get(message.index).hasAbility(nbt))
 								{

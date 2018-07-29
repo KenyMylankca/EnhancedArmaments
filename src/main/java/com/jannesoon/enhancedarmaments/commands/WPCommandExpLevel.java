@@ -4,17 +4,13 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.jannesoon.enhancedarmaments.leveling.Experience;
+import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumHand;
@@ -64,9 +60,7 @@ public class WPCommandExpLevel extends CommandBase
 		int c = Integer.parseInt(count);
 		if(c < 1) throw new UsageException("Level count must be bigger than 0!");
 		
-		if (((player.getHeldItemMainhand().getItem() instanceof ItemBow) || (player.getHeldItemMainhand().getItem() instanceof ItemSword) ||
-			 (player.getHeldItemMainhand().getItem() instanceof ItemAxe) || (player.getHeldItemMainhand().getItem() instanceof ItemHoe) ||
-			 (player.getHeldItemMainhand().getItem() instanceof ItemArmor)) && (c > 0))
+		if (EAUtils.canEnhance(player.getHeldItemMainhand().getItem()) && (c > 0))
 		{
 		ItemStack item = player.getHeldItemMainhand();
 		NBTTagCompound nbt = NBTHelper.loadStackNBT(item);
@@ -83,11 +77,7 @@ public class WPCommandExpLevel extends CommandBase
 		player.setHeldItem(EnumHand.MAIN_HAND, item);
 		}
 		
-		if ( !((player.getHeldItemMainhand().getItem() instanceof ItemBow) ||
-			  (player.getHeldItemMainhand().getItem() instanceof ItemSword) ||
-			  (player.getHeldItemMainhand().getItem() instanceof ItemAxe) ||
-			  (player.getHeldItemMainhand().getItem() instanceof ItemHoe) ||
-			  (player.getHeldItemMainhand().getItem() instanceof ItemArmor))) throw new UsageException("Hold a weapon or an armor in your mainhand!");
+		if (!EAUtils.canEnhance(player.getHeldItemMainhand().getItem())) throw new UsageException("Hold a weapon or an armor in your mainhand!");
 	}
 	
 	public static boolean isInteger(String s)

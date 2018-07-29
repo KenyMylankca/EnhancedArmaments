@@ -10,6 +10,7 @@ import com.jannesoon.enhancedarmaments.config.Config;
 import com.jannesoon.enhancedarmaments.leveling.Ability;
 import com.jannesoon.enhancedarmaments.leveling.Experience;
 import com.jannesoon.enhancedarmaments.leveling.Rarity;
+import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
 
 import net.minecraft.client.resources.I18n;
@@ -17,12 +18,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -51,7 +47,7 @@ public class EventItemTooltip
 
 		if (item != null)
 		{
-			if (item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemHoe || item instanceof ItemArmor || item instanceof ItemBow)
+			if (EAUtils.canEnhance(item))
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
@@ -91,7 +87,7 @@ public class EventItemTooltip
 						tooltip.add(rarity.getColor() + "" + TextFormatting.ITALIC + I18n.format("enhancedarmaments.misc.abilities"));
 						tooltip.add("");
 						
-						if (item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemHoe || item instanceof ItemBow)
+						if (EAUtils.canEnhanceWeapon(item))
 						{
 							for (Ability ability : Ability.WEAPONS)
 							{
@@ -101,7 +97,7 @@ public class EventItemTooltip
 								}
 							}
 						}
-						else if (item instanceof ItemArmor)
+						else if (EAUtils.canEnhanceArmor(item))
 						{
 							for (Ability ability : Ability.ARMOR)
 							{

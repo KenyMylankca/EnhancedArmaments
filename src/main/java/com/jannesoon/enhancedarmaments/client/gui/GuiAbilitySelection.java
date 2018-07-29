@@ -10,6 +10,7 @@ import com.jannesoon.enhancedarmaments.leveling.Ability;
 import com.jannesoon.enhancedarmaments.leveling.Experience;
 import com.jannesoon.enhancedarmaments.leveling.Rarity;
 import com.jannesoon.enhancedarmaments.network.PacketGuiAbility;
+import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
 
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -17,12 +18,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.HoverChecker;
@@ -45,7 +41,7 @@ public class GuiAbilitySelection extends GuiScreen
 	    	
 	    	if (stack != null)
 	    	{
-	    		if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemHoe || stack.getItem() instanceof ItemBow)
+	    		if (EAUtils.canEnhanceWeapon(stack.getItem()))
 		    	{
 		    		weaponAbilities = new GuiButton[Ability.WEAPON_ABILITIES];
 		    		NBTTagCompound nbt = stack.getTagCompound();
@@ -69,7 +65,7 @@ public class GuiAbilitySelection extends GuiScreen
 		    			}
 		    		}
 		    	}
-		    	else if (stack.getItem() instanceof ItemArmor)
+		    	else if (EAUtils.canEnhanceArmor(stack.getItem()))
 		    	{
 		    		armorAbilities = new GuiButton[Ability.ARMOR_ABILITIES];
 		    		NBTTagCompound nbt = stack.getTagCompound();
@@ -112,19 +108,19 @@ public class GuiAbilitySelection extends GuiScreen
 	    	
 	    	if (stack != null)
 	    	{
-	    		if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemHoe || stack.getItem() instanceof ItemArmor || stack.getItem() instanceof ItemBow)
+	    		if (EAUtils.canEnhance(stack.getItem()))
 	    		{
 	    			NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 		    		
 		    		if (nbt != null)
 		    		{	
-		    			if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemHoe || stack.getItem() instanceof ItemBow)
+		    			if (EAUtils.canEnhanceWeapon(stack.getItem()))
 		    			{
 		    				drawStrings(stack, Ability.WEAPONS, nbt);
 		    				displayButtons(weaponAbilities, Ability.WEAPONS, nbt);
 		    				drawTooltips(weaponAbilities, Ability.WEAPONS, mouseX, mouseY);
 		    			}
-		    			else if (stack.getItem() instanceof ItemArmor)
+		    			else if (EAUtils.canEnhanceArmor(stack.getItem()))
 		    			{
 		    				drawStrings(stack, Ability.ARMOR, nbt);
 		    				displayButtons(armorAbilities, Ability.ARMOR, nbt);
@@ -154,7 +150,7 @@ public class GuiAbilitySelection extends GuiScreen
 				{
 					if (Experience.getAbilityTokens(nbt) > 0)
 					{
-						if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemHoe || stack.getItem() instanceof ItemBow)
+						if (EAUtils.canEnhanceWeapon(stack.getItem()))
 						{
 							for (int i = 0; i < weaponAbilities.length; i++)
 							{
@@ -164,7 +160,7 @@ public class GuiAbilitySelection extends GuiScreen
 								}
 							}
 						}
-						else if (stack.getItem() instanceof ItemArmor)
+						else if (EAUtils.canEnhanceArmor(stack.getItem()))
 						{
 							for (int i = 0; i < armorAbilities.length; i++)
 							{
@@ -308,7 +304,7 @@ public class GuiAbilitySelection extends GuiScreen
 				list.add("");
 				list.add(I18n.format("enhancedarmaments.abilities.info." + abilities.get(i).getName()));
 				list.add("");
-				if (stack.getItem() instanceof ItemSword ||stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemHoe || stack.getItem() instanceof ItemBow)
+				if (EAUtils.canEnhanceWeapon(stack.getItem()))
 				{
 						if (i == 0)//FIRE
 						{
@@ -570,7 +566,7 @@ public class GuiAbilitySelection extends GuiScreen
 							}
 						}
 				}
-				else if (stack.getItem() instanceof ItemArmor)
+				else if (EAUtils.canEnhanceArmor(stack.getItem()))
 				{		
 						if (i == 0)//MOLTEN
 						{

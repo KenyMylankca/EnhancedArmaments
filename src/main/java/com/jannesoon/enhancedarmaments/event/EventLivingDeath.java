@@ -3,16 +3,13 @@ package com.jannesoon.enhancedarmaments.event;
 import com.jannesoon.enhancedarmaments.config.Config;
 import com.jannesoon.enhancedarmaments.leveling.Ability;
 import com.jannesoon.enhancedarmaments.leveling.Experience;
+import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -33,7 +30,7 @@ public class EventLivingDeath
 			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
 			ItemStack stack = player.inventory.getCurrentItem();
 			
-			if (stack != null && (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemHoe))
+			if (stack != null && EAUtils.canEnhanceMelee(stack.getItem()))
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
@@ -48,7 +45,7 @@ public class EventLivingDeath
 					NBTHelper.saveStackNBT(stack, nbt);
 				}
 			}
-			else if (stack != null && stack.getItem() instanceof ItemBow)
+			else if (stack != null && EAUtils.canEnhanceRanged(stack.getItem()))
 			{
 				if (stack != null)
 				{

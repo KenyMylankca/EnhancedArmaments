@@ -7,6 +7,7 @@ import com.jannesoon.enhancedarmaments.config.Config;
 import com.jannesoon.enhancedarmaments.leveling.Ability;
 import com.jannesoon.enhancedarmaments.leveling.Experience;
 import com.jannesoon.enhancedarmaments.leveling.Rarity;
+import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -17,12 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
@@ -44,7 +40,7 @@ public class EventLivingHurt
 			EntityLivingBase target = event.getEntityLiving();
 			ItemStack stack = player.inventory.getCurrentItem();
 			
-			if (stack != null && (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemHoe))
+			if (stack != null && EAUtils.canEnhanceMelee(stack.getItem()))
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
@@ -56,7 +52,7 @@ public class EventLivingHurt
 					updateLevel(player, stack, nbt);
 				}
 			}
-			else if (stack != null && stack.getItem() instanceof ItemBow)
+			else if (stack != null && EAUtils.canEnhanceRanged(stack.getItem()))
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
@@ -78,7 +74,7 @@ public class EventLivingHurt
 			{
 				if (stack != null)
 				{
-					if (stack.getItem() instanceof ItemArmor)	
+					if (EAUtils.canEnhanceArmor(stack.getItem()))	
 					{
 						NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 						
@@ -106,7 +102,7 @@ public class EventLivingHurt
 				{
 					if (stack != null)
 					{
-						if (stack.getItem() instanceof ItemArmor)	
+						if (EAUtils.canEnhanceArmor(stack.getItem()))	
 						{
 							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 							
@@ -150,7 +146,7 @@ public class EventLivingHurt
 		Rarity rarity = Rarity.getRarity(nbt);
 		
 		if (rarity != Rarity.DEFAULT)
-			if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemAxe || stack.getItem() instanceof ItemHoe || stack.getItem() instanceof ItemBow)
+			if (EAUtils.canEnhanceWeapon(stack.getItem()))
 			{
 				Multimap<String, AttributeModifier> map = stack.getItem().getAttributeModifiers(EntityEquipmentSlot.MAINHAND, stack);
 				Collection<AttributeModifier> damageCollection = map.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
@@ -158,7 +154,7 @@ public class EventLivingHurt
 				double damage = damageModifier.getAmount();
 				event.setAmount((float) (event.getAmount() + damage * rarity.getEffect()));
 			}
-			else if (stack.getItem() instanceof ItemArmor)
+			else if (EAUtils.canEnhanceArmor(stack.getItem()))
 				event.setAmount((float) (event.getAmount() / (1.0F + (rarity.getEffect()/4F))));
 	}
 	

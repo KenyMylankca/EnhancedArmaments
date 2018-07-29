@@ -2,18 +2,14 @@ package com.jannesoon.enhancedarmaments.event;
 
 import com.jannesoon.enhancedarmaments.EnhancedArmaments;
 import com.jannesoon.enhancedarmaments.proxies.ClientProxy;
+import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.GuiHandler;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -39,11 +35,11 @@ public class EventInput
 			
 			if (stack != null)
 			{
-				Item current = stack.getItem();
+				Item helditem = stack.getItem();
 				
-				if (current != null)
+				if (helditem != null)
 				{
-					if (current instanceof ItemSword || current instanceof ItemAxe || current instanceof ItemHoe || current instanceof ItemArmor || current instanceof ItemBow)
+					if (EAUtils.canEnhance(helditem))
 					{
 						if (key.isPressed())
 						{
