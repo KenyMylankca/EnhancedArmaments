@@ -64,20 +64,20 @@ public class EventItemTooltip
 					
 					// level
 					if (level >= Config.maxLevel)
-						tooltip.add(TextFormatting.GRAY + I18n.format("enhancedarmaments.misc.level") + ": " + I18n.format("enhancedarmaments.misc.max"));
+						tooltip.add(I18n.format("enhancedarmaments.misc.level") + ": " + I18n.format("enhancedarmaments.misc.max"));
 					else
-						tooltip.add(TextFormatting.GRAY + I18n.format("enhancedarmaments.misc.level") + ": " + level);
+						tooltip.add(I18n.format("enhancedarmaments.misc.level") + ": " + level);
 					
 					// experience
 					if (level >= Config.maxLevel)
-						tooltip.add(TextFormatting.GRAY + I18n.format("enhancedarmaments.misc.experience") + ": " + I18n.format("enhancedarmaments.misc.max"));
+						tooltip.add(I18n.format("enhancedarmaments.misc.experience") + ": " + I18n.format("enhancedarmaments.misc.max"));
 					else
-						tooltip.add(TextFormatting.GRAY + I18n.format("enhancedarmaments.misc.experience") + ": " + experience + " / " + maxExperience);
+						tooltip.add(I18n.format("enhancedarmaments.misc.experience") + ": " + experience + " / " + maxExperience);
 					
 					// durability
 					if (Config.showDurability)
 					{
-						tooltip.add(TextFormatting.GRAY + I18n.format("enhancedarmaments.misc.durability") + ": " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
+						tooltip.add(I18n.format("enhancedarmaments.misc.durability") + ": " + (stack.getMaxDamage() - stack.getItemDamage()) + " / " + stack.getMaxDamage());
 					}
 					
 					// abilities
@@ -116,7 +116,7 @@ public class EventItemTooltip
 	}
 	
 	private void changeTooltips(ArrayList<String> tooltip, ItemStack stack, Rarity rarity)
-	{	
+	{
 		// rarity after the name
 		tooltip.set(0, stack.getDisplayName() + rarity.getColor() + " (" + TextFormatting.ITALIC + I18n.format("enhancedarmaments.rarity." + rarity.getName()) + ")");
 		
@@ -142,6 +142,12 @@ public class EventItemTooltip
 			if(tooltip.indexOf("When on feet:") != -1) line = tooltip.indexOf("When on feet:");
 			if(percentage != 0)
 				tooltip.add(line + 1," " + TextFormatting.BLUE + "+" + rarity.getColor() + percentage + TextFormatting.BLUE + "% " + I18n.format("enhancedarmaments.misc.rarity.armorreduction"));
+		}
+		
+		if(EAUtils.canEnhanceRanged(stack.getItem()) && rarity.getEffect() != 0)
+		{
+			String b = String.format("%.1f", rarity.getEffect()/3*100);
+			tooltip.add(1, I18n.format("enhancedarmaments.misc.rarity.arrowpercentage") + ": " + rarity.getColor() + b + "%");
 		}
 	}
 }
