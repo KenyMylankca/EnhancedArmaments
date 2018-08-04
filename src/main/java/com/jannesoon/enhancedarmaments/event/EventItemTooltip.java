@@ -147,7 +147,7 @@ public class EventItemTooltip
 		if(EAUtils.canEnhanceRanged(stack.getItem()) && rarity.getEffect() != 0)
 		{
 			String b = String.format("%.1f", rarity.getEffect()/3*100);
-			tooltip.add(1, I18n.format("enhancedarmaments.misc.rarity.arrowpercentage") + ": " + rarity.getColor() + b + "%");
+			tooltip.add(1, I18n.format("enhancedarmaments.misc.rarity.arrowpercentage") + " " + rarity.getColor() + "+" + b + "%");
 		}
 	}
 }
