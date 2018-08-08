@@ -25,21 +25,29 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
-/**
- */
 public class EventLivingHurt
 {
-	public static EnumHand bowfriendlyhand;
+	public static EnumHand bowfriendlyhand = EnumHand.MAIN_HAND;
 	
 	@SubscribeEvent
-	public void onPlayerLogins(PlayerLoggedInEvent event)
+	public void onArrowHit(ProjectileImpactEvent event)
 	{
-		bowfriendlyhand = event.player.getActiveHand();
+		EntityArrow arrow;
+		if(event.getEntity() instanceof EntityArrow)
+		{
+			arrow = (EntityArrow) event.getEntity();
+			if(arrow.shootingEntity instanceof EntityPlayer)
+			{
+				EntityPlayer player=(EntityPlayer) arrow.shootingEntity;
+				if(event.getRayTraceResult().entityHit == null)
+					bowfriendlyhand=player.getActiveHand();
+			}
+		}
 	}
 	
 	@SubscribeEvent
