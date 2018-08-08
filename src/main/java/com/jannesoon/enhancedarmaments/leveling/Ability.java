@@ -28,11 +28,11 @@ public enum Ability
 	MOLTEN("armor", "active", Config.molten, TextFormatting.RED, 0xFF5555, 2, 2),
 	FROZEN("armor", "active", Config.frozen, TextFormatting.AQUA, 0x55FFFF, 2, 2),
 	TOXIC("armor", "active", Config.toxic, TextFormatting.DARK_GREEN, 0x00AA00, 2, 2),
-	ABSORB("armor", "active", Config.absorb, TextFormatting.GREEN, 0x55FF55, 3, 1),
 	// passive
 	BEASTIAL("armor", "passive", Config.beastial, TextFormatting.DARK_RED, 0xAA0000, 2, 1),
 	REMEDIAL("armor", "passive", Config.remedial, TextFormatting.LIGHT_PURPLE, 0xFF55FF, 2, 2),
-	HARDENED("armor", "passive", Config.hardened, TextFormatting.GRAY, 0xAAAAAA, 3, 1);
+	HARDENED("armor", "passive", Config.hardened, TextFormatting.GRAY, 0xAAAAAA, 3, 1),
+	ADRENALINE("armor", "passive", Config.adrenaline, TextFormatting.GREEN, 0x55FF55, 3, 1);
 	
 	public static int WEAPON_ABILITIES;
 	public static int ARMOR_ABILITIES;

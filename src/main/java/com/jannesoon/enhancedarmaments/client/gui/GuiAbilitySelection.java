@@ -661,38 +661,7 @@ public class GuiAbilitySelection extends GuiScreen
 								}
 							}
 						}
-						if (i == 3)//ABSORB
-						{
-							float chance = (float) (1.0 / (Config.absorbchance))*100;
-							float currentduration = (Ability.ABSORB.getLevel(nbt) + Ability.ABSORB.getLevel(nbt)*5)/3;
-							float nextlevelduration = (Ability.ABSORB.getLevel(nbt)+1 + (Ability.ABSORB.getLevel(nbt)+1)*5)/3;
-							int c = (int) chance;
-							
-							if (!(Ability.ABSORB.hasAbility(nbt)))
-							{
-								if (buttons[i].enabled)
-								{
-									list.add(I18n.format("enhancedarmaments.abilities.info.chance")+": %0"+ TextFormatting.GREEN + " + %" + c);
-									list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": 0 " + I18n.format("enhancedarmaments.abilities.info.seconds")+ TextFormatting.GREEN + " +" + nextlevelduration);
-								}
-							}
-							else
-							{
-								if (buttons[i].enabled)
-								{
-									list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
-									list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " + " + (nextlevelduration-currentduration));
-								}
-								else
-								{
-									list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
-									list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration +" "+ I18n.format("enhancedarmaments.abilities.info.seconds"));
-									if(!(Ability.ABSORB.canUpgradeLevel(nbt)))
-										list.add(TextFormatting.RED + I18n.format("enhancedarmaments.misc.max")+" " + I18n.format("enhancedarmaments.misc.level"));
-								}
-							}
-						}
-						if (i == 4)//BEASTIAL
+						if (i == 3)//BEASTIAL
 						{
 							if (!(Ability.BEASTIAL.hasAbility(nbt)))
 							{
@@ -708,7 +677,7 @@ public class GuiAbilitySelection extends GuiScreen
 							if(!(Ability.BEASTIAL.canUpgradeLevel(nbt)) && (!(buttons[i].enabled)))
 									list.add(TextFormatting.RED + I18n.format("enhancedarmaments.misc.max")+" " + I18n.format("enhancedarmaments.misc.level"));
 						}
-						if (i == 5)//REMEDIAL
+						if (i == 4)//REMEDIAL
 						{
 							float heal = (float) Ability.REMEDIAL.getLevel(nbt);
 							if (!(Ability.REMEDIAL.hasAbility(nbt)))
@@ -729,7 +698,7 @@ public class GuiAbilitySelection extends GuiScreen
 							if(!(Ability.REMEDIAL.canUpgradeLevel(nbt)) && (!(buttons[i].enabled)))
 									list.add(TextFormatting.RED + I18n.format("enhancedarmaments.misc.max")+" " + I18n.format("enhancedarmaments.misc.level"));
 						}
-						if (i == 6)//HARDENED
+						if (i == 5)//HARDENED
 						{
 							float chance = (float) ((1.0 / (Config.hardenedchance))*100);
 							
@@ -746,6 +715,37 @@ public class GuiAbilitySelection extends GuiScreen
 							}
 							if(!(Ability.HARDENED.canUpgradeLevel(nbt)) && (!(buttons[i].enabled)))
 									list.add(TextFormatting.RED + I18n.format("enhancedarmaments.misc.max")+" " + I18n.format("enhancedarmaments.misc.level"));
+						}
+						if (i == 6)//ADRENALINE
+						{
+							float chance = (float) (1.0 / (Config.adrenalinechance))*100;
+							float currentduration = (Ability.ADRENALINE.getLevel(nbt) + Ability.ADRENALINE.getLevel(nbt)*5)/3;
+							float nextlevelduration = (Ability.ADRENALINE.getLevel(nbt)+1 + (Ability.ADRENALINE.getLevel(nbt)+1)*5)/3;
+							int c = (int) chance;
+							
+							if (!(Ability.ADRENALINE.hasAbility(nbt)))
+							{
+								if (buttons[i].enabled)
+								{
+									list.add(I18n.format("enhancedarmaments.abilities.info.chance")+": %0"+ TextFormatting.GREEN + " + %" + c);
+									list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": 0 " + I18n.format("enhancedarmaments.abilities.info.seconds")+ TextFormatting.GREEN + " +" + nextlevelduration);
+								}
+							}
+							else
+							{
+								if (buttons[i].enabled)
+								{
+									list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
+									list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " + " + (nextlevelduration-currentduration));
+								}
+								else
+								{
+									list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
+									list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration +" "+ I18n.format("enhancedarmaments.abilities.info.seconds"));
+									if(!(Ability.ADRENALINE.canUpgradeLevel(nbt)))
+										list.add(TextFormatting.RED + I18n.format("enhancedarmaments.misc.max")+" " + I18n.format("enhancedarmaments.misc.level"));
+								}
+							}
 						}
 				}
 							

@@ -48,7 +48,7 @@ public class Config
 	public static boolean molten = true;
 	public static boolean frozen = true;
 	public static boolean toxic = true;
-	public static boolean absorb = true;
+	public static boolean adrenaline = true;
 	public static boolean beastial = true;
 	public static boolean remedial = true;
 	public static boolean hardened = true;
@@ -68,7 +68,7 @@ public class Config
 	public static int moltenchance = 4;
 	public static int frozenchance = 4;
 	public static int toxicchance = 4;
-	public static int absorbchance = 7;
+	public static int adrenalinechance = 7;
 	public static int hardenedchance = 10;
 	
 	/*
@@ -226,9 +226,9 @@ public class Config
 		toxic = prop.getBoolean();
 		propOrder.add(prop.getName());
 		
-		prop = abilities.get(category, "absorbAbility", absorb);
+		prop = abilities.get(category, "adrenalineAbility", adrenaline);
 		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
-		absorb = prop.getBoolean();
+		adrenaline = prop.getBoolean();
 		propOrder.add(prop.getName());
 		
 		prop = abilities.get(category, "beastialAbility", beastial);
@@ -301,9 +301,9 @@ public class Config
 		toxicchance = prop.getInt();
 		propOrder.add(prop.getName());
 		
-		prop = abilitychances.get(category, "absorbchance", absorbchance);
-		prop.setComment("Determines how rare the Absorb ability will occur. (Higher values=lower occurance) Default: 7");
-		absorbchance = prop.getInt();
+		prop = abilitychances.get(category, "adrenalinechance", adrenalinechance);
+		prop.setComment("Determines how rare the Adrenaline ability will occur. (Higher values=lower occurance) Default: 7");
+		adrenalinechance = prop.getInt();
 		propOrder.add(prop.getName());
 		
 		prop = abilitychances.get(category, "hardenedchance", hardenedchance);

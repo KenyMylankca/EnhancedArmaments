@@ -288,10 +288,10 @@ public class EventLivingHurt
 				target.addPotionEffect(new PotionEffect(MobEffects.POISON, (int) (20 * multiplier), Ability.TOXIC.getLevel(nbt)));
 			}
 			
-			if (Ability.ABSORB.hasAbility(nbt) && (int) (Math.random() * Config.absorbchance) == 0)
+			if (Ability.ADRENALINE.hasAbility(nbt) && (int) (Math.random() * Config.adrenalinechance) == 0)
 			{
-				double multiplier = (Ability.ABSORB.getLevel(nbt) + Ability.ABSORB.getLevel(nbt)*5)/3 ;
-				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, (int) (20 * (multiplier)), Ability.ABSORB.getLevel(nbt)));
+				double multiplier = (Ability.ADRENALINE.getLevel(nbt) + Ability.ADRENALINE.getLevel(nbt)*5)/3 ;
+				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, (int) (20 * (multiplier)), Ability.ADRENALINE.getLevel(nbt)));
 			}
 
 			// passive
