@@ -466,19 +466,19 @@ public class GuiAbilitySelection extends GuiScreen
 								}
 							}
 						}
-						if (i == 5)//VOID
+						if (i == 5)//CRITICAL_POINT
 						{
-							float chance = (float) ((1.0 / (Config.voidachance))*100);
-							float currentdamage = (Ability.VOID.getLevel(nbt)*21);
-							float nextleveldamage = ((Ability.VOID.getLevel(nbt)+1)*21);
+							float chance = (float) ((1.0 / (Config.criticalpointchance))*100);
+							float currentdamage = (Ability.CRITICAL_POINT.getLevel(nbt)*21);
+							float nextleveldamage = ((Ability.CRITICAL_POINT.getLevel(nbt)+1)*21);
 							int c = (int) chance;
 							
-							if (!(Ability.VOID.hasAbility(nbt)))
+							if (!(Ability.CRITICAL_POINT.hasAbility(nbt)))
 							{
 								if (buttons[i].enabled)
 								{
 									list.add(I18n.format("enhancedarmaments.abilities.info.chance")+": %0"+ TextFormatting.GREEN + " + %" + c);
-									list.add(I18n.format("enhancedarmaments.abilities.info.damagepercentage")+": %0"+ TextFormatting.GREEN + " + %" + nextleveldamage);
+									list.add(I18n.format("enhancedarmaments.abilities.info.healthpercentage")+": %0"+ TextFormatting.GREEN + " + %" + nextleveldamage);
 								}
 							}
 							else
@@ -486,13 +486,13 @@ public class GuiAbilitySelection extends GuiScreen
 								if (buttons[i].enabled)
 								{
 									list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
-									list.add(I18n.format("enhancedarmaments.abilities.info.damagepercentage")+": %"+ currentdamage + " " + TextFormatting.GREEN + "+ %" + (nextleveldamage-currentdamage));
+									list.add(I18n.format("enhancedarmaments.abilities.info.healthpercentage")+": %"+ currentdamage + " " + TextFormatting.GREEN + "+ %" + (nextleveldamage-currentdamage));
 								}
 								else
 								{
 									list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
-									list.add(I18n.format("enhancedarmaments.abilities.info.damagepercentage")+": %"+ currentdamage);
-									if(!(Ability.VOID.canUpgradeLevel(nbt)))
+									list.add(I18n.format("enhancedarmaments.abilities.info.healthpercentage")+": %"+ currentdamage);
+									if(!(Ability.CRITICAL_POINT.canUpgradeLevel(nbt)))
 										list.add(TextFormatting.RED + I18n.format("enhancedarmaments.misc.max")+" " + I18n.format("enhancedarmaments.misc.level"));
 								}
 							}

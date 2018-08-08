@@ -239,13 +239,13 @@ public class EventLivingHurt
 					}
 			}
 			
-			if (Ability.VOID.hasAbility(nbt) && (int) (Math.random() * Config.voidachance) == 0)
+			if (Ability.CRITICAL_POINT.hasAbility(nbt) && (int) (Math.random() * Config.criticalpointchance) == 0)
 			{
 				float multiplier = 0F;
 				
-				if (Ability.VOID.getLevel(nbt) == 1) multiplier = 0.21F;
-				else if (Ability.VOID.getLevel(nbt) == 2) multiplier = 0.42F;
-				else if (Ability.VOID.getLevel(nbt) == 3) multiplier = 0.63F;
+				if (Ability.CRITICAL_POINT.getLevel(nbt) == 1) multiplier = 0.21F;
+				else if (Ability.CRITICAL_POINT.getLevel(nbt) == 2) multiplier = 0.42F;
+				else if (Ability.CRITICAL_POINT.getLevel(nbt) == 3) multiplier = 0.63F;
 
 				float damage = target.getMaxHealth() * multiplier;
 				event.setAmount(damage);

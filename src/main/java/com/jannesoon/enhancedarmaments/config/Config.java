@@ -40,7 +40,7 @@ public class Config
 	public static boolean poison = true;
 	public static boolean innate = true;
 	public static boolean bombastic = true;
-	public static boolean voida = true;
+	public static boolean criticalpoint = true;
 	public static boolean illumination = true;
 	public static boolean ethereal = true;
 	public static boolean bloodthirst = true;
@@ -63,7 +63,7 @@ public class Config
 	public static int poisonchance = 4;
 	public static int innatechance = 6;
 	public static int bombasticchance = 7;
-	public static int voidachance = 13;
+	public static int criticalpointchance = 13;
 	//armor
 	public static int moltenchance = 4;
 	public static int frozenchance = 4;
@@ -190,9 +190,9 @@ public class Config
 		bombastic = prop.getBoolean();
 		propOrder.add(prop.getName());
 		
-		prop = abilities.get(category, "voidAbility", voida);
+		prop = abilities.get(category, "criticalpointAbility", criticalpoint);
 		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
-		voida = prop.getBoolean();
+		criticalpoint = prop.getBoolean();
 		propOrder.add(prop.getName());
 		
 		prop = abilities.get(category, "illuminationAbility", illumination);
@@ -281,9 +281,9 @@ public class Config
 		bombasticchance = prop.getInt();
 		propOrder.add(prop.getName());
 		
-		prop = abilitychances.get(category, "voidachance", voidachance);
-		prop.setComment("Determines how rare the Void ability will occur. (Higher values=lower occurance) Default: 13");
-		voidachance = prop.getInt();
+		prop = abilitychances.get(category, "criticalpointchance", criticalpointchance);
+		prop.setComment("Determines how rare the Critical Point ability will occur. (Higher values=lower occurance) Default: 13");
+		criticalpointchance = prop.getInt();
 		propOrder.add(prop.getName());
 		
 		prop = abilitychances.get(category, "moltenchance", moltenchance);

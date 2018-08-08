@@ -17,7 +17,7 @@ public enum Ability
 	POISON("weapon", "active", Config.poison, TextFormatting.DARK_GREEN, 0x00AA00, 1, 3),
 	INNATE("weapon", "active", Config.innate, TextFormatting.DARK_RED, 0xAA0000, 2, 3),
 	BOMBASTIC("weapon", "active", Config.bombastic, TextFormatting.GRAY, 0xAAAAAA, 3, 3),
-	VOID("weapon", "active", Config.voida, TextFormatting.DARK_GRAY, 0x555555, 3, 3),
+	CRITICAL_POINT("weapon", "active", Config.criticalpoint, TextFormatting.DARK_GRAY, 0x555555, 3, 3),
 	// passive
 	ILLUMINATION("weapon", "passive", Config.illumination, TextFormatting.YELLOW, 0xFFFF55, 2, 1),
 	ETHEREAL("weapon", "passive", Config.ethereal, TextFormatting.GREEN, 0x55FF55, 2, 2),
