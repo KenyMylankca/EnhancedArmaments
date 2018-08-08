@@ -22,15 +22,32 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
 /**
  */
-public class EventLivingHurt 
+public class EventLivingHurt
 {
+	public static EnumHand bowfriendlyhand;
+	
+	@SubscribeEvent
+	public void onPlayerLogins(PlayerLoggedInEvent event)
+	{
+		bowfriendlyhand = event.player.getActiveHand();
+	}
+	
+	@SubscribeEvent
+	public void onArrowShoot(ArrowLooseEvent event)
+	{
+		bowfriendlyhand=event.getEntityPlayer().getActiveHand();
+	}
+	
 	@SubscribeEvent
 	public void onHurt(LivingHurtEvent event)
 	{
@@ -38,7 +55,7 @@ public class EventLivingHurt
 		{
 			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
 			EntityLivingBase target = event.getEntityLiving();
-			ItemStack stack = player.inventory.getCurrentItem();
+			ItemStack stack = player.getHeldItem(bowfriendlyhand);
 			
 			if (stack != null && EAUtils.canEnhanceMelee(stack.getItem()))
 			{
@@ -64,6 +81,7 @@ public class EventLivingHurt
 					updateLevel(player, stack, nbt);
 				}
 			}
+			bowfriendlyhand = player.getActiveHand();
 		}
 		else if (event.getSource().getTrueSource() instanceof EntityLivingBase && event.getEntityLiving() instanceof EntityPlayer)
 		{
@@ -119,6 +137,8 @@ public class EventLivingHurt
 			}
 		}
 	}
+	
+	
 	
 	/**
 	 * Called everytime a target is hurt. Used to add experience to weapons dealing damage.

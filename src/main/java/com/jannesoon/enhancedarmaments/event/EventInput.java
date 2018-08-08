@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * Opens the weapon ability selection gui on key press.
  *
  */
-public class EventInput 
+public class EventInput
 {
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent

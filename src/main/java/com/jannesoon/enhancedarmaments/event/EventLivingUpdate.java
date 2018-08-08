@@ -17,7 +17,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class EventLivingUpdate 
+public class EventLivingUpdate
 {
 	private int count=0;
 	@SubscribeEvent

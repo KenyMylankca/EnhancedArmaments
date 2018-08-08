@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * level, abilities, and so on.
  *
  */
-public class EventLivingDeath 
+public class EventLivingDeath
 {
 	@SubscribeEvent
 	public void onLivingDeath(LivingDeathEvent event)
@@ -28,7 +28,7 @@ public class EventLivingDeath
 		if (event.getSource().getTrueSource() instanceof EntityPlayer && !(event.getSource().getTrueSource() instanceof FakePlayer))
 		{
 			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
-			ItemStack stack = player.inventory.getCurrentItem();
+			ItemStack stack = player.getHeldItem(EventLivingHurt.bowfriendlyhand);
 			
 			if (stack != null && EAUtils.canEnhanceMelee(stack.getItem()))
 			{
@@ -85,6 +85,7 @@ public class EventLivingDeath
 			}
 		}
 	}
+	
 	/**
 	 * Called everytime a target dies. Adds bonus experience based on how much health the target had.
 	 * @param event
