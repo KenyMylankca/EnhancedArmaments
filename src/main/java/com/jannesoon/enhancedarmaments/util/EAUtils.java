@@ -6,6 +6,7 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.DamageSource;
 
 public class EAUtils
 {
@@ -32,5 +33,15 @@ public class EAUtils
 	public static boolean canEnhanceArmor(Item item)
 	{
 		return (item instanceof ItemArmor) ? true : false;
+	}
+	
+	public static boolean isDamageSourceAllowed(DamageSource damageSource)
+	{
+		return !(damageSource == DamageSource.FALL ||
+				damageSource == DamageSource.DROWN ||
+				damageSource == DamageSource.CACTUS ||
+				damageSource == DamageSource.STARVE ||
+				damageSource == DamageSource.IN_WALL ||
+				damageSource == DamageSource.IN_FIRE);
 	}
 }

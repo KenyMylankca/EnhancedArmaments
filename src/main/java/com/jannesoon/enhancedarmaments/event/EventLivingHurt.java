@@ -79,7 +79,7 @@ public class EventLivingHurt
 			}
 			bowfriendlyhand = player.getActiveHand();
 		}
-		else if (event.getSource().getTrueSource() instanceof EntityLivingBase && event.getEntityLiving() instanceof EntityPlayer)
+		else if (EAUtils.isDamageSourceAllowed(event.getSource()) && event.getEntityLiving() instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 			EntityLivingBase target = (EntityLivingBase) event.getSource().getTrueSource();
@@ -98,35 +98,6 @@ public class EventLivingHurt
 							useRarity(event, stack, nbt);
 							useArmorAbilities(event, player, target, nbt);
 							updateLevel(player, stack, nbt);
-						}
-					}
-				}
-			}
-		}
-		else if (event.getSource().getTrueSource() instanceof EntityArrow)
-		{
-			EntityArrow arrow = (EntityArrow) event.getSource().getTrueSource();
-			
-			if (arrow.shootingEntity instanceof EntityLivingBase && event.getEntityLiving() instanceof EntityPlayer)
-			{
-				EntityLivingBase target = (EntityLivingBase) arrow.shootingEntity;
-				EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-				
-				for (ItemStack stack : player.inventory.armorInventory)
-				{
-					if (stack != null)
-					{
-						if (EAUtils.canEnhanceArmor(stack.getItem()))	
-						{
-							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-							
-							if (nbt != null)
-							{
-								updateExperience(nbt);
-								useRarity(event, stack, nbt);
-								useArmorAbilities(event, player, target, nbt);
-								updateLevel(player, stack, nbt);
-							}
 						}
 					}
 				}
