@@ -65,19 +65,7 @@ public class EventLivingHurt
 			EntityLivingBase target = event.getEntityLiving();
 			ItemStack stack = player.getHeldItem(bowfriendlyhand);
 			
-			if (stack != null && EAUtils.canEnhanceMelee(stack.getItem()))
-			{
-				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-				
-				if (nbt != null)
-				{
-					updateExperience(nbt);
-					useRarity(event, stack, nbt);
-					useWeaponAbilities(event, player, target, nbt);
-					updateLevel(player, stack, nbt);
-				}
-			}
-			else if (stack != null && EAUtils.canEnhanceRanged(stack.getItem()))
+			if (stack != null && EAUtils.canEnhanceWeapon(stack.getItem()))
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
@@ -145,8 +133,6 @@ public class EventLivingHurt
 			}
 		}
 	}
-	
-	
 	
 	/**
 	 * Called everytime a target is hurt. Used to add experience to weapons dealing damage.
