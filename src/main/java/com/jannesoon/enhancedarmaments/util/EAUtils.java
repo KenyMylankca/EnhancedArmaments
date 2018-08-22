@@ -1,5 +1,6 @@
 package com.jannesoon.enhancedarmaments.util;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
@@ -42,6 +43,6 @@ public class EAUtils
 				damageSource == DamageSource.CACTUS ||
 				damageSource == DamageSource.STARVE ||
 				damageSource == DamageSource.IN_WALL ||
-				damageSource == DamageSource.IN_FIRE);
+				damageSource == DamageSource.IN_FIRE) || damageSource.getTrueSource() instanceof EntityLivingBase;
 	}
 }
