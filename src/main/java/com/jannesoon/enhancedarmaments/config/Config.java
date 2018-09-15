@@ -23,7 +23,7 @@ public class Config
 	public static int maxLevel = 10;
 	public static int level1Exp = 40;
 	public static double expExponent = 2.4D;
-	public static int expMultiplier = 10;
+	public static int expMultiplier = 15;
 	
 	// misc
 	public static boolean showDurability = true;
