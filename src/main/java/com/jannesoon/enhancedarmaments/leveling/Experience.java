@@ -2,11 +2,11 @@ package com.jannesoon.enhancedarmaments.leveling;
 
 import com.jannesoon.enhancedarmaments.config.Config;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 public class Experience 
@@ -20,7 +20,7 @@ public class Experience
 			newLevel = currentLevel + 1;
 			currentLevel++;
 			Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) + 1);
-			player.sendMessage(new TextComponentString(stack.getDisplayName() + TextFormatting.GRAY + " " + I18n.format("enhancedarmaments.misc.level.leveledup") + " " + TextFormatting.GOLD + "" + newLevel + TextFormatting.GRAY + "!"));
+			player.sendMessage(new TextComponentString(stack.getDisplayName() + TextFormatting.GRAY + " " + new TextComponentTranslation("enhancedarmaments.misc.level.leveledup").getFormattedText() + " " + TextFormatting.GOLD + "" + newLevel + TextFormatting.GRAY + "!"));
 		}
 		
 		return newLevel;

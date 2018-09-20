@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.jannesoon.enhancedarmaments.config.Config;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 public enum Ability
@@ -143,13 +143,13 @@ public enum Ability
 	public String getName(NBTTagCompound nbt)
 	{
 		if (getLevel(nbt) == 1)
-			return I18n.format("enhancedarmaments.ability." + this.toString());
+			return new TextComponentTranslation("enhancedarmaments.ability." + this.toString()).getFormattedText();
 		else if (getLevel(nbt) == 2)
-			return I18n.format("enhancedarmaments.ability." + this.toString()) + " II";
+			return new TextComponentTranslation("enhancedarmaments.ability." + this.toString()).getFormattedText() + " II";
 		else if (getLevel(nbt) == 3)
-			return I18n.format("enhancedarmaments.ability." + this.toString()) + " III";
+			return new TextComponentTranslation("enhancedarmaments.ability." + this.toString()).getFormattedText() + " III";
 		else
-			return I18n.format(this.toString());
+			return new TextComponentTranslation(this.toString()).getFormattedText();
 	}
 	
 	public String getType()
@@ -159,7 +159,7 @@ public enum Ability
 	
 	public String getTypeName()
 	{
-		return I18n.format("enhancedarmaments.ability.type." + type.toString()); 
+		return new TextComponentTranslation("enhancedarmaments.ability.type." + type.toString()).getFormattedText(); 
 	}
 	
 	public String getCategory()

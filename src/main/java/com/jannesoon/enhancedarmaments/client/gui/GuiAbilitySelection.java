@@ -32,7 +32,7 @@ public class GuiAbilitySelection extends GuiScreen
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void initGui() 
-	{	
+	{
 		EntityPlayer player = this.mc.player;
 	    
 	    if (player != null)
@@ -300,7 +300,7 @@ public class GuiAbilitySelection extends GuiScreen
 			if (checker.checkHover(mouseX, mouseY))
 			{
 				List<String> list = new ArrayList<String>();
-				list.add(abilities.get(i).getColor() + I18n.format("enhancedarmaments.ability." + abilities.get(i).getName()) + " (" + abilities.get(i).getTypeName() + ")");
+				list.add(abilities.get(i).getColor() + I18n.format("enhancedarmaments.ability." + abilities.get(i).getName()) + " (" + abilities.get(i).getTypeName() + abilities.get(i).getColor() + ")");
 				list.add("");
 				list.add(I18n.format("enhancedarmaments.abilities.info." + abilities.get(i).getName()));
 				list.add("");
