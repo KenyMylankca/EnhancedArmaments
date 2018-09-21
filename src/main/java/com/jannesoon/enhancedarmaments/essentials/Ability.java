@@ -154,7 +154,7 @@ public enum Ability
 		else if (getLevel(nbt) == 3)
 			return new TextComponentTranslation("enhancedarmaments.ability." + this.toString()).getFormattedText() + " III";
 		else
-			return new TextComponentTranslation(this.toString()).getFormattedText();
+			return new TextComponentTranslation("enhancedarmaments.ability." + this.toString()).getFormattedText();
 	}
 	
 	public String getType()
