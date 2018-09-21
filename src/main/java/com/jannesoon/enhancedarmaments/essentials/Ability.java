@@ -125,6 +125,11 @@ public enum Ability
 		return tier;
 	}
 	
+	public int getMaxLevel()
+	{
+		return maxlevel;
+	}
+	
 	public String getColor()
 	{
 		return color;
