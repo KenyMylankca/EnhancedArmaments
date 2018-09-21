@@ -240,49 +240,20 @@ public class GuiAbilitySelection extends GuiScreen
 		{
 			buttons[i].enabled = false;
 		}
-		if (Experience.getAbilityTokens(nbt) > 0)
+		
+		for (int i = 0; i < buttons.length; i++)
 		{
-			for (int i = 0; i < buttons.length; i++)
-			{	
-				if (Experience.getAbilityTokens(nbt) == 1)
+			if(Experience.getAbilityTokens(nbt) >= abilities.get(i).getTier())
+			{
+				if(!(abilities.get(i).hasAbility(nbt)))
 				{
-					if (abilities.get(i).getTier() == 1)
-					{
-						if (!(abilities.get(i).hasAbility(nbt)))
-							buttons[i].enabled = true;
-					
-						else if (abilities.get(i).canUpgradeLevel(nbt))
-							buttons[i].enabled = true;
-						else
-							buttons[i].enabled = false;
-					}
+					if(Ability.hasEnoughExp(nbt, player, abilities.get(i)))
+						buttons[i].enabled = true;
 				}
-				
-				if (Experience.getAbilityTokens(nbt) == 2)
-				{
-					if (abilities.get(i).getTier() <= 2)
-					{
-						if (!(abilities.get(i).hasAbility(nbt)))
-							buttons[i].enabled = true;
-						else if (abilities.get(i).canUpgradeLevel(nbt))
-							buttons[i].enabled = true;
-						else
-							buttons[i].enabled = false;
-					}
-				}
-				
-				if (Experience.getAbilityTokens(nbt) >= 3)
-				{
-					if (abilities.get(i).getTier() <= 3)
-					{
-						if (!(abilities.get(i).hasAbility(nbt)))
-							buttons[i].enabled = true;
-						else if (abilities.get(i).canUpgradeLevel(nbt))
-							buttons[i].enabled = true;
-						else
-							buttons[i].enabled = false;
-					}
-				}
+				else if (abilities.get(i).canUpgradeLevel(nbt))
+					buttons[i].enabled = true;
+				else
+					buttons[i].enabled = false;
 			}
 		}
 	}
@@ -326,7 +297,7 @@ public class GuiAbilitySelection extends GuiScreen
 							if (buttons[i].enabled)
 							{
 								list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
-								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " + " + (nextlevelduration-currentduration));
+								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " +" + (nextlevelduration-currentduration));
 							}
 							else
 							{
@@ -357,7 +328,7 @@ public class GuiAbilitySelection extends GuiScreen
 							if (buttons[i].enabled)
 							{
 								list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
-								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " + " + (nextlevelduration-currentduration));
+								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " +" + (nextlevelduration-currentduration));
 							}
 							else
 							{
@@ -388,7 +359,7 @@ public class GuiAbilitySelection extends GuiScreen
 							if (buttons[i].enabled)
 							{
 								list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
-								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " + " + (nextlevelduration-currentduration));
+								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " +" + (nextlevelduration-currentduration));
 							}
 							else
 							{
@@ -422,7 +393,7 @@ public class GuiAbilitySelection extends GuiScreen
 							if (buttons[i].enabled)
 							{
 								list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
-								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " + " + (nextlevelduration-currentduration));
+								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " +" + (nextlevelduration-currentduration));
 								list.add(I18n.format("enhancedarmaments.abilities.info.bleedingspeed")+": "+ currentbleedingspeed + " " + TextFormatting.GREEN + "+" + (nextlevelbleedingspeed-currentbleedingspeed));
 							}
 							else
@@ -522,14 +493,14 @@ public class GuiAbilitySelection extends GuiScreen
 						{
 							if (buttons[i].enabled)
 							{
-								list.add(I18n.format("enhancedarmaments.abilities.info.durability")+": 0" + TextFormatting.GREEN + " +" + 3.0 + " " );
+								list.add(I18n.format("enhancedarmaments.abilities.info.durability")+": 0" + TextFormatting.GREEN + " +" + 3.0);
 							}
 						}
 						else
 						{
 							if (buttons[i].enabled)
 							{
-								list.add(I18n.format("enhancedarmaments.abilities.info.durability")+": "+ currentrepair + " " + TextFormatting.GREEN + "+ " + (nextlevelrepair-currentrepair));
+								list.add(I18n.format("enhancedarmaments.abilities.info.durability")+": "+ currentrepair + " " + TextFormatting.GREEN + "+" + (nextlevelrepair-currentrepair));
 							}
 							else
 							{
@@ -588,7 +559,7 @@ public class GuiAbilitySelection extends GuiScreen
 							if (buttons[i].enabled)
 							{
 								list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
-								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " + " + (nextlevelduration-currentduration));
+								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " +" + (nextlevelduration-currentduration));
 							}
 							else
 							{
@@ -619,7 +590,7 @@ public class GuiAbilitySelection extends GuiScreen
 							if (buttons[i].enabled)
 							{
 								list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
-								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " + " + (nextlevelduration-currentduration));
+								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " +" + (nextlevelduration-currentduration));
 							}
 							else
 							{
@@ -650,7 +621,7 @@ public class GuiAbilitySelection extends GuiScreen
 							if (buttons[i].enabled)
 							{
 								list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
-								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " + " + (nextlevelduration-currentduration));
+								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " +" + (nextlevelduration-currentduration));
 							}
 							else
 							{
@@ -672,10 +643,10 @@ public class GuiAbilitySelection extends GuiScreen
 						}
 						else
 						{
-								list.add(I18n.format("enhancedarmaments.abilities.info.duration") + ": " + 7.0 + " " + I18n.format("enhancedarmaments.abilities.info.seconds"));
+							list.add(I18n.format("enhancedarmaments.abilities.info.duration") + ": " + 7.0 + " " + I18n.format("enhancedarmaments.abilities.info.seconds"));
 						}
 						if(!(Ability.BEASTIAL.canUpgradeLevel(nbt)) && (!(buttons[i].enabled)))
-								list.add(TextFormatting.RED + I18n.format("enhancedarmaments.misc.max")+" " + I18n.format("enhancedarmaments.misc.level"));
+							list.add(TextFormatting.RED + I18n.format("enhancedarmaments.misc.max")+" " + I18n.format("enhancedarmaments.misc.level"));
 					}
 					if (i == 4)//REMEDIAL
 					{
@@ -736,7 +707,7 @@ public class GuiAbilitySelection extends GuiScreen
 							if (buttons[i].enabled)
 							{
 								list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
-								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " + " + (nextlevelduration-currentduration));
+								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " +" + (nextlevelduration-currentduration));
 							}
 							else
 							{
