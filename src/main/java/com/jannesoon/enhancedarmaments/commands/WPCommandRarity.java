@@ -3,7 +3,7 @@ package com.jannesoon.enhancedarmaments.commands;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.jannesoon.enhancedarmaments.leveling.Rarity;
+import com.jannesoon.enhancedarmaments.essentials.Rarity;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
 

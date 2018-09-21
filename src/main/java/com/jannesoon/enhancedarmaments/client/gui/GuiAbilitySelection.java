@@ -6,9 +6,9 @@ import java.util.List;
 
 import com.jannesoon.enhancedarmaments.EnhancedArmaments;
 import com.jannesoon.enhancedarmaments.config.Config;
-import com.jannesoon.enhancedarmaments.leveling.Ability;
-import com.jannesoon.enhancedarmaments.leveling.Experience;
-import com.jannesoon.enhancedarmaments.leveling.Rarity;
+import com.jannesoon.enhancedarmaments.essentials.Ability;
+import com.jannesoon.enhancedarmaments.essentials.Experience;
+import com.jannesoon.enhancedarmaments.essentials.Rarity;
 import com.jannesoon.enhancedarmaments.network.PacketGuiAbility;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;

@@ -1,4 +1,4 @@
-package com.jannesoon.enhancedarmaments.leveling;
+package com.jannesoon.enhancedarmaments.essentials;
 
 import com.jannesoon.enhancedarmaments.config.Config;
 

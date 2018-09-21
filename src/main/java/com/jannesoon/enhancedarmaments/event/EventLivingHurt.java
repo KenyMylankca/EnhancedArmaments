@@ -4,9 +4,9 @@ import java.util.Collection;
 
 import com.google.common.collect.Multimap;
 import com.jannesoon.enhancedarmaments.config.Config;
-import com.jannesoon.enhancedarmaments.leveling.Ability;
-import com.jannesoon.enhancedarmaments.leveling.Experience;
-import com.jannesoon.enhancedarmaments.leveling.Rarity;
+import com.jannesoon.enhancedarmaments.essentials.Ability;
+import com.jannesoon.enhancedarmaments.essentials.Experience;
+import com.jannesoon.enhancedarmaments.essentials.Rarity;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
 
