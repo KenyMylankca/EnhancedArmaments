@@ -189,11 +189,11 @@ public class GuiAbilitySelection extends GuiScreen
 		drawCenteredString(fontRenderer, stack.getDisplayName(), width / 2, 20, 0xFFFFFF);
 		drawString(fontRenderer, I18n.format("enhancedarmaments.misc.rarity") + ": ", width / 2 - 50, 40, 0xFFFFFF);
 		drawString(fontRenderer, I18n.format("enhancedarmaments.rarity." + rarity.getName()), width / 2 - 15, 40, rarity.getHex());
-		drawCenteredString(fontRenderer, I18n.format("enhancedarmaments.misc.abilities"), width / 3, 80, 0xFFFFFF);
-		drawCenteredString(fontRenderer, I18n.format("enhancedarmaments.misc.abilities.tokens") + ": " + Experience.getAbilityTokens(nbt), width / 2 - 112, 230, 0xFFFFFF);
-		drawCenteredString(fontRenderer, I18n.format("enhancedarmaments.misc.abilities.purchased"), width / 2 + 112, 100, 0xFFFFFF);
-		drawCenteredString(fontRenderer, I18n.format("enhancedarmaments.ability.type.active"), width / 2 + 75, 120, 0xFFFFFF);
-		drawCenteredString(fontRenderer, I18n.format("enhancedarmaments.ability.type.passive"), width / 2 + 150, 120, 0xFFFFFF);
+		drawCenteredString(fontRenderer, TextFormatting.ITALIC + I18n.format("enhancedarmaments.misc.abilities"), width / 2 - 100, 73, 0xFFFFFF);
+		drawCenteredString(fontRenderer, TextFormatting.DARK_GREEN + I18n.format("enhancedarmaments.misc.abilities.tokens") + ": " + Experience.getAbilityTokens(nbt), width / 2 - 100, 86, 0xFFFFFF);
+		drawCenteredString(fontRenderer, TextFormatting.GOLD + I18n.format("enhancedarmaments.misc.abilities.purchased"), width / 2 + 112, 100, 0xFFFFFF);
+		drawCenteredString(fontRenderer, TextFormatting.BOLD + I18n.format("enhancedarmaments.ability.type.active"), width / 2 + 75, 120, 0xFFFFFF);
+		drawCenteredString(fontRenderer, TextFormatting.BOLD + I18n.format("enhancedarmaments.ability.type.passive"), width / 2 + 150, 120, 0xFFFFFF);
 		
 		if (Experience.getLevel(nbt) == Config.maxLevel)
 		{
