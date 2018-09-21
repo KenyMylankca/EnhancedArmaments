@@ -147,9 +147,7 @@ public enum Ability
 	
 	public String getName(NBTTagCompound nbt)
 	{
-		if (getLevel(nbt) == 1)
-			return new TextComponentTranslation("enhancedarmaments.ability." + this.toString()).getFormattedText();
-		else if (getLevel(nbt) == 2)
+		if (getLevel(nbt) == 2)
 			return new TextComponentTranslation("enhancedarmaments.ability." + this.toString()).getFormattedText() + " II";
 		else if (getLevel(nbt) == 3)
 			return new TextComponentTranslation("enhancedarmaments.ability." + this.toString()).getFormattedText() + " III";
