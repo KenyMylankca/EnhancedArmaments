@@ -71,9 +71,7 @@ public class Experience
 	
 	public static int getMaxLevelExp(int level)
 	{
-		if (level == 1) return Config.level1Exp;
-		int maxXP = (int) Math.pow(level, Config.expExponent) * Config.expMultiplier;
-		return maxXP;
+		return level*Config.experienceHardness + (level*level*3 + level*6)*level;
 	}
 	
 	public static void setAbilityTokens(NBTTagCompound nbt, int tokens)
