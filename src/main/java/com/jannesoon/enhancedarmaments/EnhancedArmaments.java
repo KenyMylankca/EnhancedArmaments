@@ -50,7 +50,7 @@ public class EnhancedArmaments
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		configDir = new File(event.getModConfigurationDirectory() + "/" + EnhancedArmaments.MODID);
+		configDir = new File(event.getModConfigurationDirectory() + "/" + EnhancedArmaments.NAME);
 		configDir.mkdirs();
 		Config.init(configDir);
 		

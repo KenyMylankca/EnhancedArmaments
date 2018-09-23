@@ -92,7 +92,7 @@ public class Config
 	
 	public static void init(File dir)
 	{
-		main = new Configuration(new File(dir.getPath(), "enhancedarmaments.cfg"));
+		main = new Configuration(new File(dir.getPath(), "main.cfg"));
 		abilities = new Configuration(new File(dir.getPath(), "abilities.cfg"));
 		abilitychances = new Configuration(new File(dir.getPath(), "abilitychances.cfg"));
 		rarities = new Configuration(new File(dir.getPath(), "rarities.cfg"));
