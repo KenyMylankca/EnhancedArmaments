@@ -71,7 +71,7 @@ public class EventLivingHurt
 				
 				if (nbt != null)
 				{
-					updateExperience(nbt);
+					updateExperience(nbt, event.getAmount());
 					useRarity(event, stack, nbt);
 					useWeaponAbilities(event, player, target, nbt);
 					updateLevel(player, stack, nbt);
@@ -94,7 +94,7 @@ public class EventLivingHurt
 						
 						if (nbt != null)
 						{
-							updateExperience(nbt);
+							updateExperience(nbt, event.getAmount());
 							useRarity(event, stack, nbt);
 							useArmorAbilities(event, player, target, nbt);
 							updateLevel(player, stack, nbt);
@@ -109,7 +109,7 @@ public class EventLivingHurt
 	 * Called everytime a target is hurt. Used to add experience to weapons dealing damage.
 	 * @param nbt
 	 */
-	private void updateExperience(NBTTagCompound nbt)
+	private void updateExperience(NBTTagCompound nbt, float dealedDamage)
 	{
 		if (Experience.getLevel(nbt) < Config.maxLevel)
 		{
@@ -118,7 +118,7 @@ public class EventLivingHurt
 			if (isDev)
 				Experience.setExperience(nbt, Experience.getExperience(nbt) + Experience.getNeededExpForNextLevel(nbt) + 1);
 			else
-				Experience.setExperience(nbt, Experience.getExperience(nbt) + 1);
+				Experience.setExperience(nbt, Experience.getExperience(nbt) + 1 + (int)dealedDamage/3);
 		}
 	}
 	
