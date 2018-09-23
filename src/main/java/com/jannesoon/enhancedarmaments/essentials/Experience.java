@@ -55,7 +55,7 @@ public class Experience
 	
 	public static int getExperience(NBTTagCompound nbt)
 	{
-		return nbt != null ? nbt.getInteger("EXPERIENCE") : 0;
+		return nbt.hasKey("EXPERIENCE") ? nbt.getInteger("EXPERIENCE") : 0;
 	}
 	
 	public static void setExperience(NBTTagCompound nbt, int experience)
