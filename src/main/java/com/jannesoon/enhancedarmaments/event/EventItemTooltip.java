@@ -99,7 +99,7 @@ public class EventItemTooltip
 						}
 						else if (EAUtils.canEnhanceArmor(item))
 						{
-							for (Ability ability : Ability.ARMOR)
+							for (Ability ability : Ability.ARMORS)
 							{
 								if (ability.hasAbility(nbt))
 								{

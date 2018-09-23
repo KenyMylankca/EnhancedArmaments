@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.jannesoon.enhancedarmaments.config.Config;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -37,7 +38,7 @@ public enum Ability
 	public static int WEAPON_ABILITIES;
 	public static int ARMOR_ABILITIES;
 	public static final ArrayList<Ability> WEAPONS = new ArrayList<Ability>();
-	public static final ArrayList<Ability> ARMOR = new ArrayList<Ability>();
+	public static final ArrayList<Ability> ARMORS = new ArrayList<Ability>();
 	
 	private String category;
 	private String type;
@@ -56,6 +57,31 @@ public enum Ability
 		this.hex = hex;
 		this.tier = tier;
 		this.maxlevel = maxlevel;
+	}
+	
+	/**
+	 * Returns true if the player has enough experience to unlock the ability.
+	 * @param nbt
+	 * @param player
+	 * @param ability
+	 * @return
+	 */
+	public static boolean hasEnoughExp (NBTTagCompound nbt, EntityPlayer player, Ability ability)
+	{
+		return getExpLevel(ability, nbt) <= player.experienceLevel || player.isCreative();
+	}
+	
+	/**
+	 * Returns the abilitys requiring experience level.
+	 * @param ability
+	 * @param nbt
+	 * @return
+	 */
+	public static int getExpLevel (Ability ability, NBTTagCompound nbt)
+	{
+		int requiredExpLevel = ability.getTier() + ability.getMaxLevel() + ability.getLevel(nbt) + 1;
+		
+		return requiredExpLevel;
 	}
 	
 	/**
@@ -181,7 +207,7 @@ public enum Ability
 			}
 			else if (Ability.values()[i].getCategory().equals("armor") && Ability.values()[i].enabled)
 			{
-				Ability.ARMOR.add(Ability.values()[i]);
+				Ability.ARMORS.add(Ability.values()[i]);
 				Ability.ARMOR_ABILITIES++;
 			}
 		}

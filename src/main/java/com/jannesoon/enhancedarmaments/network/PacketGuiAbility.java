@@ -60,29 +60,31 @@ public class PacketGuiAbility implements IMessage
 							NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 							
 							if (EAUtils.canEnhanceWeapon(stack.getItem()))
-							{	
+							{
 								if (Ability.WEAPONS.get(message.index).hasAbility(nbt))
 								{
 									Ability.WEAPONS.get(message.index).setLevel(nbt, Ability.WEAPONS.get(message.index).getLevel(nbt) + 1);
-									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - 1);
+									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.WEAPONS.get(message.index).getTier());
 								}
 								else
 								{
 									Ability.WEAPONS.get(message.index).addAbility(nbt, 1);
-									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.WEAPONS.get(message.index).getTier());
+									if(!player.isCreative())
+										player.addExperienceLevel(-Ability.getExpLevel(Ability.WEAPONS.get(message.index), nbt) + 1);
 								}
 							}
 							else if (EAUtils.canEnhanceArmor(stack.getItem()))
 							{
-								if (Ability.ARMOR.get(message.index).hasAbility(nbt))
+								if (Ability.ARMORS.get(message.index).hasAbility(nbt))
 								{
-									Ability.ARMOR.get(message.index).setLevel(nbt, Ability.ARMOR.get(message.index).getLevel(nbt) + 1);
-									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - 1);
+									Ability.ARMORS.get(message.index).setLevel(nbt, Ability.ARMORS.get(message.index).getLevel(nbt) + 1);
+									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.ARMORS.get(message.index).getTier());
 								}
 								else
 								{
-									Ability.ARMOR.get(message.index).addAbility(nbt, 1);
-									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.ARMOR.get(message.index).getTier());
+									Ability.ARMORS.get(message.index).addAbility(nbt, 1);
+									if(!player.isCreative())
+										player.addExperienceLevel(-Ability.getExpLevel(Ability.ARMORS.get(message.index), nbt) + 1);
 								}
 							}
 						}
