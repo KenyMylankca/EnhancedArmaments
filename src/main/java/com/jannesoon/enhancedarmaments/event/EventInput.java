@@ -42,7 +42,7 @@ public class EventInput
 					if (EAUtils.canEnhance(helditem))
 					{
 						if (key.isPressed() && stack.getTagCompound() != null)
-							if(stack.getTagCompound().hasKey("ENABLED"))
+							if(stack.getTagCompound().hasKey("EA_ENABLED"))
 								player.openGui(EnhancedArmaments.instance, GuiHandler.ABILITY_SELECTION, player.world, (int) player.posX, (int) player.posY, (int) player.posZ);
 					}
 				}

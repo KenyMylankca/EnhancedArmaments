@@ -95,14 +95,14 @@ public class Experience
 		if (nbt != null)
 		{
 			if (value)
-				nbt.setBoolean("ENABLED", value);
+				nbt.setBoolean("EA_ENABLED", value);
 			else
-				nbt.removeTag("ENABLED");
+				nbt.removeTag("EA_ENABLED");
 		}
 	}
 	
 	public static boolean isEnabled(NBTTagCompound nbt)
 	{
-		return nbt != null ? nbt.getBoolean("ENABLED") : false;
+		return nbt != null ? nbt.getBoolean("EA_ENABLED") : false;
 	}
 }

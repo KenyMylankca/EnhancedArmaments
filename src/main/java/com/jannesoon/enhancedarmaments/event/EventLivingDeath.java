@@ -35,7 +35,7 @@ public class EventLivingDeath
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
 				if (nbt != null)
-					if(nbt.hasKey("ENABLED"))
+					if(nbt.hasKey("EA_ENABLED"))
 					{
 						if (Ability.ETHEREAL.hasAbility(nbt))
 						{
@@ -53,7 +53,7 @@ public class EventLivingDeath
 					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 					
 					if (nbt != null)
-						if(nbt.hasKey("ENABLED"))
+						if(nbt.hasKey("EA_ENABLED"))
 						{
 							if (Ability.ETHEREAL.hasAbility(nbt))
 							{

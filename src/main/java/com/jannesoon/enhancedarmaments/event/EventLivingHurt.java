@@ -70,7 +70,7 @@ public class EventLivingHurt
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
 				if (nbt != null)
-					if(nbt.hasKey("ENABLED"))
+					if(nbt.hasKey("EA_ENABLED"))
 					{
 						updateExperience(nbt, event.getAmount());
 						useRarity(event, stack, nbt);
@@ -94,7 +94,7 @@ public class EventLivingHurt
 						NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 						
 						if (nbt != null)
-							if(nbt.hasKey("ENABLED"))
+							if(nbt.hasKey("EA_ENABLED"))
 							{
 								if(EAUtils.isDamageSourceAllowed(event.getSource()))
 								{
