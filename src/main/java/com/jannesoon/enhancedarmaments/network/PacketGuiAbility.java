@@ -61,30 +61,30 @@ public class PacketGuiAbility implements IMessage
 							
 							if (EAUtils.canEnhanceWeapon(stack.getItem()))
 							{
-								if (Ability.WEAPONS.get(message.index).hasAbility(nbt))
+								if (Ability.WEAPON_ABILITIES.get(message.index).hasAbility(nbt))
 								{
-									Ability.WEAPONS.get(message.index).setLevel(nbt, Ability.WEAPONS.get(message.index).getLevel(nbt) + 1);
-									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.WEAPONS.get(message.index).getTier());
+									Ability.WEAPON_ABILITIES.get(message.index).setLevel(nbt, Ability.WEAPON_ABILITIES.get(message.index).getLevel(nbt) + 1);
+									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.WEAPON_ABILITIES.get(message.index).getTier());
 								}
 								else
 								{
-									Ability.WEAPONS.get(message.index).addAbility(nbt, 1);
+									Ability.WEAPON_ABILITIES.get(message.index).addAbility(nbt);
 									if(!player.isCreative())
-										player.addExperienceLevel(-Ability.getExpLevel(Ability.WEAPONS.get(message.index), nbt) + 1);
+										player.addExperienceLevel(-Ability.WEAPON_ABILITIES.get(message.index).getExpLevel(player, nbt) + 1);
 								}
 							}
 							else if (EAUtils.canEnhanceArmor(stack.getItem()))
 							{
-								if (Ability.ARMORS.get(message.index).hasAbility(nbt))
+								if (Ability.ARMOR_ABILITIES.get(message.index).hasAbility(nbt))
 								{
-									Ability.ARMORS.get(message.index).setLevel(nbt, Ability.ARMORS.get(message.index).getLevel(nbt) + 1);
-									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.ARMORS.get(message.index).getTier());
+									Ability.ARMOR_ABILITIES.get(message.index).setLevel(nbt, Ability.ARMOR_ABILITIES.get(message.index).getLevel(nbt) + 1);
+									Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) - Ability.ARMOR_ABILITIES.get(message.index).getTier());
 								}
 								else
 								{
-									Ability.ARMORS.get(message.index).addAbility(nbt, 1);
+									Ability.ARMOR_ABILITIES.get(message.index).addAbility(nbt);
 									if(!player.isCreative())
-										player.addExperienceLevel(-Ability.getExpLevel(Ability.ARMORS.get(message.index), nbt) + 1);
+										player.addExperienceLevel(-Ability.ARMOR_ABILITIES.get(message.index).getExpLevel(player, nbt) + 1);
 								}
 							}
 						}

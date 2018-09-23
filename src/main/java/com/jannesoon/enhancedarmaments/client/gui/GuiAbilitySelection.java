@@ -43,7 +43,7 @@ public class GuiAbilitySelection extends GuiScreen
 	    	{
 	    		if (EAUtils.canEnhanceWeapon(stack.getItem()))
 		    	{
-		    		weaponAbilities = new GuiButton[Ability.WEAPON_ABILITIES];
+		    		weaponAbilities = new GuiButton[Ability.WEAPON_ABILITIES_COUNT];
 		    		NBTTagCompound nbt = stack.getTagCompound();
 		    		
 		    		if (nbt != null)
@@ -52,13 +52,13 @@ public class GuiAbilitySelection extends GuiScreen
 		    			
 		    			for (int i = 0; i < weaponAbilities.length; i++)
 		    			{
-		    				if (Ability.WEAPONS.get(i).getType().equals("active"))
+		    				if (Ability.WEAPON_ABILITIES.get(i).getType().equals("active"))
 			    			{
-		    					weaponAbilities[i] = new GuiButton(i, width / 2 - 215, 100 + (i * 21), 110, 20, I18n.format("enhancedarmaments.ability." + Ability.WEAPONS.get(i).getName()));
+		    					weaponAbilities[i] = new GuiButton(i, width / 2 - 215, 100 + (i * 21), 110, 20, I18n.format("enhancedarmaments.ability." + Ability.WEAPON_ABILITIES.get(i).getName()));
 		    					j++;
 			    			}
 		    				else
-		    					weaponAbilities[i] = new GuiButton(i, width / 2 - 100, 100 + ((i - j) * 21), 110, 20, I18n.format("enhancedarmaments.ability." + Ability.WEAPONS.get(i).getName()));
+		    					weaponAbilities[i] = new GuiButton(i, width / 2 - 100, 100 + ((i - j) * 21), 110, 20, I18n.format("enhancedarmaments.ability." + Ability.WEAPON_ABILITIES.get(i).getName()));
 		    				
 		    				this.buttonList.add(weaponAbilities[i]);
 		    				weaponAbilities[i].enabled = false;
@@ -67,7 +67,7 @@ public class GuiAbilitySelection extends GuiScreen
 		    	}
 		    	else if (EAUtils.canEnhanceArmor(stack.getItem()))
 		    	{
-		    		armorAbilities = new GuiButton[Ability.ARMOR_ABILITIES];
+		    		armorAbilities = new GuiButton[Ability.ARMOR_ABILITIES_COUNT];
 		    		NBTTagCompound nbt = stack.getTagCompound();
 
 		    		if (nbt != null)
@@ -76,13 +76,13 @@ public class GuiAbilitySelection extends GuiScreen
 		    			
 		    			for (int i = 0; i < armorAbilities.length; i++)
 		    			{
-		    				if (Ability.ARMORS.get(i).getType().equals("active"))
+		    				if (Ability.ARMOR_ABILITIES.get(i).getType().equals("active"))
 			    			{
-		    					armorAbilities[i] = new GuiButton(i, width / 2 - 215, 100 + (i * 21), 100, 20, I18n.format("enhancedarmaments.ability." + Ability.ARMORS.get(i).getName()));
+		    					armorAbilities[i] = new GuiButton(i, width / 2 - 215, 100 + (i * 21), 100, 20, I18n.format("enhancedarmaments.ability." + Ability.ARMOR_ABILITIES.get(i).getName()));
 		    					j++;
 			    			}
 		    				else
-		    					armorAbilities[i] = new GuiButton(i, width / 2 - 100, 100 + ((i - j) * 21), 105, 20, I18n.format("enhancedarmaments.ability." + Ability.ARMORS.get(i).getName()));
+		    					armorAbilities[i] = new GuiButton(i, width / 2 - 100, 100 + ((i - j) * 21), 105, 20, I18n.format("enhancedarmaments.ability." + Ability.ARMOR_ABILITIES.get(i).getName()));
 		    				
 		    				this.buttonList.add(armorAbilities[i]);
 		    				armorAbilities[i].enabled = false;
@@ -116,15 +116,15 @@ public class GuiAbilitySelection extends GuiScreen
 		    		{	
 		    			if (EAUtils.canEnhanceWeapon(stack.getItem()))
 		    			{
-		    				drawStrings(stack, Ability.WEAPONS, nbt);
-		    				displayButtons(weaponAbilities, Ability.WEAPONS, nbt, player);
-		    				drawTooltips(weaponAbilities, Ability.WEAPONS, mouseX, mouseY);
+		    				drawStrings(stack, Ability.WEAPON_ABILITIES, nbt);
+		    				displayButtons(weaponAbilities, Ability.WEAPON_ABILITIES, nbt, player);
+		    				drawTooltips(weaponAbilities, Ability.WEAPON_ABILITIES, mouseX, mouseY);
 		    			}
 		    			else if (EAUtils.canEnhanceArmor(stack.getItem()))
 		    			{
-		    				drawStrings(stack, Ability.ARMORS, nbt);
-		    				displayButtons(armorAbilities, Ability.ARMORS, nbt, player);
-		    				drawTooltips(armorAbilities, Ability.ARMORS, mouseX, mouseY);
+		    				drawStrings(stack, Ability.ARMOR_ABILITIES, nbt);
+		    				displayButtons(armorAbilities, Ability.ARMOR_ABILITIES, nbt, player);
+		    				drawTooltips(armorAbilities, Ability.ARMOR_ABILITIES, mouseX, mouseY);
 		    			}
 		    		}
 	    		}
@@ -245,7 +245,7 @@ public class GuiAbilitySelection extends GuiScreen
 		{
 			if(!(abilities.get(i).hasAbility(nbt)))
 			{
-				if(Ability.hasEnoughExp(nbt, player, abilities.get(i)))
+				if(abilities.get(i).hasEnoughExp(player, nbt))
 					buttons[i].enabled = true;
 			}
 			else if (abilities.get(i).canUpgradeLevel(nbt) && Experience.getAbilityTokens(nbt) >= abilities.get(i).getTier())
@@ -717,11 +717,11 @@ public class GuiAbilitySelection extends GuiScreen
 					}
 				}
 				
-				int explevel = Ability.getExpLevel(abilities.get(i), nbt);
+				int explevel = abilities.get(i).getExpLevel(player, nbt);
 				if(!abilities.get(i).hasAbility(nbt))
 				{
 					list.add("");
-					if(Ability.hasEnoughExp(nbt, player, abilities.get(i)))
+					if(abilities.get(i).hasEnoughExp(player, nbt))
 						list.add(TextFormatting.DARK_GREEN + I18n.format("enhancedarmaments.abilities.info.required_exp") + ": " + explevel);
 					else
 						list.add(TextFormatting.DARK_RED + I18n.format("enhancedarmaments.abilities.info.required_exp") + ": " + explevel);

@@ -35,10 +35,12 @@ public enum Ability
 	HARDENED("armor", "passive", Config.hardened, TextFormatting.GRAY, 0xAAAAAA, 3, 1),
 	ADRENALINE("armor", "passive", Config.adrenaline, TextFormatting.GREEN, 0x55FF55, 3, 1);
 	
-	public static int WEAPON_ABILITIES;
-	public static int ARMOR_ABILITIES;
-	public static final ArrayList<Ability> WEAPONS = new ArrayList<Ability>();
-	public static final ArrayList<Ability> ARMORS = new ArrayList<Ability>();
+	public static int WEAPON_ABILITIES_COUNT=0;
+	public static int ARMOR_ABILITIES_COUNT=0;
+	public static int ALL_ABILITIES_COUNT=0;
+	public static final ArrayList<Ability> WEAPON_ABILITIES = new ArrayList<Ability>();
+	public static final ArrayList<Ability> ARMOR_ABILITIES = new ArrayList<Ability>();
+	public static final ArrayList<Ability> ALL_ABILITIES = new ArrayList<Ability>();
 	
 	private String category;
 	private String type;
@@ -60,15 +62,50 @@ public enum Ability
 	}
 	
 	/**
+	 * Returns true if the stack has the ability.
+	 * @param nbt
+	 * @return
+	 */
+	public boolean hasAbility(NBTTagCompound nbt)
+	{
+		return nbt != null && nbt.getInteger(toString()) > 0;
+	}
+	
+	/**
+	 * Adds the specified ability to the stack.
+	 * @param nbt
+	 */
+	public void addAbility(NBTTagCompound nbt)
+	{
+		nbt.setInteger(toString(), 1);
+		if(nbt.hasKey("ABILITIES"))
+			nbt.setInteger("ABILITIES", nbt.getInteger("ABILITIES")+1);
+		else
+			nbt.setInteger("ABILITIES", 1);
+	}
+	
+	/**
+	 * Removes the specified ability from the NBT of the stack.
+	 * @param nbt
+	 */
+	public void removeAbility(NBTTagCompound nbt)
+	{
+		nbt.removeTag(toString());
+		if(nbt.hasKey("ABILITIES"))
+			if(nbt.getInteger("ABILITIES") > 0)
+				nbt.setInteger("ABILITIES", nbt.getInteger("ABILITIES")-1);
+	}
+	
+	/**
 	 * Returns true if the player has enough experience to unlock the ability.
 	 * @param nbt
 	 * @param player
 	 * @param ability
 	 * @return
 	 */
-	public static boolean hasEnoughExp (NBTTagCompound nbt, EntityPlayer player, Ability ability)
+	public boolean hasEnoughExp (EntityPlayer player, NBTTagCompound nbt)
 	{
-		return getExpLevel(ability, nbt) <= player.experienceLevel || player.isCreative();
+		return getExpLevel(player, nbt) <= player.experienceLevel || player.isCreative();
 	}
 	
 	/**
@@ -77,41 +114,14 @@ public enum Ability
 	 * @param nbt
 	 * @return
 	 */
-	public static int getExpLevel (Ability ability, NBTTagCompound nbt)
+	public int getExpLevel (EntityPlayer player, NBTTagCompound nbt)
 	{
-		int requiredExpLevel = ability.getTier() + ability.getMaxLevel() + ability.getLevel(nbt) + 1;
-		
+		int requiredExpLevel=0;
+		if(nbt.hasKey("ABILITIES"))
+			requiredExpLevel = (getTier() + getMaxLevel() + 1) * nbt.getInteger("ABILITIES") +  + player.experienceLevel/3;
+		else
+			requiredExpLevel = getTier() + getMaxLevel() + 1;
 		return requiredExpLevel;
-	}
-	
-	/**
-	 * Returns true if the stack has the ability.
-	 * @param nbt
-	 * @return
-	 */
-	public boolean hasAbility(NBTTagCompound nbt)
-	{
-		return nbt != null && nbt.getBoolean(toString());
-	}
-	
-	/**
-	 * Adds the specified ability to the stack.
-	 * @param nbt
-	 */
-	public void addAbility(NBTTagCompound nbt, int level)
-	{
-		nbt.setBoolean(toString(), true);
-		setLevel(nbt, level);
-	}
-	
-	/**
-	 * Removes the specified ability from the stack.
-	 * @param nbt
-	 */
-	public void removeAbility(NBTTagCompound nbt)
-	{
-		nbt.removeTag(toString());
-		nbt.removeTag(toString() + "_level");
 	}
 	
 	/**
@@ -121,10 +131,7 @@ public enum Ability
 	 */
 	public void setLevel(NBTTagCompound nbt, int level)
 	{
-		if (level <= 3)
-		{
-			nbt.setInteger(toString() + "_level", level);
-		}
+		nbt.setInteger(toString(), level);
 	}
 	
 	/**
@@ -134,16 +141,16 @@ public enum Ability
 	 */
 	public int getLevel(NBTTagCompound nbt)
 	{
-		if (nbt != null) return nbt.getInteger(toString() + "_level");
+		if (nbt != null) return nbt.getInteger(toString());
 		else return 0;
 	}
 	
 	public boolean canUpgradeLevel(NBTTagCompound nbt)
 	{
-			if (getLevel(nbt) < this.maxlevel)
-				return true;
-			else
-				return false;
+		if (getLevel(nbt) < this.maxlevel)
+			return true;
+		else
+			return false;
 	}
 	
 	public int getTier()
@@ -199,16 +206,18 @@ public enum Ability
 	static
 	{
 		for (int i = 0; i < Ability.values().length; i++)
-		{		
+		{
+			Ability.ALL_ABILITIES.add(Ability.values()[i]);
+			Ability.ALL_ABILITIES_COUNT++;
 			if (Ability.values()[i].getCategory().equals("weapon") && Ability.values()[i].enabled)
 			{
-				Ability.WEAPONS.add(Ability.values()[i]);
-				Ability.WEAPON_ABILITIES++;
+				Ability.WEAPON_ABILITIES.add(Ability.values()[i]);
+				Ability.WEAPON_ABILITIES_COUNT++;
 			}
 			else if (Ability.values()[i].getCategory().equals("armor") && Ability.values()[i].enabled)
 			{
-				Ability.ARMORS.add(Ability.values()[i]);
-				Ability.ARMOR_ABILITIES++;
+				Ability.ARMOR_ABILITIES.add(Ability.values()[i]);
+				Ability.ARMOR_ABILITIES_COUNT++;
 			}
 		}
 	}
