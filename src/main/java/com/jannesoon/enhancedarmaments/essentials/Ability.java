@@ -37,7 +37,6 @@ public enum Ability
 	
 	public static int WEAPON_ABILITIES_COUNT=0;
 	public static int ARMOR_ABILITIES_COUNT=0;
-	public static int ALL_ABILITIES_COUNT=0;
 	public static final ArrayList<Ability> WEAPON_ABILITIES = new ArrayList<Ability>();
 	public static final ArrayList<Ability> ARMOR_ABILITIES = new ArrayList<Ability>();
 	public static final ArrayList<Ability> ALL_ABILITIES = new ArrayList<Ability>();
@@ -208,7 +207,6 @@ public enum Ability
 		for (int i = 0; i < Ability.values().length; i++)
 		{
 			Ability.ALL_ABILITIES.add(Ability.values()[i]);
-			Ability.ALL_ABILITIES_COUNT++;
 			if (Ability.values()[i].getCategory().equals("weapon") && Ability.values()[i].enabled)
 			{
 				Ability.WEAPON_ABILITIES.add(Ability.values()[i]);
