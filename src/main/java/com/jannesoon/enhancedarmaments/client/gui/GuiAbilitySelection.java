@@ -248,7 +248,7 @@ public class GuiAbilitySelection extends GuiScreen
 				if(Ability.hasEnoughExp(nbt, player, abilities.get(i)))
 					buttons[i].enabled = true;
 			}
-			else if (abilities.get(i).canUpgradeLevel(nbt) && Experience.getAbilityTokens(nbt) > abilities.get(i).getTier())
+			else if (abilities.get(i).canUpgradeLevel(nbt) && Experience.getAbilityTokens(nbt) >= abilities.get(i).getTier())
 				buttons[i].enabled = true;
 			else
 				buttons[i].enabled = false;
