@@ -80,7 +80,7 @@ public class EventLivingHurt
 			}
 			bowfriendlyhand = player.getActiveHand();
 		}
-		else if (EAUtils.isDamageSourceAllowed(event.getSource()) && event.getEntityLiving() instanceof EntityPlayer)
+		else if (event.getEntityLiving() instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 			EntityLivingBase target = (EntityLivingBase) event.getSource().getTrueSource();
@@ -96,10 +96,13 @@ public class EventLivingHurt
 						if (nbt != null)
 							if(nbt.hasKey("ENABLED"))
 							{
-								updateExperience(nbt, event.getAmount());
+								if(EAUtils.isDamageSourceAllowed(event.getSource()))
+								{
+									updateExperience(nbt, event.getAmount());
+									updateLevel(player, stack, nbt);
+								}
 								useRarity(event, stack, nbt);
 								useArmorAbilities(event, player, target, nbt);
-								updateLevel(player, stack, nbt);
 							}
 					}
 				}
