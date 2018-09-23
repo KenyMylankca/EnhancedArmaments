@@ -71,9 +71,14 @@ public class EventLivingUpdate
 										for (int j = 0; j < Config.itemBlacklist.length; j++)
 										{
 											if (Config.itemBlacklist[j].equals(stack.getItem().getRegistryName().getResourceDomain() + ":" + stack.getItem().getRegistryName().getResourcePath()))
-											{
 												count++;
-											}
+										}
+										if (Config.itemWhitelist.length != 0)
+										{
+											count=1;
+											for(int k = 0; k < Config.itemWhitelist.length; k++)
+												if(Config.itemWhitelist[k].equals(stack.getItem().getRegistryName().getResourceDomain() + ":" + stack.getItem().getRegistryName().getResourcePath()))
+													count=0;
 										}
 										
 										if (count == 0)

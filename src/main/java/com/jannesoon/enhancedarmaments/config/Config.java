@@ -26,6 +26,7 @@ public class Config
 	// misc
 	public static boolean showDurability = true;
 	public static String[] itemBlacklist = new String[] { "modid:item" };
+	public static String[] itemWhitelist = new String[] {};
 	public static String stringPosition = "default";
 	
 	/*
@@ -137,6 +138,11 @@ public class Config
 		prop = main.get(category, "itemBlacklist", itemBlacklist);
 		prop.setComment("Items in this blacklist will not gain the leveling systems. Useful for very powerful items or potential conflicts. Style should be 'modid:item'");
 		itemBlacklist = prop.getStringList();
+		propOrder.add(prop.getName());
+		
+		prop = main.get(category, "itemWhitelist", itemWhitelist);
+		prop.setComment("This is item whitelist, basically. If you don't want a whitelist, just leave this empty. If you want a whitelist, fill it with items you want. Style should be 'modid:item'");
+		itemWhitelist = prop.getStringList();
 		propOrder.add(prop.getName());
 		
 		main.setCategoryPropertyOrder(category, propOrder);
