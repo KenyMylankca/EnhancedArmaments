@@ -70,12 +70,13 @@ public class EventLivingHurt
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
 				if (nbt != null)
-				{
-					updateExperience(nbt, event.getAmount());
-					useRarity(event, stack, nbt);
-					useWeaponAbilities(event, player, target, nbt);
-					updateLevel(player, stack, nbt);
-				}
+					if(nbt.hasKey("ENABLED"))
+					{
+						updateExperience(nbt, event.getAmount());
+						useRarity(event, stack, nbt);
+						useWeaponAbilities(event, player, target, nbt);
+						updateLevel(player, stack, nbt);
+					}
 			}
 			bowfriendlyhand = player.getActiveHand();
 		}
@@ -93,12 +94,13 @@ public class EventLivingHurt
 						NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 						
 						if (nbt != null)
-						{
-							updateExperience(nbt, event.getAmount());
-							useRarity(event, stack, nbt);
-							useArmorAbilities(event, player, target, nbt);
-							updateLevel(player, stack, nbt);
-						}
+							if(nbt.hasKey("ENABLED"))
+							{
+								updateExperience(nbt, event.getAmount());
+								useRarity(event, stack, nbt);
+								useArmorAbilities(event, player, target, nbt);
+								updateLevel(player, stack, nbt);
+							}
 					}
 				}
 			}

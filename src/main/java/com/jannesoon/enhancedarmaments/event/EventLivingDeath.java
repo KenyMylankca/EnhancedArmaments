@@ -35,15 +35,16 @@ public class EventLivingDeath
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
 				if (nbt != null)
-				{
-					if (Ability.ETHEREAL.hasAbility(nbt))
+					if(nbt.hasKey("ENABLED"))
 					{
-						player.inventory.getCurrentItem().setItemDamage((int) (player.inventory.getCurrentItem().getItemDamage() - (Ability.ETHEREAL.getLevel(nbt)*2+1)));
+						if (Ability.ETHEREAL.hasAbility(nbt))
+						{
+							player.inventory.getCurrentItem().setItemDamage((int) (player.inventory.getCurrentItem().getItemDamage() - (Ability.ETHEREAL.getLevel(nbt)*2+1)));
+						}
+						addBonusExperience(event, nbt);
+						updateLevel(player, stack, nbt);
+						NBTHelper.saveStackNBT(stack, nbt);
 					}
-					addBonusExperience(event, nbt);
-					updateLevel(player, stack, nbt);
-					NBTHelper.saveStackNBT(stack, nbt);
-				}
 			}
 			else if (stack != null && EAUtils.canEnhanceRanged(stack.getItem()))
 			{
@@ -52,14 +53,15 @@ public class EventLivingDeath
 					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 					
 					if (nbt != null)
-					{
-						if (Ability.ETHEREAL.hasAbility(nbt))
+						if(nbt.hasKey("ENABLED"))
 						{
-							player.inventory.getCurrentItem().setItemDamage((int) (player.inventory.getCurrentItem().getItemDamage() - (Ability.ETHEREAL.getLevel(nbt)*2+1)));
+							if (Ability.ETHEREAL.hasAbility(nbt))
+							{
+								player.inventory.getCurrentItem().setItemDamage((int) (player.inventory.getCurrentItem().getItemDamage() - (Ability.ETHEREAL.getLevel(nbt)*2+1)));
+							}
+							addBonusExperience(event, nbt);
+							updateLevel(player, stack, nbt);
 						}
-						addBonusExperience(event, nbt);
-						updateLevel(player, stack, nbt);
-					}
 				}
 			}
 		}
