@@ -210,7 +210,7 @@ public class EventLivingHurt
 				else if (Ability.CRITICAL_POINT.getLevel(nbt) == 3) multiplier = 0.63F;
 
 				float damage = target.getMaxHealth() * multiplier;
-				event.setAmount(damage);
+				event.setAmount(event.getAmount() + damage);
 			}
 			
 			// passive
