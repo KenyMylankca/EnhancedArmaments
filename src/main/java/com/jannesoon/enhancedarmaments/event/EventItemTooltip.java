@@ -64,9 +64,9 @@ public class EventItemTooltip
 					
 					// level
 					if (level >= Config.maxLevel)
-						tooltip.add(I18n.format("enhancedarmaments.misc.level") + ": " + I18n.format("enhancedarmaments.misc.max"));
+						tooltip.add(I18n.format("enhancedarmaments.misc.level") + ": " + TextFormatting.RED + I18n.format("enhancedarmaments.misc.max"));
 					else
-						tooltip.add(I18n.format("enhancedarmaments.misc.level") + ": " + level);
+						tooltip.add(I18n.format("enhancedarmaments.misc.level") + ": " + TextFormatting.WHITE + level);
 					
 					// experience
 					if (level >= Config.maxLevel)
