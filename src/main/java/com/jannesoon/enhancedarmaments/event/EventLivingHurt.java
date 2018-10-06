@@ -10,6 +10,7 @@ import com.jannesoon.enhancedarmaments.essentials.Rarity;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -83,7 +84,7 @@ public class EventLivingHurt
 		else if (event.getEntityLiving() instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-			EntityLivingBase target = (EntityLivingBase) event.getSource().getTrueSource();
+			Entity target = (EntityLivingBase) event.getSource().getTrueSource();
 			
 			for (ItemStack stack : player.inventory.armorInventory)
 			{
@@ -227,27 +228,30 @@ public class EventLivingHurt
 		}
 	}
 	
-	private void useArmorAbilities(LivingHurtEvent event, EntityPlayer player, EntityLivingBase target, NBTTagCompound nbt)
+	private void useArmorAbilities(LivingHurtEvent event, EntityPlayer player, Entity target, NBTTagCompound nbt)
 	{
 		if (target != null)
 		{
 			// active
-			if (Ability.MOLTEN.hasAbility(nbt) && (int) (Math.random() * Config.moltenchance) == 0)
+			if (Ability.MOLTEN.hasAbility(nbt) && (int) (Math.random() * Config.moltenchance) == 0 && target instanceof EntityLivingBase)
 			{
+				EntityLivingBase realTarget = (EntityLivingBase) target;
 				double multiplier = (Ability.MOLTEN.getLevel(nbt) + Ability.MOLTEN.getLevel(nbt)*5)/4 ;
-				target.setFire((int) (multiplier));
+				realTarget.setFire((int) (multiplier));
 			}
 			
-			if (Ability.FROZEN.hasAbility(nbt) && (int) (Math.random() * Config.frozenchance) == 0)
+			if (Ability.FROZEN.hasAbility(nbt) && (int) (Math.random() * Config.frozenchance) == 0 && target instanceof EntityLivingBase)
 			{
+				EntityLivingBase realTarget = (EntityLivingBase) target;
 				double multiplier = (Ability.FROZEN.getLevel(nbt) + Ability.FROZEN.getLevel(nbt)*5)/6 ;
-				target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, (int) (20 * multiplier), 10));
+				realTarget.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, (int) (20 * multiplier), 10));
 			}
 			
-			if (Ability.TOXIC.hasAbility(nbt) && (int) (Math.random() * Config.toxicchance) == 0)
+			if (Ability.TOXIC.hasAbility(nbt) && (int) (Math.random() * Config.toxicchance) == 0 && target instanceof EntityLivingBase)
 			{
+				EntityLivingBase realTarget = (EntityLivingBase) target;
 				double multiplier = (Ability.TOXIC.getLevel(nbt) + Ability.TOXIC.getLevel(nbt)*4)/4 ;
-				target.addPotionEffect(new PotionEffect(MobEffects.POISON, (int) (20 * multiplier), Ability.TOXIC.getLevel(nbt)));
+				realTarget.addPotionEffect(new PotionEffect(MobEffects.POISON, (int) (20 * multiplier), Ability.TOXIC.getLevel(nbt)));
 			}
 			
 			if (Ability.ADRENALINE.hasAbility(nbt) && (int) (Math.random() * Config.adrenalinechance) == 0)
