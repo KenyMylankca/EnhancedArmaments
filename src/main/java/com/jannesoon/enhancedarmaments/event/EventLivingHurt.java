@@ -33,18 +33,16 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EventLivingHurt
 {
-	public static EnumHand bowfriendlyhand = EnumHand.MAIN_HAND;
+	public static EnumHand bowfriendlyhand;
 	
 	@SubscribeEvent
 	public void onArrowHit(ProjectileImpactEvent event)
 	{
-		EntityArrow arrow;
 		if(event.getEntity() instanceof EntityArrow)
 		{
-			arrow = (EntityArrow) event.getEntity();
-			if(arrow.shootingEntity instanceof EntityPlayer)
+			if(((EntityArrow)event.getEntity()).shootingEntity instanceof EntityPlayer)
 			{
-				EntityPlayer player=(EntityPlayer) arrow.shootingEntity;
+				EntityPlayer player=(EntityPlayer) ((EntityArrow)event.getEntity()).shootingEntity;
 				if(event.getRayTraceResult().entityHit == null)
 					bowfriendlyhand=player.getActiveHand();
 			}
@@ -60,6 +58,8 @@ public class EventLivingHurt
 	@SubscribeEvent
 	public void onHurt(LivingHurtEvent event)
 	{
+		if (bowfriendlyhand == null) bowfriendlyhand = EnumHand.MAIN_HAND;
+		
 		if (event.getSource().getTrueSource() instanceof EntityPlayer && !(event.getSource().getTrueSource() instanceof FakePlayer))
 		{
 			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
