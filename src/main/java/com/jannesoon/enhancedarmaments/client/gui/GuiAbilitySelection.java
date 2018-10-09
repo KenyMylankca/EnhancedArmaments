@@ -717,7 +717,7 @@ public class GuiAbilitySelection extends GuiScreen
 					}
 				}
 				
-				int explevel = abilities.get(i).getExpLevel(player, nbt);
+				int explevel = abilities.get(i).getExpLevel(nbt);
 				if(!abilities.get(i).hasAbility(nbt))
 				{
 					list.add("");

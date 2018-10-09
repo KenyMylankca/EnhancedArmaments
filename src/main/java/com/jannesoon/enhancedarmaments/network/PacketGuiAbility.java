@@ -70,7 +70,7 @@ public class PacketGuiAbility implements IMessage
 								{
 									Ability.WEAPON_ABILITIES.get(message.index).addAbility(nbt);
 									if(!player.isCreative())
-										player.addExperienceLevel(-Ability.WEAPON_ABILITIES.get(message.index).getExpLevel(player, nbt) + 1);
+										player.addExperienceLevel(-Ability.WEAPON_ABILITIES.get(message.index).getExpLevel(nbt) + 1);
 								}
 							}
 							else if (EAUtils.canEnhanceArmor(stack.getItem()))
@@ -84,7 +84,7 @@ public class PacketGuiAbility implements IMessage
 								{
 									Ability.ARMOR_ABILITIES.get(message.index).addAbility(nbt);
 									if(!player.isCreative())
-										player.addExperienceLevel(-Ability.ARMOR_ABILITIES.get(message.index).getExpLevel(player, nbt) + 1);
+										player.addExperienceLevel(-Ability.ARMOR_ABILITIES.get(message.index).getExpLevel(nbt) + 1);
 								}
 							}
 						}

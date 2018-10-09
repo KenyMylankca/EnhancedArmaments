@@ -104,7 +104,7 @@ public enum Ability
 	 */
 	public boolean hasEnoughExp (EntityPlayer player, NBTTagCompound nbt)
 	{
-		return getExpLevel(player, nbt) <= player.experienceLevel || player.isCreative();
+		return getExpLevel(nbt) <= player.experienceLevel || player.isCreative();
 	}
 	
 	/**
@@ -113,11 +113,11 @@ public enum Ability
 	 * @param nbt
 	 * @return
 	 */
-	public int getExpLevel (EntityPlayer player, NBTTagCompound nbt)
+	public int getExpLevel (NBTTagCompound nbt)
 	{
 		int requiredExpLevel=0;
 		if(nbt.hasKey("ABILITIES"))
-			requiredExpLevel = (getTier() + getMaxLevel() + 1) * nbt.getInteger("ABILITIES") + player.experienceLevel/3;
+			requiredExpLevel = (getTier() + getMaxLevel() + 1) * (nbt.getInteger("ABILITIES") + 1);
 		else
 			requiredExpLevel = getTier() + getMaxLevel() + 1;
 		return requiredExpLevel;
