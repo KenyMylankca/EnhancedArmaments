@@ -84,7 +84,7 @@ public class EventLivingHurt
 		else if (event.getEntityLiving() instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-			Entity target = (EntityLivingBase) event.getSource().getTrueSource();
+			Entity target = event.getSource().getTrueSource();
 			
 			for (ItemStack stack : player.inventory.armorInventory)
 			{
