@@ -43,6 +43,7 @@ public class EAUtils
 				damageSource == DamageSource.CACTUS ||
 				damageSource == DamageSource.STARVE ||
 				damageSource == DamageSource.IN_WALL ||
-				damageSource == DamageSource.IN_FIRE) || damageSource.getTrueSource() instanceof EntityLivingBase;
+				damageSource == DamageSource.IN_FIRE ||
+				damageSource == DamageSource.OUT_OF_WORLD) || damageSource.getTrueSource() instanceof EntityLivingBase;
 	}
 }
