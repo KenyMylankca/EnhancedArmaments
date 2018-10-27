@@ -437,8 +437,8 @@ public class GuiAbilitySelection extends GuiScreen
 					if (i == 5)//CRITICAL_POINT
 					{
 						float chance = (float) ((1.0 / (Config.criticalpointchance))*100);
-						float currentdamage = (Ability.CRITICAL_POINT.getLevel(nbt)*21);
-						float nextleveldamage = ((Ability.CRITICAL_POINT.getLevel(nbt)+1)*21);
+						float currentdamage = (Ability.CRITICAL_POINT.getLevel(nbt)*18);
+						float nextleveldamage = ((Ability.CRITICAL_POINT.getLevel(nbt)+1)*18);
 						int c = (int) chance;
 						
 						if (!(Ability.CRITICAL_POINT.hasAbility(nbt)))

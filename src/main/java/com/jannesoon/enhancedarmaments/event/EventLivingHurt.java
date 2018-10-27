@@ -206,9 +206,9 @@ public class EventLivingHurt
 			{
 				float multiplier = 0F;
 				
-				if (Ability.CRITICAL_POINT.getLevel(nbt) == 1) multiplier = 0.21F;
-				else if (Ability.CRITICAL_POINT.getLevel(nbt) == 2) multiplier = 0.42F;
-				else if (Ability.CRITICAL_POINT.getLevel(nbt) == 3) multiplier = 0.63F;
+				if (Ability.CRITICAL_POINT.getLevel(nbt) == 1) multiplier = 0.18F;
+				else if (Ability.CRITICAL_POINT.getLevel(nbt) == 2) multiplier = 0.36F;
+				else if (Ability.CRITICAL_POINT.getLevel(nbt) == 3) multiplier = 0.54F;
 
 				float damage = target.getMaxHealth() * multiplier;
 				event.setAmount(event.getAmount() + damage);
