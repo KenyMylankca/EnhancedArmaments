@@ -21,7 +21,7 @@ public class Config
 	
 	// experience
 	public static int maxLevel = 10;
-	public static int experienceHardness = 40;
+	public static int experienceHardness = 50;
 	
 	// misc
 	public static boolean showDurability = true;
