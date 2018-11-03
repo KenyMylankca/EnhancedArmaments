@@ -62,7 +62,7 @@ public class Config
 	public static int poisonchance = 4;
 	public static int innatechance = 6;
 	public static int bombasticchance = 7;
-	public static int criticalpointchance = 13;
+	public static int criticalpointchance = 14;
 	//armor
 	public static int moltenchance = 4;
 	public static int frozenchance = 4;
