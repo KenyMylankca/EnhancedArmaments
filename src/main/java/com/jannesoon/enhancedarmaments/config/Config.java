@@ -21,7 +21,8 @@ public class Config
 	
 	// experience
 	public static int maxLevel = 10;
-	public static int experienceHardness = 50;
+	public static int level1Experience = 100;
+	public static double experienceMultiplier = 1.5;
 	
 	// misc
 	public static boolean showDurability = true;
@@ -122,9 +123,14 @@ public class Config
 		maxLevel = prop.getInt();
 		propOrder.add(prop.getName());
 		
-		prop = main.get(category, "experienceHardness", experienceHardness);
-		prop.setComment("The major effective of the experience algorithm that is gonna used for required experience to level up the item. Higher values mean higher experience needed to level up. Default: 40");
-		experienceHardness = prop.getInt();
+		prop = main.get(category, "level1Experience", level1Experience);
+		prop.setComment("The experience amount needed for the first level(1). Default: 100");
+		level1Experience = prop.getInt();
+		propOrder.add(prop.getName());
+		
+		prop = main.get(category, "experienceMultiplier", experienceMultiplier);
+		prop.setComment("The experience multiplier for each level based on the first level experience. Default: 1.5");
+		experienceMultiplier = prop.getDouble();
 		propOrder.add(prop.getName());
 		
 		/**
