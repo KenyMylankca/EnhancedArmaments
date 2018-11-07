@@ -103,10 +103,10 @@ public class EventLivingDeath
 				int bonusExperience = 0;
 				
 				if (target.getMaxHealth() < 10) bonusExperience = 3;
-				else if (target.getMaxHealth() > 9 && target.getMaxHealth() < 20) bonusExperience = 8;
-				else if (target.getMaxHealth() > 19 && target.getMaxHealth() < 50) bonusExperience = 20;
-				else if (target.getMaxHealth() > 49 && target.getMaxHealth() < 100) bonusExperience = 55;
-				else if (target.getMaxHealth() > 99) bonusExperience = 80;
+				else if (target.getMaxHealth() > 9 && target.getMaxHealth() < 20) bonusExperience = 6;
+				else if (target.getMaxHealth() > 19 && target.getMaxHealth() < 50) bonusExperience = 15;
+				else if (target.getMaxHealth() > 49 && target.getMaxHealth() < 100) bonusExperience = 50;
+				else if (target.getMaxHealth() > 99) bonusExperience = 70;
 				
 				Experience.setExperience(nbt, Experience.getExperience(nbt) + bonusExperience);
 			}

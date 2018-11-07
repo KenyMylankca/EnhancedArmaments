@@ -127,7 +127,7 @@ public class EventLivingHurt
 			if (isDev)
 				Experience.setExperience(nbt, Experience.getExperience(nbt) + Experience.getNeededExpForNextLevel(nbt) + 1);
 			else
-				Experience.setExperience(nbt, Experience.getExperience(nbt) + 1 + (int)dealedDamage/3);
+				Experience.setExperience(nbt, Experience.getExperience(nbt) + 1 + (int)dealedDamage/4);
 		}
 	}
 	
