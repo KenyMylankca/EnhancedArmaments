@@ -99,7 +99,10 @@ public class EventLivingHurt
 							{
 								if(EAUtils.isDamageSourceAllowed(event.getSource()))
 								{
-									updateExperience(nbt, event.getAmount());
+									if(event.getAmount() < 55)
+										updateExperience(nbt, event.getAmount());
+									else
+										updateExperience(nbt, 1);
 									updateLevel(player, stack, nbt);
 								}
 								useRarity(event, stack, nbt);
