@@ -99,7 +99,7 @@ public class EventLivingHurt
 							{
 								if(EAUtils.isDamageSourceAllowed(event.getSource()))
 								{
-									if(event.getAmount() < 55)
+									if(event.getAmount() < player.getMaxHealth())
 										updateExperience(nbt, event.getAmount());
 									else
 										updateExperience(nbt, 1);
