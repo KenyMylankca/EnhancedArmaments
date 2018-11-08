@@ -73,7 +73,7 @@ public class Experience
 	{
 		int maxLevelExp=Config.level1Experience;
 		for(int i=1; i<level; i++)
-			maxLevelExp*=Config.experienceMultiplier;
+			maxLevelExp *= Config.experienceMultiplier;
 		return maxLevelExp;
 	}
 	
