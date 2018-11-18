@@ -66,22 +66,22 @@ public class EventLivingUpdate
 								{
 									if (!Experience.isEnabled(nbt))
 									{
-										int count = 0;
+										boolean okay = true;
 										
 										for (int j = 0; j < Config.itemBlacklist.length; j++)
 										{
 											if (Config.itemBlacklist[j].equals(stack.getItem().getRegistryName().getResourceDomain() + ":" + stack.getItem().getRegistryName().getResourcePath()))
-												count++;
+												okay=false;
 										}
 										if (Config.itemWhitelist.length != 0)
 										{
-											count=1;
+											okay=false;
 											for(int k = 0; k < Config.itemWhitelist.length; k++)
 												if(Config.itemWhitelist[k].equals(stack.getItem().getRegistryName().getResourceDomain() + ":" + stack.getItem().getRegistryName().getResourcePath()))
-													count=0;
+													okay=true;
 										}
 										
-										if (count == 0)
+										if (okay)
 										{
 											Experience.enable(nbt, true);
 											Rarity rarity = Rarity.getRarity(nbt);
