@@ -26,7 +26,7 @@ public class Config
 	
 	// misc
 	public static boolean showDurability = true;
-	public static String[] itemBlacklist = new String[] { "modid:item" };
+	public static String[] itemBlacklist = new String[] {};
 	public static String[] itemWhitelist = new String[] {};
 	public static String[] extraItems = new String[] {};
 	public static String stringPosition = "default";
@@ -78,10 +78,10 @@ public class Config
 	
 	//rarity chances
 	public static double basicChance = 0.5D;
-	public static double uncommonChance = 0.2D;
-	public static double rareChance = 0.12D;
-	public static double ultraRareChance = 0.06D;
-	public static double legendaryChance = 0.03D;
+	public static double uncommonChance = 0.18D;
+	public static double rareChance = 0.10D;
+	public static double ultraRareChance = 0.05D;
+	public static double legendaryChance = 0.02D;
 	public static double archaicChance = 0.01D;
 	
 	//rarity effect
@@ -130,7 +130,7 @@ public class Config
 		propOrder.add(prop.getName());
 		
 		prop = main.get(category, "experienceMultiplier", experienceMultiplier);
-		prop.setComment("The experience multiplier for each level based on the first level experience. Default: 1.5");
+		prop.setComment("The experience multiplier for each level based on the first level experience. Default: 1.8");
 		experienceMultiplier = prop.getDouble();
 		propOrder.add(prop.getName());
 		
@@ -288,7 +288,7 @@ public class Config
 		propOrder.add(prop.getName());
 		
 		prop = abilitychances.get(category, "criticalpointchance", criticalpointchance);
-		prop.setComment("Determines how rare the Critical Point ability will occur. (Higher values=lower occurance) Default: 13");
+		prop.setComment("Determines how rare the Critical Point ability will occur. (Higher values=lower occurance) Default: 14");
 		criticalpointchance = prop.getInt();
 		propOrder.add(prop.getName());
 		
@@ -336,22 +336,22 @@ public class Config
 		propOrder.add(prop.getName());
 		
 		prop = rarities.get(category, "uncommonChance", uncommonChance);
-		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.2");
+		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.18");
 		uncommonChance = prop.getDouble();
 		propOrder.add(prop.getName());
 		
 		prop = rarities.get(category, "rareChance", rareChance);
-		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.12");
+		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.10");
 		rareChance = prop.getDouble();
 		propOrder.add(prop.getName());
 		
 		prop = rarities.get(category, "ultraRareChance", ultraRareChance);
-		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.06");
+		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.05");
 		ultraRareChance = prop.getDouble();
 		propOrder.add(prop.getName());
 		
 		prop = rarities.get(category, "legendaryChance", legendaryChance);
-		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.03");
+		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.02");
 		legendaryChance = prop.getDouble();
 		propOrder.add(prop.getName());
 		
