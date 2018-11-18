@@ -73,6 +73,7 @@ public class EventLivingUpdate
 											if (Config.itemBlacklist[j].equals(stack.getItem().getRegistryName().getResourceDomain() + ":" + stack.getItem().getRegistryName().getResourcePath()))
 												okay=false;
 										}
+										
 										if (Config.itemWhitelist.length != 0)
 										{
 											okay=false;

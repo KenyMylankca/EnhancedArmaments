@@ -28,6 +28,7 @@ public class Config
 	public static boolean showDurability = true;
 	public static String[] itemBlacklist = new String[] { "modid:item" };
 	public static String[] itemWhitelist = new String[] {};
+	public static String[] extraItems = new String[] {};
 	public static String stringPosition = "default";
 	
 	/*
@@ -149,6 +150,11 @@ public class Config
 		prop = main.get(category, "itemWhitelist", itemWhitelist);
 		prop.setComment("This is item whitelist, basically. If you don't want a whitelist, just leave this empty. If you want a whitelist, fill it with items you want. Style should be 'modid:item'");
 		itemWhitelist = prop.getStringList();
+		propOrder.add(prop.getName());
+		
+		prop = main.get(category, "extraItems", extraItems);
+		prop.setComment("This is an extra item list to add custom support for such modded items. Be careful on this, it may crash if the item can't be enhanced. Style should be 'modid:item'");
+		extraItems = prop.getStringList();
 		propOrder.add(prop.getName());
 		
 		main.setCategoryPropertyOrder(category, propOrder);
