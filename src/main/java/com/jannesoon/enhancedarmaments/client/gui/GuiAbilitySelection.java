@@ -471,15 +471,15 @@ public class GuiAbilitySelection extends GuiScreen
 						{
 							if (buttons[i].enabled)
 							{
-								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": 0 " + I18n.format("enhancedarmaments.abilities.info.seconds")+ TextFormatting.GREEN + " +" + 6.0);
+								list.add(I18n.format("enhancedarmaments.abilities.info.duration") + ": 0 " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " +" + 5.0);
 							}
 						}
 						else
 						{
-								list.add(I18n.format("enhancedarmaments.abilities.info.duration") + ": " + 6.0 + " " + I18n.format("enhancedarmaments.abilities.info.seconds"));
+								list.add(I18n.format("enhancedarmaments.abilities.info.duration") + ": " + 5.0 + " " + I18n.format("enhancedarmaments.abilities.info.seconds"));
 						}
 						if(!(Ability.ILLUMINATION.canUpgradeLevel(nbt)) && (!(buttons[i].enabled)))
-								list.add(TextFormatting.RED + I18n.format("enhancedarmaments.misc.max")+" " + I18n.format("enhancedarmaments.misc.level"));
+								list.add(TextFormatting.RED + I18n.format("enhancedarmaments.misc.max") + " " + I18n.format("enhancedarmaments.misc.level"));
 					}
 					if (i == 7)//ETHEREAL
 					{

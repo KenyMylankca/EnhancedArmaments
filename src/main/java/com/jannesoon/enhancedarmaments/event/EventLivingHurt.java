@@ -220,7 +220,7 @@ public class EventLivingHurt
 			// passive
 			if (Ability.ILLUMINATION.hasAbility(nbt))
 			{
-				target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, (int) (20 * 6), Ability.ILLUMINATION.getLevel(nbt)));
+				target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, (20 * 5), Ability.ILLUMINATION.getLevel(nbt)));
 			}
 			
 			if (Ability.BLOODTHIRST.hasAbility(nbt))
