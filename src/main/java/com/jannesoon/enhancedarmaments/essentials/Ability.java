@@ -117,7 +117,7 @@ public enum Ability
 	{
 		int requiredExpLevel=0;
 		if(nbt.hasKey("ABILITIES"))
-			requiredExpLevel = (getTier() + getMaxLevel()) * (nbt.getInteger("ABILITIES") + 1);
+			requiredExpLevel = (getTier() + getMaxLevel()) * (nbt.getInteger("ABILITIES") + 1) - 1;
 		else
 			requiredExpLevel = getTier() + getMaxLevel();
 		return requiredExpLevel;
