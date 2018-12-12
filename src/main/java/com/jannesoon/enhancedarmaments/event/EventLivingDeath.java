@@ -39,7 +39,7 @@ public class EventLivingDeath
 					{
 						if (Ability.ETHEREAL.hasAbility(nbt))
 						{
-							player.inventory.getCurrentItem().setItemDamage((int) (player.inventory.getCurrentItem().getItemDamage() - (Ability.ETHEREAL.getLevel(nbt)*2+1)));
+							player.inventory.getCurrentItem().setItemDamage((int) (player.inventory.getCurrentItem().getItemDamage() - (Ability.ETHEREAL.getLevel(nbt)*2)));
 						}
 						addBonusExperience(event, nbt);
 						updateLevel(player, stack, nbt);

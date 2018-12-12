@@ -483,14 +483,14 @@ public class GuiAbilitySelection extends GuiScreen
 					}
 					if (i == 7)//ETHEREAL
 					{
-						float currentrepair = (Ability.ETHEREAL.getLevel(nbt)*2+1);
-						float nextlevelrepair = ((Ability.ETHEREAL.getLevel(nbt)+1)*2+1);
+						float currentrepair = (Ability.ETHEREAL.getLevel(nbt)*2);
+						float nextlevelrepair = ((Ability.ETHEREAL.getLevel(nbt)+1)*2);
 						
 						if (!(Ability.ETHEREAL.hasAbility(nbt)))
 						{
 							if (buttons[i].enabled)
 							{
-								list.add(I18n.format("enhancedarmaments.abilities.info.durability")+": 0" + TextFormatting.GREEN + " +" + 3.0);
+								list.add(I18n.format("enhancedarmaments.abilities.info.durability")+": 0" + TextFormatting.GREEN + " +" + 2.0);
 							}
 						}
 						else
