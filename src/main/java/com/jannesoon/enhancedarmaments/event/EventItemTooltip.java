@@ -134,7 +134,7 @@ public class EventItemTooltip
 		}
 		if (tooltip.indexOf("When on head:") != -1 || tooltip.indexOf("When on body:") != -1 || tooltip.indexOf("When on legs:") != -1 || tooltip.indexOf("When on feet:") != -1)
 		{
-			String p = String.format("%.1f", 100-(100/(1.0F + (rarity.getEffect()/4F))));
+			String p = String.format("%.1f", 100-(100/(1.0F + (rarity.getEffect()/5F))));
 			float percentage = Float.valueOf(p);
 			int line = 2;
 			if(tooltip.indexOf("When on head:") != -1) line = tooltip.indexOf("When on head:");

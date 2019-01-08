@@ -61,7 +61,7 @@ public class EventLivingHurt
 		if (bowfriendlyhand == null) bowfriendlyhand = EnumHand.MAIN_HAND;
 		
 		if (event.getSource().getTrueSource() instanceof EntityPlayer && !(event.getSource().getTrueSource() instanceof FakePlayer))
-		{
+		{//PLAYER IS ATTACKER
 			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
 			EntityLivingBase target = event.getEntityLiving();
 			ItemStack stack = player.getHeldItem(bowfriendlyhand);
@@ -82,7 +82,7 @@ public class EventLivingHurt
 			bowfriendlyhand = player.getActiveHand();
 		}
 		else if (event.getEntityLiving() instanceof EntityPlayer)
-		{
+		{//PLAYER IS GETTING HURT
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 			Entity target = event.getSource().getTrueSource();
 			
@@ -154,7 +154,7 @@ public class EventLivingHurt
 				event.setAmount(newdamage);
 			}
 			else if (EAUtils.canEnhanceArmor(stack.getItem()))
-				event.setAmount((float) (event.getAmount() / (1.0F + (rarity.getEffect()/4F))));
+				event.setAmount((float) (event.getAmount() / (1.0F + (rarity.getEffect()/5F))));
 	}
 	
 	/**
