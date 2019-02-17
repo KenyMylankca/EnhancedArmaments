@@ -13,13 +13,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 /**
  * Updates weapon information when killing a target with a valid weapon. Used to update experience,
  * level, abilities, and so on.
  *
  */
+@Mod.EventBusSubscriber
 public class EventLivingDeath
 {
 	@SubscribeEvent
@@ -39,7 +41,7 @@ public class EventLivingDeath
 					{
 						if (Ability.ETHEREAL.hasAbility(nbt))
 						{
-							player.inventory.getCurrentItem().setItemDamage((int) (player.inventory.getCurrentItem().getItemDamage() - (Ability.ETHEREAL.getLevel(nbt)*2)));
+							player.inventory.getCurrentItem().setDamage((int) (player.inventory.getCurrentItem().getDamage() - (Ability.ETHEREAL.getLevel(nbt)*2)));
 						}
 						addBonusExperience(event, nbt);
 						updateLevel(player, stack, nbt);
@@ -57,7 +59,7 @@ public class EventLivingDeath
 						{
 							if (Ability.ETHEREAL.hasAbility(nbt))
 							{
-								player.inventory.getCurrentItem().setItemDamage((int) (player.inventory.getCurrentItem().getItemDamage() - (Ability.ETHEREAL.getLevel(nbt)*2+1)));
+								player.inventory.getCurrentItem().setDamage((int) (player.inventory.getCurrentItem().getDamage() - (Ability.ETHEREAL.getLevel(nbt)*2+1)));
 							}
 							addBonusExperience(event, nbt);
 							updateLevel(player, stack, nbt);
@@ -69,9 +71,9 @@ public class EventLivingDeath
 		{
 			EntityArrow arrow = (EntityArrow) event.getSource().getTrueSource();
 			
-			if (arrow.shootingEntity instanceof EntityPlayer)
+			if (EAUtils.getEntityByUniqueId(arrow.shootingEntity) instanceof EntityPlayer && EAUtils.getEntityByUniqueId(arrow.shootingEntity) != null)
 			{
-				EntityPlayer player = (EntityPlayer) arrow.shootingEntity;
+				EntityPlayer player = (EntityPlayer) EAUtils.getEntityByUniqueId(arrow.shootingEntity);
 				ItemStack stack = player.inventory.getCurrentItem();
 				
 				if (stack != null)

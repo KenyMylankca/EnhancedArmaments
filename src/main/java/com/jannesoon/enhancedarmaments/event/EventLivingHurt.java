@@ -20,7 +20,6 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
@@ -29,8 +28,10 @@ import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
+@Mod.EventBusSubscriber
 public class EventLivingHurt
 {
 	public static EnumHand bowfriendlyhand;
@@ -40,10 +41,10 @@ public class EventLivingHurt
 	{
 		if(event.getEntity() instanceof EntityArrow)
 		{
-			if(((EntityArrow)event.getEntity()).shootingEntity instanceof EntityPlayer)
+			if(EAUtils.getEntityByUniqueId(((EntityArrow)event.getEntity()).shootingEntity) instanceof EntityPlayer && EAUtils.getEntityByUniqueId(((EntityArrow)event.getEntity()).shootingEntity) != null)
 			{
-				EntityPlayer player=(EntityPlayer) ((EntityArrow)event.getEntity()).shootingEntity;
-				if(event.getRayTraceResult().entityHit == null)
+				EntityPlayer player=(EntityPlayer)EAUtils.getEntityByUniqueId(((EntityArrow)event.getEntity()).shootingEntity);
+				if(event.getRayTraceResult().entity == null)
 					bowfriendlyhand=player.getActiveHand();
 			}
 		}
@@ -122,12 +123,7 @@ public class EventLivingHurt
 	{
 		if (Experience.getLevel(nbt) < Config.maxLevel)
 		{
-			boolean isDev = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
-			
-			if (isDev)
-				Experience.setExperience(nbt, Experience.getExperience(nbt) + Experience.getNeededExpForNextLevel(nbt) + 1);
-			else
-				Experience.setExperience(nbt, Experience.getExperience(nbt) + 1 + (int)dealedDamage/4);
+			Experience.setExperience(nbt, Experience.getExperience(nbt) + 1 + (int)dealedDamage/4);
 		}
 	}
 	
