@@ -21,6 +21,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.config.HoverChecker;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,7 +31,7 @@ public class GuiAbilitySelection extends GuiScreen
 	private GuiButton[] weaponAbilities;
 	private GuiButton[] armorAbilities;
 	
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void initGui() 
 	{
@@ -44,7 +46,7 @@ public class GuiAbilitySelection extends GuiScreen
 	    		if (EAUtils.canEnhanceWeapon(stack.getItem()))
 		    	{
 		    		weaponAbilities = new GuiButton[Ability.WEAPON_ABILITIES_COUNT];
-		    		NBTTagCompound nbt = stack.getTagCompound();
+		    		NBTTagCompound nbt = stack.getTag();
 		    		
 		    		if (nbt != null)
 		    		{
@@ -68,7 +70,7 @@ public class GuiAbilitySelection extends GuiScreen
 		    	else if (EAUtils.canEnhanceArmor(stack.getItem()))
 		    	{
 		    		armorAbilities = new GuiButton[Ability.ARMOR_ABILITIES_COUNT];
-		    		NBTTagCompound nbt = stack.getTagCompound();
+		    		NBTTagCompound nbt = stack.getTag();
 
 		    		if (nbt != null)
 		    		{
@@ -186,7 +188,7 @@ public class GuiAbilitySelection extends GuiScreen
 	{
 		Rarity rarity = Rarity.getRarity(nbt);
 		
-		drawCenteredString(fontRenderer, stack.getDisplayName(), width / 2, 20, 0xFFFFFF);
+		drawCenteredString(fontRenderer, stack.getDisplayName().getString(), width / 2, 20, 0xFFFFFF);
 		drawString(fontRenderer, I18n.format("enhancedarmaments.misc.rarity") + ": ", width / 2 - 50, 40, 0xFFFFFF);
 		drawString(fontRenderer, I18n.format("enhancedarmaments.rarity." + rarity.getName()), width / 2 - 15, 40, rarity.getHex());
 		drawCenteredString(fontRenderer, TextFormatting.ITALIC + I18n.format("enhancedarmaments.misc.abilities"), width / 2 - 100, 73, 0xFFFFFF);
@@ -259,7 +261,7 @@ public class GuiAbilitySelection extends GuiScreen
 	{
 		EntityPlayer player = this.mc.player;
 		ItemStack stack = player.inventory.getCurrentItem();
-		NBTTagCompound nbt = stack.getTagCompound();
+		NBTTagCompound nbt = stack.getTag();
 		
 		for (int i = 0; i < buttons.length; i++)
 		{

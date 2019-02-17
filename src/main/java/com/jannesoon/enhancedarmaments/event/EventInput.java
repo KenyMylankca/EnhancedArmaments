@@ -10,23 +10,25 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Opens the weapon ability selection gui on key press.
  *
  */
+@Mod.EventBusSubscriber
 public class EventInput
 {
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public void onKeyPress(InputEvent.KeyInputEvent event)
 	{
 		KeyBinding key = ClientProxy.keyBinding;
-		Minecraft mc = Minecraft.getMinecraft();
+		Minecraft mc = Minecraft.getInstance();
 		EntityPlayer player = mc.player;
 		
 		if (player != null)
@@ -41,8 +43,8 @@ public class EventInput
 				{
 					if (EAUtils.canEnhance(helditem))
 					{
-						if (key.isPressed() && stack.getTagCompound() != null)
-							if(stack.getTagCompound().hasKey("EA_ENABLED"))
+						if (key.isPressed() && stack.getTag() != null)
+							if(stack.getTag().hasKey("EA_ENABLED"))
 								player.openGui(EnhancedArmaments.instance, GuiHandler.ABILITY_SELECTION, player.world, (int) player.posX, (int) player.posY, (int) player.posZ);
 					}
 				}
