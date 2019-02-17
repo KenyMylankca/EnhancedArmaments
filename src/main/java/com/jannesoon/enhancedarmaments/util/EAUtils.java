@@ -1,7 +1,11 @@
 package com.jannesoon.enhancedarmaments.util;
 
+import java.util.UUID;
+
 import com.jannesoon.enhancedarmaments.config.Config;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -66,5 +70,16 @@ public class EAUtils
 				damageSource == DamageSource.IN_WALL ||
 				damageSource == DamageSource.IN_FIRE ||
 				damageSource == DamageSource.OUT_OF_WORLD) || damageSource.getTrueSource() instanceof EntityLivingBase;
+	}
+	
+	public static Entity getEntityByUniqueId(UUID uniqueId)
+	{
+	    for (Entity entity : Minecraft.getInstance().world.loadedEntityList)
+	    	{
+	    		if (entity.getUniqueID().equals(uniqueId))
+	                return entity;
+	    	}
+
+	    return null;
 	}
 }
