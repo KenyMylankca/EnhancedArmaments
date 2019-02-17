@@ -50,21 +50,21 @@ public enum Rarity
 	 */
 	public static Rarity getRarity(NBTTagCompound nbt)
 	{
-		return nbt != null && nbt.hasKey("RARITY") ? RARITIES[nbt.getInteger("RARITY")] : DEFAULT;
+		return nbt != null && nbt.hasKey("RARITY") ? RARITIES[nbt.getInt("RARITY")] : DEFAULT;
 	}
 	
 	public void setRarity(NBTTagCompound nbt)
 	{
 		if (nbt != null)
 		{
-			nbt.setInteger("RARITY", ordinal());
+			nbt.setInt("RARITY", ordinal());
 		}
 	}
 	
 	public static void setRarity(NBTTagCompound nbt, String rarityName)
 	{
 		int rarity = Integer.parseInt(rarityName);
-		nbt.setInteger("RARITY", rarity);
+		nbt.setInt("RARITY", rarity);
 	}
 
 	public String getName()

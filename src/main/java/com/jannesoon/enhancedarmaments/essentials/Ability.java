@@ -67,7 +67,7 @@ public enum Ability
 	 */
 	public boolean hasAbility(NBTTagCompound nbt)
 	{
-		return nbt != null && nbt.getInteger(toString()) > 0;
+		return nbt != null && nbt.getInt(toString()) > 0;
 	}
 	
 	/**
@@ -76,11 +76,11 @@ public enum Ability
 	 */
 	public void addAbility(NBTTagCompound nbt)
 	{
-		nbt.setInteger(toString(), 1);
+		nbt.setInt(toString(), 1);
 		if(nbt.hasKey("ABILITIES"))
-			nbt.setInteger("ABILITIES", nbt.getInteger("ABILITIES")+1);
+			nbt.setInt("ABILITIES", nbt.getInt("ABILITIES")+1);
 		else
-			nbt.setInteger("ABILITIES", 1);
+			nbt.setInt("ABILITIES", 1);
 	}
 	
 	/**
@@ -91,8 +91,8 @@ public enum Ability
 	{
 		nbt.removeTag(toString());
 		if(nbt.hasKey("ABILITIES"))
-			if(nbt.getInteger("ABILITIES") > 0)
-				nbt.setInteger("ABILITIES", nbt.getInteger("ABILITIES")-1);
+			if(nbt.getInt("ABILITIES") > 0)
+				nbt.setInt("ABILITIES", nbt.getInt("ABILITIES")-1);
 	}
 	
 	/**
@@ -117,7 +117,7 @@ public enum Ability
 	{
 		int requiredExpLevel=0;
 		if(nbt.hasKey("ABILITIES"))
-			requiredExpLevel = (getTier() + getMaxLevel()) * (nbt.getInteger("ABILITIES") + 1) - 1;
+			requiredExpLevel = (getTier() + getMaxLevel()) * (nbt.getInt("ABILITIES") + 1) - 1;
 		else
 			requiredExpLevel = getTier() + getMaxLevel();
 		return requiredExpLevel;
@@ -130,7 +130,7 @@ public enum Ability
 	 */
 	public void setLevel(NBTTagCompound nbt, int level)
 	{
-		nbt.setInteger(toString(), level);
+		nbt.setInt(toString(), level);
 	}
 	
 	/**
@@ -140,7 +140,7 @@ public enum Ability
 	 */
 	public int getLevel(NBTTagCompound nbt)
 	{
-		if (nbt != null) return nbt.getInteger(toString());
+		if (nbt != null) return nbt.getInt(toString());
 		else return 0;
 	}
 	

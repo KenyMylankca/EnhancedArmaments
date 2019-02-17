@@ -20,7 +20,7 @@ public class Experience
 			newLevel = currentLevel + 1;
 			currentLevel++;
 			Experience.setAbilityTokens(nbt, Experience.getAbilityTokens(nbt) + 1);
-			player.sendMessage(new TextComponentString(stack.getDisplayName() + TextFormatting.GRAY + " " + new TextComponentTranslation("enhancedarmaments.misc.level.leveledup").getFormattedText() + " " + TextFormatting.GOLD + "" + newLevel + TextFormatting.GRAY + "!"));
+			player.sendMessage(new TextComponentString(stack.getDisplayName().getString() + TextFormatting.GRAY + " " + new TextComponentTranslation("enhancedarmaments.misc.level.leveledup").getFormattedText() + " " + TextFormatting.GOLD + "" + newLevel + TextFormatting.GRAY + "!"));
 		}
 		
 		return newLevel;
@@ -28,7 +28,7 @@ public class Experience
 	
 	public static int getLevel(NBTTagCompound nbt)
 	{
-		return nbt != null ? Math.max(nbt.getInteger("LEVEL"), 1) : 1;
+		return nbt != null ? Math.max(nbt.getInt("LEVEL"), 1) : 1;
 	}
 	
 	public static boolean canLevelUp(NBTTagCompound nbt)
@@ -41,7 +41,7 @@ public class Experience
 		if (nbt != null)
 		{
 			if (level > 1)
-				nbt.setInteger("LEVEL", level);
+				nbt.setInt("LEVEL", level);
 			else
 				nbt.removeTag("LEVEL");
 		}
@@ -55,7 +55,7 @@ public class Experience
 	
 	public static int getExperience(NBTTagCompound nbt)
 	{
-		return nbt.hasKey("EXPERIENCE") ? nbt.getInteger("EXPERIENCE") : 0;
+		return nbt.hasKey("EXPERIENCE") ? nbt.getInt("EXPERIENCE") : 0;
 	}
 	
 	public static void setExperience(NBTTagCompound nbt, int experience)
@@ -63,7 +63,7 @@ public class Experience
 		if (nbt != null)
 		{
 			if (experience > 0)
-				nbt.setInteger("EXPERIENCE", experience);
+				nbt.setInt("EXPERIENCE", experience);
 			else
 				nbt.removeTag("EXPERIENCE");
 		}
@@ -82,7 +82,7 @@ public class Experience
 		if (nbt != null)
 		{
 			if (tokens > 0)
-				nbt.setInteger("TOKENS", tokens);
+				nbt.setInt("TOKENS", tokens);
 			else
 				nbt.removeTag("TOKENS");
 		}
@@ -90,7 +90,7 @@ public class Experience
 	
 	public static int getAbilityTokens(NBTTagCompound nbt)
 	{
-		return nbt != null ? nbt.getInteger("TOKENS") : 0;
+		return nbt != null ? nbt.getInt("TOKENS") : 0;
 	}
 	
 	public static void enable(NBTTagCompound nbt, boolean value)
