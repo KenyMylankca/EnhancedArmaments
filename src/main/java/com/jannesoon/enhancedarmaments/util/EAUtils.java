@@ -29,7 +29,7 @@ public class EAUtils
 		{
 			boolean allowed=false;
 			for(int k = 0; k < Config.extraItems.length; k++)
-				if(Config.extraItems[k].equals(item.getRegistryName().getResourceDomain() + ":" + item.getRegistryName().getResourcePath()))
+				if(Config.extraItems[k].equals(item.getRegistryName().getPath()))
 					allowed=true;
 			return (allowed || item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemHoe || item instanceof ItemBow || item instanceof ItemArmor) ? true : false;
 		}
