@@ -24,8 +24,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.config.HoverChecker;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiAbilitySelection extends GuiScreen
 {
 	private GuiButton[] weaponAbilities;
@@ -95,7 +93,7 @@ public class GuiAbilitySelection extends GuiScreen
 	    }
 	}
 	
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) 
 	{
@@ -134,7 +132,7 @@ public class GuiAbilitySelection extends GuiScreen
 	    }
 	}
 	
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException 
 	{
