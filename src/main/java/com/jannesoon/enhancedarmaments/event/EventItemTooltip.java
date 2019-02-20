@@ -10,9 +10,8 @@ import com.jannesoon.enhancedarmaments.essentials.Experience;
 import com.jannesoon.enhancedarmaments.essentials.Rarity;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
+import com.sun.jna.platform.KeyboardUtils;
 
-import net.java.games.input.Component.Identifier.Key;
-import net.java.games.input.Keyboard;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -88,7 +87,7 @@ public class EventItemTooltip
 					
 					// abilities
 					tooltip.add(new TextComponentString(""));
-					if (Keyboard.isKeyDown(Key.LSHIFT))
+					if (KeyboardUtils.isPressed(75)) //TODO check this out
 					{
 						tooltip.add(new TextComponentString(rarity.getColor() + "" + TextFormatting.ITALIC + I18n.format("enhancedarmaments.misc.abilities")));
 						tooltip.add(new TextComponentString(""));

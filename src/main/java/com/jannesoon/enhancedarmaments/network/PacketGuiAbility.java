@@ -1,5 +1,7 @@
 package com.jannesoon.enhancedarmaments.network;
 
+import javax.xml.ws.handler.MessageContext;
+
 import com.jannesoon.enhancedarmaments.essentials.Ability;
 import com.jannesoon.enhancedarmaments.essentials.Experience;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
@@ -13,7 +15,6 @@ import net.minecraft.util.IThreadListener;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class PacketGuiAbility implements IMessage
 {
