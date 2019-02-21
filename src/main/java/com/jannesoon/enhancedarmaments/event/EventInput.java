@@ -4,6 +4,7 @@ import com.jannesoon.enhancedarmaments.EnhancedArmaments;
 import com.jannesoon.enhancedarmaments.client.gui.GuiAbilitySelection;
 import com.jannesoon.enhancedarmaments.init.ClientProxy;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
