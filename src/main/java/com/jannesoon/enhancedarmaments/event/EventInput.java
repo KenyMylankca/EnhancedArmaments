@@ -1,14 +1,12 @@
 package com.jannesoon.enhancedarmaments.event;
 
 import com.jannesoon.enhancedarmaments.EnhancedArmaments;
-import com.jannesoon.enhancedarmaments.proxies.ClientProxy;
+import com.jannesoon.enhancedarmaments.client.gui.GuiAbilitySelection;
+import com.jannesoon.enhancedarmaments.init.ClientProxy;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
-import com.jannesoon.enhancedarmaments.util.GuiHandler;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -27,7 +25,7 @@ public class EventInput
 	@SubscribeEvent
 	public void onKeyPress(InputEvent.KeyInputEvent event)
 	{
-		KeyBinding key = ClientProxy.keyBinding;
+		KeyBinding key = ((ClientProxy)EnhancedArmaments.proxy).abilityKey;
 		Minecraft mc = Minecraft.getInstance();
 		EntityPlayer player = mc.player;
 		
@@ -35,18 +33,13 @@ public class EventInput
 		{
 			ItemStack stack = player.inventory.getCurrentItem();
 			
-			if (stack != null)
+			if (stack != ItemStack.EMPTY)
 			{
-				Item helditem = stack.getItem();
-				
-				if (helditem != null)
+				if (EAUtils.canEnhance(stack.getItem()))
 				{
-					if (EAUtils.canEnhance(helditem))
-					{
-						if (key.isPressed() && stack.getTag() != null)
-							if(stack.getTag().hasKey("EA_ENABLED"))
-								player.openGui(EnhancedArmaments.instance, GuiHandler.ABILITY_SELECTION, player.world, (int) player.posX, (int) player.posY, (int) player.posZ);
-					}
+					if (key.isPressed() && stack.getTag() != null)
+						if(stack.getTag().hasKey("EA_ENABLED"))
+							mc.displayGuiScreen(new GuiAbilitySelection());
 				}
 			}
 		}
