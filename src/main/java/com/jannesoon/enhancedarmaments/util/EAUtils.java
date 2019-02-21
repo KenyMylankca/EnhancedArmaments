@@ -1,20 +1,14 @@
 package com.jannesoon.enhancedarmaments.util;
 
-import java.util.UUID;
-
 import com.jannesoon.enhancedarmaments.config.Config;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemSword;
+import net.minecraft.item.*;
 import net.minecraft.util.DamageSource;
+
+import java.util.UUID;
 
 public class EAUtils
 {
@@ -29,36 +23,37 @@ public class EAUtils
 					|| item == Items.BOW
 					|| item == Items.CHAINMAIL_BOOTS || item == Items.CHAINMAIL_CHESTPLATE || item == Items.CHAINMAIL_HELMET || item == Items.CHAINMAIL_LEGGINGS)
 				return false;
-		if(Config.extraItems.length != 0)
+
+		if(Config.extraItems.size() != 0)
 		{
 			boolean allowed=false;
-			for(int k = 0; k < Config.extraItems.length; k++)
-				if(Config.extraItems[k].equals(item.getRegistryName().getPath()))
+			for(int k = 0; k < Config.extraItems.size(); k++)
+				if(Config.extraItems.get(k).equals(item.getRegistryName().getPath()))
 					allowed=true;
-			return (allowed || item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemHoe || item instanceof ItemBow || item instanceof ItemArmor) ? true : false;
+			return allowed || item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemHoe || item instanceof ItemBow || item instanceof ItemArmor;
 		}
 		else
-			return (item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemHoe || item instanceof ItemBow || item instanceof ItemArmor) ? true : false;
+			return item instanceof ItemSword || item instanceof ItemAxe || item instanceof ItemHoe || item instanceof ItemBow || item instanceof ItemArmor;
 	}
 	
 	public static boolean canEnhanceWeapon(Item item)
 	{
-		return (canEnhance(item) && !(item instanceof ItemArmor)) ? true : false;
+		return canEnhance(item) && !(item instanceof ItemArmor);
 	}
 	
 	public static boolean canEnhanceMelee(Item item)
 	{
-		return (canEnhance(item) && !(item instanceof ItemArmor) && !(item instanceof ItemBow)) ? true : false;
+		return canEnhance(item) && !(item instanceof ItemArmor) && !(item instanceof ItemBow);
 	}
 	
 	public static boolean canEnhanceRanged(Item item)
 	{
-		return (canEnhance(item) && item instanceof ItemBow) ? true : false;
+		return canEnhance(item) && item instanceof ItemBow;
 	}
 	
 	public static boolean canEnhanceArmor(Item item)
 	{
-		return (canEnhance(item) && item instanceof ItemArmor) ? true : false;
+		return canEnhance(item) && item instanceof ItemArmor;
 	}
 	
 	public static boolean isDamageSourceAllowed(DamageSource damageSource)
