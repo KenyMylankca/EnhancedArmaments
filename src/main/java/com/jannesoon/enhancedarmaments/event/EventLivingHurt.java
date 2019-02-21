@@ -1,7 +1,5 @@
 package com.jannesoon.enhancedarmaments.event;
 
-import java.util.Collection;
-
 import com.google.common.collect.Multimap;
 import com.jannesoon.enhancedarmaments.config.Config;
 import com.jannesoon.enhancedarmaments.essentials.Ability;
@@ -9,7 +7,6 @@ import com.jannesoon.enhancedarmaments.essentials.Experience;
 import com.jannesoon.enhancedarmaments.essentials.Rarity;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -30,6 +27,8 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.Collection;
 
 @Mod.EventBusSubscriber
 public class EventLivingHurt

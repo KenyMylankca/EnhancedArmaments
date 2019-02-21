@@ -1,17 +1,16 @@
 package com.jannesoon.enhancedarmaments.network;
 
-import java.util.function.Supplier;
-
 import com.jannesoon.enhancedarmaments.essentials.Ability;
 import com.jannesoon.enhancedarmaments.essentials.Experience;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
+
+import java.util.function.Supplier;
 
 public class PacketGuiAbility
 {
