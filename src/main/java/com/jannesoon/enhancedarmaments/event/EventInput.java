@@ -38,7 +38,7 @@ public class EventInput
 			{
 				if (EAUtils.canEnhance(stack.getItem()))
 				{
-					if (key.isPressed() && stack.getTag() != null)
+					if (key.isPressed() && stack.hasTag())
 						if(stack.getTag().hasKey("EA_ENABLED"))
 							mc.displayGuiScreen(new GuiAbilitySelection());
 				}

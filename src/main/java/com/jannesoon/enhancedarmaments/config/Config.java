@@ -400,8 +400,8 @@ public class Config
 					.define("uncommonChance", 0.18);
 
 			rareChance = builder
-					.comment("Sets the chance the given rarity will be applied. Default: 0.10")
-					.define("rareChance", 0.10);
+					.comment("Sets the chance the given rarity will be applied. Default: 0.1")
+					.define("rareChance", 0.1);
 
 			ultraRareChance = builder
 					.comment("Sets the chance the given rarity will be applied. Default: 0.05")
