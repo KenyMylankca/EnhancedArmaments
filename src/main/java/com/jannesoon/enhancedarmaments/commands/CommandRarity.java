@@ -17,7 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentTranslation;
 
-public class WPCommandRarity
+public class CommandRarity
 {
 	private final List<String> aliases = Lists.newArrayList("changerarity");
 
@@ -46,7 +46,6 @@ public class WPCommandRarity
 				player.setHeldItem(EnumHand.MAIN_HAND, item);
 			}
 		}
-
 		return rarityid;
 	}
 }
