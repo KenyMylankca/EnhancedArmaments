@@ -1,7 +1,6 @@
 {
     "pack": {
         "description": "Enhanced Armaments resources",
-        "pack_format": 4,
-        "_comment": ""
+        "pack_format": 4
     }
 }
