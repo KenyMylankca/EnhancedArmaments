@@ -13,14 +13,17 @@ updateJSONURL="https://minecraft.curseforge.com/projects/enhanced-armaments/file
 description='''
 This mod gives your weapons and armors unique abilities by respect to the usage of them and your experience.
 '''
-[[dependencies.enhancedarmaments]] #optional
-    # the modid of the dependency
-    modId="forge" #mandatory
-    # Does this dependency have to exist - if not, ordering below must be specified
-    mandatory=true #mandatory
-    # The version range of the dependency
-    versionRange="[25,)" #mandatory
-    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
-    ordering="NONE"
-    # Side this dependency is applied on - BOTH, CLIENT or SERVER
-    side="BOTH"
+
+[[dependencies.enhancedarmaments]]
+	    modId="forge"
+	    mandatory=true
+	    versionRange="[25.0.141,)"
+	    ordering="NONE"
+	    side="BOTH"
+		
+[[dependencies.enhancedarmaments]]
+	    modId="minecraft"
+	    mandatory=true
+	    versionRange="[1.13.2]"
+	    ordering="NONE"
+	    side="BOTH"

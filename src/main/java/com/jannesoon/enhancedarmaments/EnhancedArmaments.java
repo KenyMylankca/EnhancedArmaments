@@ -33,7 +33,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
  * of the game. On top of that, other interesting leveling systems are
  * planned to enhance the overall feel of Minecraft.
  */
-@Mod(value = EnhancedArmaments.MODID)
+@Mod(EnhancedArmaments.MODID)
 public class EnhancedArmaments
 {
 	public static final String MODID = "enhancedarmaments";
