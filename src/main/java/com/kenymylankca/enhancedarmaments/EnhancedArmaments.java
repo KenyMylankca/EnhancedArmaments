@@ -36,8 +36,8 @@ public class EnhancedArmaments
 	public static final String MODID = "enhancedarmaments";
 	public static final String NAME = "Enhanced Armaments";
 	public static final String VERSION = "1.3.15";
-	public static final String COMMON = "com.jannesoon.enhancedarmaments.proxies.CommonProxy";
-	public static final String CLIENT = "com.jannesoon.enhancedarmaments.proxies.ClientProxy";
+	public static final String COMMON = "com.kenymylankca.enhancedarmaments.proxies.CommonProxy";
+	public static final String CLIENT = "com.kenymylankca.enhancedarmaments.proxies.ClientProxy";
 	
 	@SidedProxy(clientSide = EnhancedArmaments.CLIENT, serverSide = EnhancedArmaments.COMMON)
 	public static CommonProxy proxy;
