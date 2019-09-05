@@ -1,20 +1,12 @@
 package com.jannesoon.enhancedarmaments;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jannesoon.enhancedarmaments.commands.WPCommandExpLevel;
 import com.jannesoon.enhancedarmaments.commands.WPCommandRarity;
 import com.jannesoon.enhancedarmaments.config.Config;
-import com.jannesoon.enhancedarmaments.event.EventInput;
-import com.jannesoon.enhancedarmaments.event.EventItemTooltip;
-import com.jannesoon.enhancedarmaments.event.EventLivingDeath;
-import com.jannesoon.enhancedarmaments.event.EventLivingHurt;
-import com.jannesoon.enhancedarmaments.event.EventLivingUpdate;
+import com.jannesoon.enhancedarmaments.event.*;
 import com.jannesoon.enhancedarmaments.init.ClientProxy;
 import com.jannesoon.enhancedarmaments.init.ISidedProxy;
 import com.jannesoon.enhancedarmaments.network.PacketGuiAbility;
-
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DistExecutor;
@@ -27,6 +19,8 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * A simple Minecraft mod focused on the aspect of leveling certain areas

@@ -1,8 +1,5 @@
 package com.jannesoon.enhancedarmaments.event;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.google.common.collect.Multimap;
 import com.jannesoon.enhancedarmaments.config.Config;
 import com.jannesoon.enhancedarmaments.essentials.Ability;
@@ -11,7 +8,6 @@ import com.jannesoon.enhancedarmaments.essentials.Rarity;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
 import com.sun.jna.platform.KeyboardUtils;
-
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -30,6 +26,9 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Displays information about the weapon when hovered over in an inventory.
