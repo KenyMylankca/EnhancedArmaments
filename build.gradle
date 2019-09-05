@@ -20,7 +20,7 @@ archivesBaseName = 'enhancedarmaments'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20190608-1.14.2'
+    mappings channel: 'snapshot', version: '20180921-1.13'
     runs {
         client {
             workingDirectory project.file('run')
@@ -45,7 +45,7 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.14.2-26.0.35'
+    minecraft 'net.minecraftforge:forge:1.13.2-25.0.141'
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
