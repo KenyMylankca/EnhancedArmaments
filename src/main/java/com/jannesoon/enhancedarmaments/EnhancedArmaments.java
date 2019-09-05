@@ -34,7 +34,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
  * planned to enhance the overall feel of Minecraft.
  */
 @Mod(value = EnhancedArmaments.MODID)
-public class EnhancedArmaments
+public class EnhancedArmaments 
 {
 	public static final String MODID = "enhancedarmaments";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
