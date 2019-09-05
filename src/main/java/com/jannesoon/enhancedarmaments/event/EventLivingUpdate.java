@@ -15,14 +15,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod.EventBusSubscriber
 public class EventLivingUpdate
 {
 	private int count=0;
-	
 	@SubscribeEvent
 	public void onUpdate(LivingEvent.LivingUpdateEvent event)
 	{
@@ -40,7 +37,7 @@ public class EventLivingUpdate
 					{
 						if (stack != null && EAUtils.canEnhanceArmor(stack.getItem()))
 						{
-							NBTTagCompound nbtcompound = stack.getTag();
+							NBTTagCompound nbtcompound = stack.getTagCompound();
 							float heal=Ability.REMEDIAL.getLevel(nbtcompound);
 							if (Ability.REMEDIAL.hasAbility(nbtcompound))
 								if(this.count < 120)
@@ -73,7 +70,7 @@ public class EventLivingUpdate
 										
 										for (int j = 0; j < Config.itemBlacklist.length; j++)
 										{
-											if (Config.itemBlacklist[j].equals(stack.getItem().getRegistryName().getPath()))
+											if (Config.itemBlacklist[j].equals(stack.getItem().getRegistryName().getResourceDomain() + ":" + stack.getItem().getRegistryName().getResourcePath()))
 												okay=false;
 										}
 										
@@ -81,7 +78,7 @@ public class EventLivingUpdate
 										{
 											okay=false;
 											for(int k = 0; k < Config.itemWhitelist.length; k++)
-												if(Config.itemWhitelist[k].equals(stack.getItem().getRegistryName().getPath()))
+												if(Config.itemWhitelist[k].equals(stack.getItem().getRegistryName().getResourceDomain() + ":" + stack.getItem().getRegistryName().getResourcePath()))
 													okay=true;
 										}
 										
