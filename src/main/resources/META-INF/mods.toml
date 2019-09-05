@@ -16,7 +16,7 @@ authors="JanneSoon" #optional
 # The modid of the mod
 modId="enhancedarmaments" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-version="1.4.0" #mandatory
+version="1.3.15" #mandatory
  # A display name for the mod
 displayName="Enhanced Armaments" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
