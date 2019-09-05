@@ -28,7 +28,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.GenericEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -47,73 +46,76 @@ public class EventItemTooltip
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void addInformation(ItemTooltipEvent event)
 	{
-		List<ITextComponent> tooltip = event.getToolTip();
+		List<ITextComponent> tooltip = (List<ITextComponent>) event.getToolTip();
 		ItemStack stack = event.getItemStack();
 		Item item = stack.getItem();
 
-		if (EAUtils.canEnhance(item))
+		if (item != null)
 		{
-			NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-
-			if (Experience.isEnabled(nbt))
+			if (EAUtils.canEnhance(item))
 			{
-				Rarity rarity = Rarity.getRarity(nbt);
-				int level = Experience.getLevel(nbt);
-				int experience = Experience.getExperience(nbt);
-				int maxExperience = Experience.getMaxLevelExp(level);
-
-				changeTooltips(tooltip, stack, rarity);
-
-			// add tooltips
-
-				// level
-				if (level >= Config.maxLevel)
-					tooltip.add(new TextComponentString(I18n.format("enhancedarmaments.misc.level") + ": " + TextFormatting.RED + I18n.format("enhancedarmaments.misc.max")));
-				else
-					tooltip.add(new TextComponentString(I18n.format("enhancedarmaments.misc.level") + ": " + TextFormatting.WHITE + level));
-
-				// experience
-				if (level >= Config.maxLevel)
-					tooltip.add(new TextComponentString(I18n.format("enhancedarmaments.misc.experience") + ": " + I18n.format("enhancedarmaments.misc.max")));
-				else
-					tooltip.add(new TextComponentString(I18n.format("enhancedarmaments.misc.experience") + ": " + experience + " / " + maxExperience));
-
-				// durability
-				if (Config.showDurabilityInTooltip)
+				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+				
+				if (nbt != null && Experience.isEnabled(nbt))
 				{
-					tooltip.add(new TextComponentString(I18n.format("enhancedarmaments.misc.durability") + ": " + (stack.getMaxDamage() - stack.getDamage()) + " / " + stack.getMaxDamage()));
-				}
-
-				// abilities
-				tooltip.add(new TextComponentString(""));
-				if (KeyboardUtils.isPressed(75)) //TODO check this out
-				{
-					tooltip.add(new TextComponentString(rarity.getColor() + "" + TextFormatting.ITALIC + I18n.format("enhancedarmaments.misc.abilities")));
+					Rarity rarity = Rarity.getRarity(nbt);
+					int level = Experience.getLevel(nbt);
+					int experience = Experience.getExperience(nbt);
+					int maxExperience = Experience.getMaxLevelExp(level);
+					
+					changeTooltips(tooltip, stack, rarity);
+					
+				// add tooltips
+					
+					// level
+					if (level >= Config.maxLevel)
+						tooltip.add(new TextComponentString(I18n.format("enhancedarmaments.misc.level") + ": " + TextFormatting.RED + I18n.format("enhancedarmaments.misc.max")));
+					else
+						tooltip.add(new TextComponentString(I18n.format("enhancedarmaments.misc.level") + ": " + TextFormatting.WHITE + level));
+					
+					// experience
+					if (level >= Config.maxLevel)
+						tooltip.add(new TextComponentString(I18n.format("enhancedarmaments.misc.experience") + ": " + I18n.format("enhancedarmaments.misc.max")));
+					else
+						tooltip.add(new TextComponentString(I18n.format("enhancedarmaments.misc.experience") + ": " + experience + " / " + maxExperience));
+					
+					// durability
+					if (Config.showDurability)
+					{
+						tooltip.add(new TextComponentString(I18n.format("enhancedarmaments.misc.durability") + ": " + (stack.getMaxDamage() - stack.getDamage()) + " / " + stack.getMaxDamage()));
+					}
+					
+					// abilities
 					tooltip.add(new TextComponentString(""));
-
-					if (EAUtils.canEnhanceWeapon(item))
+					if (KeyboardUtils.isPressed(75)) //TODO check this out
 					{
-						for (Ability ability : Ability.WEAPON_ABILITIES)
+						tooltip.add(new TextComponentString(rarity.getColor() + "" + TextFormatting.ITALIC + I18n.format("enhancedarmaments.misc.abilities")));
+						tooltip.add(new TextComponentString(""));
+						
+						if (EAUtils.canEnhanceWeapon(item))
 						{
-							if (ability.hasAbility(nbt))
+							for (Ability ability : Ability.WEAPON_ABILITIES)
 							{
-								tooltip.add(new TextComponentTranslation("-" + ability.getColor() + ability.getName(nbt)));
+								if (ability.hasAbility(nbt))
+								{
+									tooltip.add(new TextComponentTranslation("-" + ability.getColor() + ability.getName(nbt)));
+								}
+							}
+						}
+						else if (EAUtils.canEnhanceArmor(item))
+						{
+							for (Ability ability : Ability.ARMOR_ABILITIES)
+							{
+								if (ability.hasAbility(nbt))
+								{
+									tooltip.add(new TextComponentTranslation("-" + ability.getColor() + ability.getName(nbt)));
+								}
 							}
 						}
 					}
-					else if (EAUtils.canEnhanceArmor(item))
-					{
-						for (Ability ability : Ability.ARMOR_ABILITIES)
-						{
-							if (ability.hasAbility(nbt))
-							{
-								tooltip.add(new TextComponentTranslation("-" + ability.getColor() + ability.getName(nbt)));
-							}
-						}
-					}
+					else
+						tooltip.add(new TextComponentString(rarity.getColor() + "" + TextFormatting.ITALIC + I18n.format("enhancedarmaments.misc.abilities.shift")));
 				}
-				else
-					tooltip.add(new TextComponentString(rarity.getColor() + "" + TextFormatting.ITALIC + I18n.format("enhancedarmaments.misc.abilities.shift")));
 			}
 		}
 	}

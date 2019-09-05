@@ -15,7 +15,7 @@ public class Experience
 	{
 		int newLevel = currentLevel;
 		
-		while (currentLevel < Config.CONFIG.maxLevel.get() && experience >= Experience.getMaxLevelExp(currentLevel))
+		while (currentLevel < Config.maxLevel && experience >= Experience.getMaxLevelExp(currentLevel))
 		{
 			newLevel = currentLevel + 1;
 			currentLevel++;
@@ -33,7 +33,7 @@ public class Experience
 	
 	public static boolean canLevelUp(NBTTagCompound nbt)
 	{
-		return getLevel(nbt) < Config.CONFIG.maxLevel.get();
+		return getLevel(nbt) < Config.maxLevel;
 	}
 	
 	public static void setLevel(NBTTagCompound nbt, int level)
@@ -49,7 +49,8 @@ public class Experience
 	
 	public static int getNeededExpForNextLevel(NBTTagCompound nbt)
 	{
-		return Experience.getMaxLevelExp(Experience.getLevel(nbt)) - Experience.getExperience(nbt);
+		int neededexp = Experience.getMaxLevelExp(Experience.getLevel(nbt)) - Experience.getExperience(nbt);
+		return nbt != null ? neededexp : 0;
 	}
 	
 	public static int getExperience(NBTTagCompound nbt)
@@ -70,9 +71,9 @@ public class Experience
 	
 	public static int getMaxLevelExp(int level)
 	{
-		int maxLevelExp=Config.CONFIG.level1Experience.get();
+		int maxLevelExp=Config.level1Experience;
 		for(int i=1; i<level; i++)
-			maxLevelExp *= Config.CONFIG.experienceMultiplier.get();
+			maxLevelExp *= Config.experienceMultiplier;
 		return maxLevelExp;
 	}
 	
@@ -105,6 +106,6 @@ public class Experience
 	
 	public static boolean isEnabled(NBTTagCompound nbt)
 	{
-		return nbt != null && nbt.getBoolean("EA_ENABLED");
+		return nbt != null ? nbt.getBoolean("EA_ENABLED") : false;
 	}
 }

@@ -25,14 +25,14 @@ import net.minecraftforge.fml.common.Mod;
 public class EventLivingDeath
 {
 	@SubscribeEvent
-	public static void onLivingDeath(LivingDeathEvent event)
+	public void onLivingDeath(LivingDeathEvent event)
 	{
 		if (event.getSource().getTrueSource() instanceof EntityPlayer && !(event.getSource().getTrueSource() instanceof FakePlayer))
 		{
 			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
 			ItemStack stack = player.getHeldItem(EventLivingHurt.bowfriendlyhand);
 			
-			if (stack != ItemStack.EMPTY && EAUtils.canEnhanceMelee(stack.getItem()))
+			if (stack != null && EAUtils.canEnhanceMelee(stack.getItem()))
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
@@ -41,27 +41,30 @@ public class EventLivingDeath
 					{
 						if (Ability.ETHEREAL.hasAbility(nbt))
 						{
-							player.inventory.getCurrentItem().setDamage((player.inventory.getCurrentItem().getDamage() - (Ability.ETHEREAL.getLevel(nbt)*2)));
+							player.inventory.getCurrentItem().setDamage((int) (player.inventory.getCurrentItem().getDamage() - (Ability.ETHEREAL.getLevel(nbt)*2)));
 						}
 						addBonusExperience(event, nbt);
 						updateLevel(player, stack, nbt);
 						NBTHelper.saveStackNBT(stack, nbt);
 					}
 			}
-			else if (stack != ItemStack.EMPTY && EAUtils.canEnhanceRanged(stack.getItem()))
+			else if (stack != null && EAUtils.canEnhanceRanged(stack.getItem()))
 			{
-				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-
-				if (nbt != null)
-					if(nbt.hasKey("EA_ENABLED"))
-					{
-						if (Ability.ETHEREAL.hasAbility(nbt))
+				if (stack != null)
+				{
+					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+					
+					if (nbt != null)
+						if(nbt.hasKey("EA_ENABLED"))
 						{
-							player.inventory.getCurrentItem().setDamage((player.inventory.getCurrentItem().getDamage() - (Ability.ETHEREAL.getLevel(nbt)*2+1)));
+							if (Ability.ETHEREAL.hasAbility(nbt))
+							{
+								player.inventory.getCurrentItem().setDamage((int) (player.inventory.getCurrentItem().getDamage() - (Ability.ETHEREAL.getLevel(nbt)*2+1)));
+							}
+							addBonusExperience(event, nbt);
+							updateLevel(player, stack, nbt);
 						}
-						addBonusExperience(event, nbt);
-						updateLevel(player, stack, nbt);
-					}
+				}
 			}
 		}
 		else if (event.getSource().getTrueSource() instanceof EntityArrow)
@@ -71,19 +74,16 @@ public class EventLivingDeath
 			if (EAUtils.getEntityByUniqueId(arrow.shootingEntity) instanceof EntityPlayer && EAUtils.getEntityByUniqueId(arrow.shootingEntity) != null)
 			{
 				EntityPlayer player = (EntityPlayer) EAUtils.getEntityByUniqueId(arrow.shootingEntity);
-				if (player != null)
+				ItemStack stack = player.inventory.getCurrentItem();
+				
+				if (stack != null)
 				{
-					ItemStack stack = player.inventory.getCurrentItem();
-
-					if (stack != ItemStack.EMPTY)
+					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+					
+					if (nbt != null)
 					{
-						NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-
-						if (nbt != null)
-						{
-							addBonusExperience(event, nbt);
-							updateLevel(player, stack, nbt);
-						}
+						addBonusExperience(event, nbt);
+						updateLevel(player, stack, nbt);
 					}
 				}
 			}
@@ -95,11 +95,11 @@ public class EventLivingDeath
 	 * @param event
 	 * @param nbt
 	 */
-	private static void addBonusExperience(LivingDeathEvent event, NBTTagCompound nbt)
+	private void addBonusExperience(LivingDeathEvent event, NBTTagCompound nbt)
 	{
 		if (Experience.getLevel(nbt) < Config.maxLevel)
 		{
-			if (event.getEntityLiving() != null)
+			if (event.getEntityLiving() instanceof EntityLivingBase)
 			{
 				EntityLivingBase target = event.getEntityLiving();
 				int bonusExperience = 0;
@@ -121,7 +121,7 @@ public class EventLivingDeath
 	 * @param stack
 	 * @param nbt
 	 */
-	private static void updateLevel(EntityPlayer player, ItemStack stack, NBTTagCompound nbt)
+	private void updateLevel(EntityPlayer player, ItemStack stack, NBTTagCompound nbt)
 	{
 		int level = Experience.getNextLevel(player, stack, nbt, Experience.getLevel(nbt), Experience.getExperience(nbt));
 		Experience.setLevel(nbt, level);

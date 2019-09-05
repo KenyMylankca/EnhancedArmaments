@@ -1,5 +1,9 @@
 package com.jannesoon.enhancedarmaments.client.gui;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.jannesoon.enhancedarmaments.EnhancedArmaments;
 import com.jannesoon.enhancedarmaments.config.Config;
 import com.jannesoon.enhancedarmaments.essentials.Ability;
@@ -8,6 +12,7 @@ import com.jannesoon.enhancedarmaments.essentials.Rarity;
 import com.jannesoon.enhancedarmaments.network.PacketGuiAbility;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
+
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -18,12 +23,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.client.config.GuiButtonExt;
 import net.minecraftforge.fml.client.config.HoverChecker;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class GuiAbilitySelection extends GuiScreen
 {
 	private GuiButton[] weaponAbilities;
@@ -39,7 +39,7 @@ public class GuiAbilitySelection extends GuiScreen
 	    {
 	    	ItemStack stack = player.inventory.getCurrentItem();
 	    	
-	    	if (stack != ItemStack.EMPTY)
+	    	if (stack != null)
 	    	{
 	    		if (EAUtils.canEnhanceWeapon(stack.getItem()))
 		    	{
@@ -54,27 +54,13 @@ public class GuiAbilitySelection extends GuiScreen
 		    			{
 		    				if (Ability.WEAPON_ABILITIES.get(i).getType().equals("active"))
 			    			{
-		    					weaponAbilities[i] = new GuiButtonExt(i, width / 2 - 215, 100 + (i * 21), 110, 20, I18n.format("enhancedarmaments.ability." + Ability.WEAPON_ABILITIES.get(i).getName()))
-								{
-									@Override
-									public void onClick(double p_194829_1_, double p_194829_3_) {
-										super.onClick(p_194829_1_, p_194829_3_);
-										actionPerformed(this);
-									}
-								};
+		    					weaponAbilities[i] = new GuiButton(i, width / 2 - 215, 100 + (i * 21), 110, 20, I18n.format("enhancedarmaments.ability." + Ability.WEAPON_ABILITIES.get(i).getName()));
 		    					j++;
 			    			}
 		    				else
-		    					weaponAbilities[i] = new GuiButtonExt(i, width / 2 - 100, 100 + ((i - j) * 21), 110, 20, I18n.format("enhancedarmaments.ability." + Ability.WEAPON_ABILITIES.get(i).getName()))
-								{
-									@Override
-									public void onClick(double p_194829_1_, double p_194829_3_) {
-										super.onClick(p_194829_1_, p_194829_3_);
-										actionPerformed(this);
-									}
-								};
+		    					weaponAbilities[i] = new GuiButton(i, width / 2 - 100, 100 + ((i - j) * 21), 110, 20, I18n.format("enhancedarmaments.ability." + Ability.WEAPON_ABILITIES.get(i).getName()));
 		    				
-		    				addButton(weaponAbilities[i]);
+		    				this.buttonList.add(weaponAbilities[i]);
 		    				weaponAbilities[i].enabled = false;
 		    			}
 		    		}
@@ -92,27 +78,13 @@ public class GuiAbilitySelection extends GuiScreen
 		    			{
 		    				if (Ability.ARMOR_ABILITIES.get(i).getType().equals("active"))
 			    			{
-		    					armorAbilities[i] = new GuiButtonExt(i, width / 2 - 215, 100 + (i * 21), 100, 20, I18n.format("enhancedarmaments.ability." + Ability.ARMOR_ABILITIES.get(i).getName()))
-								{
-									@Override
-									public void onClick(double p_194829_1_, double p_194829_3_) {
-										super.onClick(p_194829_1_, p_194829_3_);
-										actionPerformed(this);
-									}
-								};
+		    					armorAbilities[i] = new GuiButton(i, width / 2 - 215, 100 + (i * 21), 100, 20, I18n.format("enhancedarmaments.ability." + Ability.ARMOR_ABILITIES.get(i).getName()));
 		    					j++;
 			    			}
 		    				else
-		    					armorAbilities[i] = new GuiButtonExt(i, width / 2 - 100, 100 + ((i - j) * 21), 105, 20, I18n.format("enhancedarmaments.ability." + Ability.ARMOR_ABILITIES.get(i).getName()))
-								{
-									@Override
-									public void onClick(double p_194829_1_, double p_194829_3_) {
-										super.onClick(p_194829_1_, p_194829_3_);
-										actionPerformed(this);
-									}
-								};
+		    					armorAbilities[i] = new GuiButton(i, width / 2 - 100, 100 + ((i - j) * 21), 105, 20, I18n.format("enhancedarmaments.ability." + Ability.ARMOR_ABILITIES.get(i).getName()));
 		    				
-		    				addButton(armorAbilities[i]);
+		    				this.buttonList.add(armorAbilities[i]);
 		    				armorAbilities[i].enabled = false;
 		    			}
 		    		}
@@ -120,55 +92,57 @@ public class GuiAbilitySelection extends GuiScreen
 	    	}
 	    }
 	}
-
+	
+	@OnlyIn(Dist.CLIENT)
 	@Override
-	public void render(int mouseX, int mouseY, float partialTicks)
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) 
 	{
 		this.drawDefaultBackground();
-		super.render(mouseX, mouseY, partialTicks);
-
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		
 		EntityPlayer player = this.mc.player;
-
-		if (player != null)
-		{
-			ItemStack stack = player.inventory.getCurrentItem();
-
-			if (stack != ItemStack.EMPTY)
-			{
-				if (EAUtils.canEnhance(stack.getItem()))
-				{
-					NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
-
-					if (nbt != null)
-					{
-						if (EAUtils.canEnhanceWeapon(stack.getItem()))
-						{
-							drawStrings(stack, Ability.WEAPON_ABILITIES, nbt);
-							displayButtons(weaponAbilities, Ability.WEAPON_ABILITIES, nbt, player);
-							drawTooltips(weaponAbilities, Ability.WEAPON_ABILITIES, mouseX, mouseY);
-						}
-						else if (EAUtils.canEnhanceArmor(stack.getItem()))
-						{
-							drawStrings(stack, Ability.ARMOR_ABILITIES, nbt);
-							displayButtons(armorAbilities, Ability.ARMOR_ABILITIES, nbt, player);
-							drawTooltips(armorAbilities, Ability.ARMOR_ABILITIES, mouseX, mouseY);
-						}
-					}
-				}
-			}
-		}
+	    
+	    if (player != null)
+	    {
+	    	ItemStack stack = player.inventory.getCurrentItem();
+	    	
+	    	if (stack != null)
+	    	{
+	    		if (EAUtils.canEnhance(stack.getItem()))
+	    		{
+	    			NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
+		    		
+		    		if (nbt != null)
+		    		{	
+		    			if (EAUtils.canEnhanceWeapon(stack.getItem()))
+		    			{
+		    				drawStrings(stack, Ability.WEAPON_ABILITIES, nbt);
+		    				displayButtons(weaponAbilities, Ability.WEAPON_ABILITIES, nbt, player);
+		    				drawTooltips(weaponAbilities, Ability.WEAPON_ABILITIES, mouseX, mouseY);
+		    			}
+		    			else if (EAUtils.canEnhanceArmor(stack.getItem()))
+		    			{
+		    				drawStrings(stack, Ability.ARMOR_ABILITIES, nbt);
+		    				displayButtons(armorAbilities, Ability.ARMOR_ABILITIES, nbt, player);
+		    				drawTooltips(armorAbilities, Ability.ARMOR_ABILITIES, mouseX, mouseY);
+		    			}
+		    		}
+	    		}
+	    	}
+	    }
 	}
 	
 	@OnlyIn(Dist.CLIENT)
-	private void actionPerformed(GuiButton button)
+	@Override
+	protected void actionPerformed(GuiButton button) throws IOException 
 	{
 		EntityPlayerSP player = mc.player;
-
+		
 		if (player != null)
 		{
 			ItemStack stack = player.inventory.getCurrentItem();
 			
-			if (stack != ItemStack.EMPTY)
+			if (stack != null)
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				

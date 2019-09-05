@@ -1,30 +1,29 @@
 package com.jannesoon.enhancedarmaments;
 
+import java.io.File;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jannesoon.enhancedarmaments.commands.WPCommandExpLevel;
 import com.jannesoon.enhancedarmaments.commands.WPCommandRarity;
 import com.jannesoon.enhancedarmaments.config.Config;
-import com.jannesoon.enhancedarmaments.event.*;
-import com.jannesoon.enhancedarmaments.init.ClientProxy;
-import com.jannesoon.enhancedarmaments.init.ISidedProxy;
+import com.jannesoon.enhancedarmaments.init.ModEvents;
 import com.jannesoon.enhancedarmaments.network.PacketGuiAbility;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ExtensionPoint;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
+import com.jannesoon.enhancedarmaments.proxies.CommonProxy;
+import com.jannesoon.enhancedarmaments.util.GuiHandler;
+
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * A simple Minecraft mod focused on the aspect of leveling certain areas
@@ -34,55 +33,55 @@ import org.apache.logging.log4j.Logger;
 @Mod(value = EnhancedArmaments.MODID)
 public class EnhancedArmaments 
 {
+	public static final Logger LOGGER = LogManager.getLogger("EnhancedArmaments");
+	
 	public static final String MODID = "enhancedarmaments";
-	public static final Logger LOGGER = LogManager.getLogger(MODID);
-	private static final String PROTOCOL_VERSION = "1.0";
+	public static final String NAME = "Enhanced Armaments";
 	public static final String VERSION = "1.3.15";
-
-	public static final ISidedProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, null);
-
-	public static SimpleChannel network = NetworkRegistry.ChannelBuilder
-			.named(new ResourceLocation(MODID, "networking"))
-			.clientAcceptedVersions(PROTOCOL_VERSION::equals)
-			.serverAcceptedVersions(PROTOCOL_VERSION::equals)
-			.networkProtocolVersion(() -> PROTOCOL_VERSION)
-			.simpleChannel();
-
-	public EnhancedArmaments()
+	public static final String COMMON = "com.jannesoon.enhancedarmaments.proxies.CommonProxy";
+	public static final String CLIENT = "com.jannesoon.enhancedarmaments.proxies.ClientProxy";
+	
+	@SidedProxy(clientSide = EnhancedArmaments.CLIENT, serverSide = EnhancedArmaments.COMMON)
+	public static CommonProxy proxy;
+	@Instance(EnhancedArmaments.MODID)
+	public static EnhancedArmaments instance;
+	
+	public static SimpleNetworkWrapper network;
+	private static File configDir;
+	
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event)
 	{
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverInit);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientInit);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::config);
-
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+		configDir = new File(event.getModConfigurationDirectory() + "/" + EnhancedArmaments.NAME);
+		configDir.mkdirs();
+		Config.init(configDir);
+		
+		ModEvents.registerEvents();
+		proxy.preInit();
+		
+		network = NetworkRegistry.INSTANCE.newSimpleChannel("enhancedarmaments");
+		network.registerMessage(PacketGuiAbility.Handler.class, PacketGuiAbility.class, 0, Side.SERVER);
 	}
-
-	private void setup(FMLCommonSetupEvent event)
-	{
-		MinecraftForge.EVENT_BUS.register(new EventItemTooltip());
-		MinecraftForge.EVENT_BUS.register(new EventLivingUpdate());
-		MinecraftForge.EVENT_BUS.register(new EventInput());
-		MinecraftForge.EVENT_BUS.register(new EventLivingHurt());
-		MinecraftForge.EVENT_BUS.register(new EventLivingDeath());
-
-		network.registerMessage(0, PacketGuiAbility.class, PacketGuiAbility::encode, PacketGuiAbility::decode, PacketGuiAbility::handle);
-	}
-
-	private void serverInit(FMLServerStartingEvent event)
-	{
-		WPCommandExpLevel.register(event.getCommandDispatcher());
-		WPCommandRarity.register(event.getCommandDispatcher());
-	}
-
-	private void clientInit(FMLClientSetupEvent event)
+	
+	@EventHandler
+	public void init(FMLInitializationEvent event)
 	{
 		proxy.init();
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 	}
-
-	private void config(ModConfig.ModConfigEvent event)
+	
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event) {}
+	
+	public static File getConfigDir()
 	{
-		if (event.getConfig().getSpec() == Config.SPEC)
-			Config.load();
+		return configDir;
+	}
+	
+	@EventHandler
+	public static void serverInit(FMLServerStartingEvent event)
+	{
+		event.registerServerCommand(new WPCommandRarity());
+		event.registerServerCommand(new WPCommandExpLevel());
 	}
 }

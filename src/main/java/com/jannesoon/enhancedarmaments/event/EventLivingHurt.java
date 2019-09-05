@@ -34,7 +34,6 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber
 public class EventLivingHurt
 {
-	//this needs to be a player capability or this will be really random in Multiplayer!
 	public static EnumHand bowfriendlyhand;
 	
 	@SubscribeEvent
@@ -45,7 +44,7 @@ public class EventLivingHurt
 			if(EAUtils.getEntityByUniqueId(((EntityArrow)event.getEntity()).shootingEntity) instanceof EntityPlayer && EAUtils.getEntityByUniqueId(((EntityArrow)event.getEntity()).shootingEntity) != null)
 			{
 				EntityPlayer player=(EntityPlayer)EAUtils.getEntityByUniqueId(((EntityArrow)event.getEntity()).shootingEntity);
-				if(event.getRayTraceResult().entity == null && player != null)
+				if(event.getRayTraceResult().entity == null)
 					bowfriendlyhand=player.getActiveHand();
 			}
 		}
@@ -68,7 +67,7 @@ public class EventLivingHurt
 			EntityLivingBase target = event.getEntityLiving();
 			ItemStack stack = player.getHeldItem(bowfriendlyhand);
 			
-			if (stack != ItemStack.EMPTY && EAUtils.canEnhanceWeapon(stack.getItem()))
+			if (stack != null && EAUtils.canEnhanceWeapon(stack.getItem()))
 			{
 				NBTTagCompound nbt = NBTHelper.loadStackNBT(stack);
 				
@@ -196,7 +195,7 @@ public class EventLivingHurt
 				float multiplier = (float)multiplierD;
 				World world = target.getEntityWorld();
 					
-					if (!(target instanceof EntityAnimal))
+					if (target instanceof EntityLivingBase && !(target instanceof EntityAnimal))
 					{
 						world.createExplosion(target, target.lastTickPosX, target.lastTickPosY, target.lastTickPosZ, multiplier, true);
 					}

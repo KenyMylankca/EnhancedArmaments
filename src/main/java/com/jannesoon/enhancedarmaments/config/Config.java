@@ -1,450 +1,405 @@
 package com.jannesoon.enhancedarmaments.config;
 
-import com.jannesoon.enhancedarmaments.EnhancedArmaments;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.ArrayList;
+import java.io.File;
 import java.util.List;
+
+import com.google.common.collect.Lists;
+
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 
 public class Config 
 {
-	public static final CFile CONFIG;
-	public static final ForgeConfigSpec SPEC;
-	static {
-		final Pair<CFile, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(CFile::new);
-		SPEC = specPair.getRight();
-		CONFIG = specPair.getLeft();
-	}
-
-	public static int maxLevel;
-	public static int level1Experience;
-	public static double experienceMultiplier;
-	public static boolean showDurabilityInTooltip;
-
-	public static List<Item> itemBlacklist;
-	public static List<Item> itemWhitelist;
-	public static List<Item> extraItems;
-
-	public static boolean onlyModdedItems;
-	public static boolean fireAbility;
-	public static boolean frostAbility;
-	public static boolean poisonAbility;
-	public static boolean innateAbility;
-	public static boolean bombasticAbility;
-	public static boolean criticalpointAbility;
-	public static boolean illuminationAbility;
-	public static boolean etherealAbility;
-	public static boolean bloodthirstAbility;
-	public static boolean moltenAbility;
-	public static boolean frozenAbility;
-	public static boolean toxicAbility;
-	public static boolean adrenalineAbility;
-	public static boolean beastialAbility;
-	public static boolean remedialAbility;
-	public static boolean hardenedAbility;
-
-	public static double firechance;
-	public static double frostchance;
-	public static double poisonchance;
-	public static double innatechance;
-	public static double bombasticchance;
-	public static double criticalpointchance;
-	public static double moltenchance;
-	public static double frozenchance;
-	public static double toxicchance;
-	public static double adrenalinechance;
-	public static double hardenedchance;
-
-	public static double basicChance;
-	public static double uncommonChance;
-	public static double rareChance;
-	public static double ultraRareChance;
-	public static double legendaryChance;
-	public static double archaicChance;
-
-	public static double basicDamage;
-	public static double uncommonDamage;
-	public static double rareDamage;
-	public static double ultraRareDamage;
-	public static double legendaryDamage;
-	public static double archaicDamage;
-
-	public static void load()
+	private static Configuration main;
+	private static Configuration abilities;
+	private static Configuration abilitychances;
+	private static Configuration rarities;
+	
+	/*
+	 * MAIN
+	 */
+	
+	// experience
+	public static int maxLevel = 10;
+	public static int level1Experience = 100;
+	public static double experienceMultiplier = 1.8;
+	
+	// misc
+	public static boolean showDurability = true;
+	public static String[] itemBlacklist = new String[] {};
+	public static String[] itemWhitelist = new String[] {};
+	public static String[] extraItems = new String[] {};
+	public static String stringPosition = "default";
+	public static boolean onlyModdedItems = false;
+	
+	/*
+	 * ABILITIES
+	 */
+	
+	// abilities
+	public static boolean fire = true;
+	public static boolean frost = true;
+	public static boolean poison = true;
+	public static boolean innate = true;
+	public static boolean bombastic = true;
+	public static boolean criticalpoint = true;
+	public static boolean illumination = true;
+	public static boolean ethereal = true;
+	public static boolean bloodthirst = true;
+	
+	public static boolean molten = true;
+	public static boolean frozen = true;
+	public static boolean toxic = true;
+	public static boolean adrenaline = true;
+	public static boolean beastial = true;
+	public static boolean remedial = true;
+	public static boolean hardened = true;
+	
+	/**
+	ABILITY CHANCES
+	*/
+	
+	//weapon
+	public static int firechance = 4;
+	public static int frostchance = 4;
+	public static int poisonchance = 4;
+	public static int innatechance = 6;
+	public static int bombasticchance = 7;
+	public static int criticalpointchance = 14;
+	//armor
+	public static int moltenchance = 4;
+	public static int frozenchance = 4;
+	public static int toxicchance = 4;
+	public static int adrenalinechance = 7;
+	public static int hardenedchance = 10;
+	
+	/*
+	 * RARITIES
+	 */
+	
+	//rarity chances
+	public static double basicChance = 0.5D;
+	public static double uncommonChance = 0.18D;
+	public static double rareChance = 0.10D;
+	public static double ultraRareChance = 0.05D;
+	public static double legendaryChance = 0.02D;
+	public static double archaicChance = 0.01D;
+	
+	//rarity effect
+	public static double basicDamage = 0;
+	public static double uncommonDamage = 0.155D;
+	public static double rareDamage = 0.305D;
+	public static double ultraRareDamage = 0.38D;
+	public static double legendaryDamage = 0.71D;
+	public static double archaicDamage = 0.91D;
+	
+	public static void init(File dir)
 	{
-		maxLevel = CONFIG.maxLevel.get();
-		level1Experience = CONFIG.level1Experience.get();
-		experienceMultiplier = CONFIG.experienceMultiplier.get();
-		showDurabilityInTooltip = CONFIG.showDurabilityInTooltip.get();
-		onlyModdedItems = CONFIG.onlyModdedItems.get();
-
-		itemBlacklist = parseItemList(CONFIG.itemBlacklist.get());
-		itemWhitelist = parseItemList(CONFIG.itemWhitelist.get());
-		extraItems = parseItemList(CONFIG.extraItems.get());
-
-		fireAbility = CONFIG.fireAbility.get();
-		frostAbility = CONFIG.frostAbility.get();
-		poisonAbility = CONFIG.poisonAbility.get();
-		innateAbility = CONFIG.innateAbility.get();
-		bombasticAbility = CONFIG.bombasticAbility.get();
-		criticalpointAbility = CONFIG.criticalpointAbility.get();
-		illuminationAbility = CONFIG.illuminationAbility.get();
-		etherealAbility = CONFIG.etherealAbility.get();
-		bloodthirstAbility = CONFIG.bloodthirstAbility.get();
-		moltenAbility = CONFIG.moltenAbility.get();
-		frozenAbility = CONFIG.frozenAbility.get();
-		toxicAbility = CONFIG.toxicAbility.get();
-		adrenalineAbility = CONFIG.adrenalineAbility.get();
-		beastialAbility = CONFIG.beastialAbility.get();
-		remedialAbility = CONFIG.remedialAbility.get();
-		hardenedAbility = CONFIG.hardenedAbility.get();
-		fireAbility = CONFIG.fireAbility.get();
-
-		firechance = CONFIG.firechance.get();
-		frostchance = CONFIG.frostchance.get();
-		poisonchance = CONFIG.poisonchance.get();
-		innatechance = CONFIG.innatechance.get();
-		bombasticchance = CONFIG.bombasticchance.get();
-		criticalpointchance = CONFIG.criticalpointchance.get();
-		moltenchance = CONFIG.moltenchance.get();
-		frozenchance = CONFIG.frozenchance.get();
-		toxicchance = CONFIG.toxicchance.get();
-		adrenalinechance = CONFIG.adrenalinechance.get();
-		hardenedchance = CONFIG.hardenedchance.get();
-
-		basicChance = CONFIG.basicChance.get();
-		uncommonChance = CONFIG.uncommonChance.get();
-		rareChance = CONFIG.rareChance.get();
-		ultraRareChance = CONFIG.ultraRareChance.get();
-		legendaryChance = CONFIG.legendaryChance.get();
-		archaicChance = CONFIG.archaicChance.get();
-
-		basicDamage = CONFIG.basicDamage.get();
-		uncommonDamage = CONFIG.uncommonDamage.get();
-		rareDamage = CONFIG.rareDamage.get();
-		ultraRareDamage = CONFIG.ultraRareDamage.get();
-		legendaryDamage = CONFIG.legendaryDamage.get();
-		archaicDamage = CONFIG.archaicDamage.get();
+		main = new Configuration(new File(dir.getPath(), "main.cfg"));
+		abilities = new Configuration(new File(dir.getPath(), "abilities.cfg"));
+		abilitychances = new Configuration(new File(dir.getPath(), "abilitychances.cfg"));
+		rarities = new Configuration(new File(dir.getPath(), "rarities.cfg"));
+		
+		sync();
 	}
-
-	private static List<Item> parseItemList(List<String> lst)
+	
+	private static void sync()
 	{
-		List<Item> exp = new ArrayList<>(lst.size());
-		for (String s : lst) {
-			Item i = ForgeRegistries.ITEMS.getValue(new ResourceLocation(s));
-			if (i == null || i == Items.AIR) {
-				EnhancedArmaments.LOGGER.error("Invalid config entry {} will be ignored from blacklist.", s);
-				continue;
-			}
-			exp.add(i);
-		}
-		return exp;
+		syncMain();
+		syncAbilities();
+		syncAbilityChances();
+		syncRarities();
 	}
-
-	public static class CFile
+	
+	private static void syncMain()
 	{
-		public ForgeConfigSpec.ConfigValue<Integer> maxLevel;
-		public ForgeConfigSpec.ConfigValue<Integer> level1Experience;
-		public ForgeConfigSpec.ConfigValue<Double> experienceMultiplier;
-
-		public ForgeConfigSpec.BooleanValue showDurabilityInTooltip;
-		public ForgeConfigSpec.ConfigValue<List<String>> itemBlacklist;
-		public ForgeConfigSpec.ConfigValue<List<String>> itemWhitelist;
-		public ForgeConfigSpec.ConfigValue<List<String>> extraItems;
-		public ForgeConfigSpec.BooleanValue onlyModdedItems;
-
-		public ForgeConfigSpec.BooleanValue fireAbility;
-		public ForgeConfigSpec.BooleanValue frostAbility;
-		public ForgeConfigSpec.BooleanValue poisonAbility;
-		public ForgeConfigSpec.BooleanValue innateAbility;
-		public ForgeConfigSpec.BooleanValue bombasticAbility;
-		public ForgeConfigSpec.BooleanValue criticalpointAbility;
-		public ForgeConfigSpec.BooleanValue illuminationAbility;
-		public ForgeConfigSpec.BooleanValue etherealAbility;
-		public ForgeConfigSpec.BooleanValue bloodthirstAbility;
-
-		public ForgeConfigSpec.BooleanValue moltenAbility;
-		public ForgeConfigSpec.BooleanValue frozenAbility;
-		public ForgeConfigSpec.BooleanValue toxicAbility;
-		public ForgeConfigSpec.BooleanValue adrenalineAbility;
-		public ForgeConfigSpec.BooleanValue beastialAbility;
-		public ForgeConfigSpec.BooleanValue remedialAbility;
-		public ForgeConfigSpec.BooleanValue hardenedAbility;
-
-		public ForgeConfigSpec.ConfigValue<Double> firechance;
-		public ForgeConfigSpec.ConfigValue<Double> frostchance;
-		public ForgeConfigSpec.ConfigValue<Double> poisonchance;
-		public ForgeConfigSpec.ConfigValue<Double> innatechance;
-		public ForgeConfigSpec.ConfigValue<Double> bombasticchance;
-		public ForgeConfigSpec.ConfigValue<Double> criticalpointchance;
-		public ForgeConfigSpec.ConfigValue<Double> moltenchance;
-		public ForgeConfigSpec.ConfigValue<Double> frozenchance;
-		public ForgeConfigSpec.ConfigValue<Double> toxicchance;
-		public ForgeConfigSpec.ConfigValue<Double> adrenalinechance;
-		public ForgeConfigSpec.ConfigValue<Double> hardenedchance;
-
-		public ForgeConfigSpec.ConfigValue<Double> basicChance;
-		public ForgeConfigSpec.ConfigValue<Double> uncommonChance;
-		public ForgeConfigSpec.ConfigValue<Double> rareChance;
-		public ForgeConfigSpec.ConfigValue<Double> ultraRareChance;
-		public ForgeConfigSpec.ConfigValue<Double> legendaryChance;
-		public ForgeConfigSpec.ConfigValue<Double> archaicChance;
-
-		public ForgeConfigSpec.ConfigValue<Double> basicDamage;
-		public ForgeConfigSpec.ConfigValue<Double> uncommonDamage;
-		public ForgeConfigSpec.ConfigValue<Double> rareDamage;
-		public ForgeConfigSpec.ConfigValue<Double> ultraRareDamage;
-		public ForgeConfigSpec.ConfigValue<Double> legendaryDamage;
-		public ForgeConfigSpec.ConfigValue<Double> archaicDamage;
-
-		public CFile(ForgeConfigSpec.Builder builder)
-		{
-			buildMain(builder);
-			buildMisc(builder);
-			buildAbilities(builder);
-			buildAbilityChance(builder);
-			buildRarities(builder);
-			buildMultiplier(builder);
-		}
-
-		private void buildMain(ForgeConfigSpec.Builder builder)
-		{
-			builder.push("experience");
-
-			maxLevel = builder
-					.comment("Sets the maximum level cap for weapons and armor. Default: 10")
-					.define("maxLevel", 10);
-
-			level1Experience = builder
-					.comment("The experience amount needed for the first level(1). Default: 100")
-					.define("level1Experience", 100);
-
-			experienceMultiplier = builder
-					.comment("The experience multiplier for each level based on the first level experience. Default: 1.8")
-					.define("experienceMultiplier", 1.8);
-
-			builder.pop();
-		}
-
-		private void buildMisc(ForgeConfigSpec.Builder builder)
-		{
-			builder.push("miscellaneous");
-
-			showDurabilityInTooltip = builder
-					.comment("Determines whether or not durability will be displayed in tooltips. Default: true")
-					.define("showDurabilityInTooltip", true);
-
-			itemBlacklist = builder
-					.comment("Items in this blacklist will not gain the leveling systems. Useful for very powerful items or potential conflicts. Style should be 'modid:item'")
-					.define("itemBlacklist", new ArrayList<>());
-
-			itemWhitelist = builder
-					.comment("This is item whitelist, basically. If you don't want a whitelist, just leave this empty. If you want a whitelist, fill it with items you want. Style should be 'modid:item'")
-					.define("itemWhitelist", new ArrayList<>());
-
-			extraItems = builder
-					.comment("This is an extra item list to add custom support for such modded items. Be careful on this, it may crash if the item can't be enhanced. Style should be 'modid:item'")
-					.define("extraItems", new ArrayList<>());
-
-			onlyModdedItems = builder
-					.comment("Determines if the vanilla items won't be affected by this mod. Default: false")
-					.define("onlyModdedItems", false);
-
-			builder.pop();
-		}
-
-		private void buildAbilities(ForgeConfigSpec.Builder builder)
-		{
-			builder.push("abilities");
-
-			// weapons
-			fireAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("fireAbility", true);
-
-			frostAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("frostAbility", true);
-
-			poisonAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("poisonAbility", true);
-
-			innateAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("innateAbility", true);
-
-			bombasticAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("bombasticAbility", true);
-
-			criticalpointAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("criticalpointAbility", true);
-
-			illuminationAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("illuminationAbility", true);
-
-			etherealAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("etherealAbility", true);
-
-			bloodthirstAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("bloodthirstAbility", true);
-
-			//armor
-			moltenAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("moltenAbility", true);
-
-			frozenAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("frozenAbility", true);
-
-			moltenAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("moltenAbility", true);
-
-			toxicAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("toxicAbility", true);
-
-			adrenalineAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("adrenalineAbility", true);
-
-			beastialAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("beastialAbility", true);
-
-			remedialAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("remedialAbility", true);
-
-			hardenedAbility = builder
-					.comment("Determines whether or not the specific ability will be present in-game. Default: true")
-					.define("hardenedAbility", true);
-
-			builder.pop();
-		}
-
-		private void buildAbilityChance(ForgeConfigSpec.Builder builder)
-		{
-			builder.push("abilitychances");
-
-			firechance = builder
-					.comment("Determines how rare the Fire ability will occur. (Higher values=lower occurance) Default: 4")
-					.define("firechance", 4D);
-
-			frostchance = builder
-					.comment("Determines how rare the Frost ability will occur. (Higher values=lower occurance) Default: 4")
-					.define("frostchance", 4d);
-
-			poisonchance = builder
-					.comment("Determines how rare the Poison ability will occur. (Higher values=lower occurance) Default: 4")
-					.define("poisonchance", 4d);
-
-			innatechance = builder
-					.comment("Determines how rare the Innate ability will occur. (Higher values=lower occurance) Default: 4")
-					.define("innatechance", 4d);
-
-			bombasticchance = builder
-					.comment("Determines how rare the Bombasitc ability will occur. (Higher values=lower occurance) Default: 4")
-					.define("bombasticchance", 4d);
-
-			criticalpointchance = builder
-					.comment("Determines how rare the Critical Point ability will occur. (Higher values=lower occurance) Default: 4")
-					.define("criticalpointchance", 4d);
-
-			moltenchance = builder
-					.comment("Determines how rare the Molten ability will occur. (Higher values=lower occurance) Default: 4")
-					.define("moltenchance", 4d);
-
-			frozenchance = builder
-					.comment("Determines how rare the Frozen ability will occur. (Higher values=lower occurance) Default: 4")
-					.define("frozenchance", 4d);
-
-			toxicchance = builder
-					.comment("Determines how rare the Toxic ability will occur. (Higher values=lower occurance) Default: 4")
-					.define("toxicchance", 4d);
-
-			adrenalinechance = builder
-					.comment("Determines how rare the Adrinalin ability will occur. (Higher values=lower occurance) Default: 4")
-					.define("adrenalinechance", 4d);
-
-			hardenedchance = builder
-					.comment("Determines how rare the Harden ability will occur. (Higher values=lower occurance) Default: 4")
-					.define("hardenedchance", 4d);
-
-			builder.pop();
-		}
-
-		private void buildRarities(ForgeConfigSpec.Builder builder)
-		{
-			builder.push("rarities");
-
-			basicChance = builder
-					.comment("Sets the chance the given rarity will be applied. Default: 0.5")
-					.define("basicChance", 0.5);
-
-			uncommonChance = builder
-					.comment("Sets the chance the given rarity will be applied. Default: 0.18")
-					.define("uncommonChance", 0.18);
-
-			rareChance = builder
-					.comment("Sets the chance the given rarity will be applied. Default: 0.10")
-					.define("rareChance", 0.10);
-
-			ultraRareChance = builder
-					.comment("Sets the chance the given rarity will be applied. Default: 0.05")
-					.define("ultraRareChance", 0.05);
-
-			legendaryChance = builder
-					.comment("Sets the chance the given rarity will be applied. Default: 0.02")
-					.define("legendaryChance", 0.02);
-
-			archaicChance = builder
-					.comment("Sets the chance the given rarity will be applied. Default: 0.01")
-					.define("archaicChance", 0.01);
-
-			builder.pop();
-		}
-
-		private void buildMultiplier(ForgeConfigSpec.Builder builder)
-		{
-			builder.push("multiplier");
-
-			basicDamage = builder
-					.comment("Sets the effectiveness for the given rarity. Default: 0")
-					.define("basicDamage", 0D);
-
-			uncommonDamage = builder
-					.comment("Sets the effectiveness for the given rarity. Default: 0.155")
-					.define("uncommonDamage", 0.155);
-
-			rareDamage = builder
-					.comment("Sets the effectiveness for the given rarity. Default: 0.305")
-					.define("rareDamage", 0.305);
-
-			ultraRareDamage = builder
-					.comment("Sets the effectiveness for the given rarity. Default: 0.38")
-					.define("ultraRareDamage", 0.38);
-
-			legendaryDamage = builder
-					.comment("Sets the effectiveness for the given rarity. Default: 0.57")
-					.define("legendaryDamage", 0.57);
-
-			archaicDamage = builder
-					.comment("Sets the effectiveness for the given rarity. Default: 0.81")
-					.define("archaicDamage", 0.81);
-
-			builder.pop();
-		}
+		String category = "main";
+		List<String> propOrder = Lists.newArrayList();
+		Property prop;
+		
+		/**
+		Experience
+		*/
+		prop = main.get(category, "maxLevel", maxLevel);
+		prop.setComment("Sets the maximum level cap for weapons and armor. Default: 10");
+		maxLevel = prop.getInt();
+		propOrder.add(prop.getName());
+		
+		prop = main.get(category, "level1Experience", level1Experience);
+		prop.setComment("The experience amount needed for the first level(1). Default: 100");
+		level1Experience = prop.getInt();
+		propOrder.add(prop.getName());
+		
+		prop = main.get(category, "experienceMultiplier", experienceMultiplier);
+		prop.setComment("The experience multiplier for each level based on the first level experience. Default: 1.8");
+		experienceMultiplier = prop.getDouble();
+		propOrder.add(prop.getName());
+		
+		/**
+		Miscellaneous
+		*/
+		prop = main.get(category, "showDurabilityInTooltip", showDurability);
+		prop.setComment("Determines whether or not durability will be displayed in tooltips. Default: true");
+		showDurability = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = main.get(category, "itemBlacklist", itemBlacklist);
+		prop.setComment("Items in this blacklist will not gain the leveling systems. Useful for very powerful items or potential conflicts. Style should be 'modid:item'");
+		itemBlacklist = prop.getStringList();
+		propOrder.add(prop.getName());
+		
+		prop = main.get(category, "itemWhitelist", itemWhitelist);
+		prop.setComment("This is item whitelist, basically. If you don't want a whitelist, just leave this empty. If you want a whitelist, fill it with items you want. Style should be 'modid:item'");
+		itemWhitelist = prop.getStringList();
+		propOrder.add(prop.getName());
+		
+		prop = main.get(category, "extraItems", extraItems);
+		prop.setComment("This is an extra item list to add custom support for such modded items. Be careful on this, it may crash if the item can't be enhanced. Style should be 'modid:item'");
+		extraItems = prop.getStringList();
+		propOrder.add(prop.getName());
+		
+		prop = main.get(category, "onlyModdedItems", onlyModdedItems);
+		prop.setComment("Determines if the vanilla items won't be affected by this mod. Default: false");
+		onlyModdedItems = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		main.setCategoryPropertyOrder(category, propOrder);
+		main.save();
+	}
+	
+	private static void syncAbilities()
+	{
+		String category = "abilities";
+		List<String> propOrder = Lists.newArrayList();
+		Property prop;
+		
+		/**
+		Abilities
+		*/
+		// weapons
+		prop = abilities.get(category, "fireAbility", fire);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		fire = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "frostAbility", frost);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		frost = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "poisonAbility", poison);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		poison = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "innateAbility", innate);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		innate = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "bombasticAbility", bombastic);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		bombastic = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "criticalpointAbility", criticalpoint);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		criticalpoint = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "illuminationAbility", illumination);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		illumination = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "etherealAbility", ethereal);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		ethereal = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "bloodthirstAbility", bloodthirst);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		bloodthirst = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		// armor
+		prop = abilities.get(category, "moltenAbility", molten);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		molten = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "frozenAbility", frozen);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		frozen = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "toxicAbility", toxic);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		toxic = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "adrenalineAbility", adrenaline);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		adrenaline = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "beastialAbility", beastial);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		beastial = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "remedialAbility", remedial);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		remedial = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		prop = abilities.get(category, "hardenedAbility", hardened);
+		prop.setComment("Determines whether or not the specific ability will be present in-game. Default: true");
+		hardened = prop.getBoolean();
+		propOrder.add(prop.getName());
+		
+		abilities.setCategoryPropertyOrder(category, propOrder);
+		abilities.save();
+	}
+	
+	private static void syncAbilityChances() 
+	{
+		String category = "abilitychances";
+		List<String> propOrder = Lists.newArrayList();
+		Property prop;
+		
+		prop = abilitychances.get(category, "firechance", firechance);
+		prop.setComment("Determines how rare the Fire ability will occur. (Higher values=lower occurance) Default: 4");
+		firechance = prop.getInt();
+		propOrder.add(prop.getName());
+
+		prop = abilitychances.get(category, "frostchance", frostchance);
+		prop.setComment("Determines how rare the Frost ability will occur. (Higher values=lower occurance) Default: 4");
+		frostchance = prop.getInt();
+		propOrder.add(prop.getName());
+
+		prop = abilitychances.get(category, "poisonchance", poisonchance);
+		prop.setComment("Determines how rare the Poison ability will occur. (Higher values=lower occurance) Default: 4");
+		poisonchance = prop.getInt();
+		propOrder.add(prop.getName());
+		
+		prop = abilitychances.get(category, "innatechance", innatechance);
+		prop.setComment("Determines how rare the Innate ability will occur. (Higher values=lower occurance) Default: 6");
+		innatechance = prop.getInt();
+		propOrder.add(prop.getName());
+		
+		prop = abilitychances.get(category, "bombasticchance", bombasticchance);
+		prop.setComment("Determines how rare the Bombastic ability will occur. (Higher values=lower occurance) Default: 7");
+		bombasticchance = prop.getInt();
+		propOrder.add(prop.getName());
+		
+		prop = abilitychances.get(category, "criticalpointchance", criticalpointchance);
+		prop.setComment("Determines how rare the Critical Point ability will occur. (Higher values=lower occurance) Default: 14");
+		criticalpointchance = prop.getInt();
+		propOrder.add(prop.getName());
+		
+		prop = abilitychances.get(category, "moltenchance", moltenchance);
+		prop.setComment("Determines how rare the Molten ability will occur. (Higher values=lower occurance) Default: 4");
+		moltenchance = prop.getInt();
+		propOrder.add(prop.getName());
+		
+		prop = abilitychances.get(category, "frozenchance", frozenchance);
+		prop.setComment("Determines how rare the Frozen ability will occur. (Higher values=lower occurance) Default: 4");
+		frozenchance = prop.getInt();
+		propOrder.add(prop.getName());
+		
+		prop = abilitychances.get(category, "toxicchance", toxicchance);
+		prop.setComment("Determines how rare the Toxic ability will occur. (Higher values=lower occurance) Default: 4");
+		toxicchance = prop.getInt();
+		propOrder.add(prop.getName());
+		
+		prop = abilitychances.get(category, "adrenalinechance", adrenalinechance);
+		prop.setComment("Determines how rare the Adrenaline ability will occur. (Higher values=lower occurance) Default: 7");
+		adrenalinechance = prop.getInt();
+		propOrder.add(prop.getName());
+		
+		prop = abilitychances.get(category, "hardenedchance", hardenedchance);
+		prop.setComment("Determines how rare the Hardened ability will occur. (Higher values=lower occurance) Default: 10");
+		hardenedchance = prop.getInt();
+		propOrder.add(prop.getName());
+		
+		abilitychances.setCategoryPropertyOrder(category, propOrder);
+		abilitychances.save();
+	}
+	
+	private static void syncRarities()
+	{
+		String category = "rarities";
+		List<String> propOrder = Lists.newArrayList();
+		Property prop;
+
+		/**
+		Chances 
+		*/
+		prop = rarities.get(category, "basicChance", basicChance);
+		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.5");
+		basicChance = prop.getDouble();
+		propOrder.add(prop.getName());
+		
+		prop = rarities.get(category, "uncommonChance", uncommonChance);
+		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.18");
+		uncommonChance = prop.getDouble();
+		propOrder.add(prop.getName());
+		
+		prop = rarities.get(category, "rareChance", rareChance);
+		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.10");
+		rareChance = prop.getDouble();
+		propOrder.add(prop.getName());
+		
+		prop = rarities.get(category, "ultraRareChance", ultraRareChance);
+		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.05");
+		ultraRareChance = prop.getDouble();
+		propOrder.add(prop.getName());
+		
+		prop = rarities.get(category, "legendaryChance", legendaryChance);
+		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.02");
+		legendaryChance = prop.getDouble();
+		propOrder.add(prop.getName());
+		
+		prop = rarities.get(category, "archaicChance", archaicChance);
+		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.01");
+		archaicChance = prop.getDouble();
+		propOrder.add(prop.getName());
+		
+		/**
+		Damage Multipliers
+		*/
+		prop = rarities.get(category, "basicDamage", basicDamage);
+		prop.setComment("Sets the effectiveness for the given rarity. Default: 0");
+		basicDamage = prop.getDouble();
+		propOrder.add(prop.getName());
+		
+		prop = rarities.get(category, "uncommonDamage", uncommonDamage);
+		prop.setComment("Sets the effectiveness for the given rarity. Default: 0.155");
+		uncommonDamage = prop.getDouble();
+		propOrder.add(prop.getName());
+		
+		prop = rarities.get(category, "rareDamage", rareDamage);
+		prop.setComment("Sets the effectiveness for the given rarity. Default: 0.305");
+		rareDamage = prop.getDouble();
+		propOrder.add(prop.getName());
+		
+		prop = rarities.get(category, "ultraRareDamage", ultraRareDamage);
+		prop.setComment("Sets the effectiveness for the given rarity. Default: 0.38");
+		ultraRareDamage = prop.getDouble();
+		propOrder.add(prop.getName());
+		
+		prop = rarities.get(category, "legendaryDamage", legendaryDamage);
+		prop.setComment("Sets the effectiveness for the given rarity. Default: 0.71");
+		legendaryDamage = prop.getDouble();
+		propOrder.add(prop.getName());
+		
+		prop = rarities.get(category, "archaicDamage", archaicDamage);
+		prop.setComment("Sets the effectiveness for the given rarity. Default: 0.91");
+		archaicDamage = prop.getDouble();
+		propOrder.add(prop.getName());
+		
+		rarities.setCategoryPropertyOrder(category, propOrder);
+		rarities.save();
 	}
 }
