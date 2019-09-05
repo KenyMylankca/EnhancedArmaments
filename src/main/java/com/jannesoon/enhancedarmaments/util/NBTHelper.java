@@ -7,14 +7,14 @@ public class NBTHelper
 {
 	public static NBTTagCompound loadStackNBT(ItemStack stack)
 	{
-		return stack.hasTag() ? stack.getTag() : new NBTTagCompound();
+		return stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
 	}
 
 	public static void saveStackNBT(ItemStack stack, NBTTagCompound nbt)
 	{
-		if (!stack.hasTag())
+		if (!stack.hasTagCompound() && !nbt.hasNoTags())
 		{
-			stack.setTag(nbt);
+			stack.setTagCompound(nbt);
 		}
 	}
 }
