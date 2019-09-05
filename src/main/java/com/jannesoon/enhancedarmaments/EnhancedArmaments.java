@@ -3,7 +3,7 @@ package com.jannesoon.enhancedarmaments;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.jannesoon.enhancedarmaments.commands.WPCommandAddLevel;
+import com.jannesoon.enhancedarmaments.commands.WPCommandExpLevel;
 import com.jannesoon.enhancedarmaments.commands.WPCommandRarity;
 import com.jannesoon.enhancedarmaments.config.Config;
 import com.jannesoon.enhancedarmaments.event.EventInput;
@@ -73,7 +73,7 @@ public class EnhancedArmaments
 
 	private void serverInit(FMLServerStartingEvent event)
 	{
-		WPCommandAddLevel.register(event.getCommandDispatcher());
+		WPCommandExpLevel.register(event.getCommandDispatcher());
 		WPCommandRarity.register(event.getCommandDispatcher());
 	}
 
