@@ -11,9 +11,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 
 /**
  * Opens the weapon ability selection gui on key press.
@@ -24,7 +24,7 @@ public class EventInput
 {
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
-	public void onKeyPress(InputUpdateEvent event)
+	public void onKeyPress(InputEvent.KeyInputEvent event)
 	{
 		KeyBinding key = ((ClientProxy)EnhancedArmaments.proxy).abilityKey;
 		Minecraft mc = Minecraft.getInstance();
