@@ -1,14 +1,11 @@
 package com.jannesoon.enhancedarmaments.commands;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.jannesoon.enhancedarmaments.essentials.Rarity;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
-
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentTranslation;
+
+import java.util.List;
 
 public class WPCommandRarity
 {

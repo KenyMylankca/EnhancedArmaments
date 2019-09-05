@@ -1,20 +1,14 @@
 package com.jannesoon.enhancedarmaments.util;
 
-import java.util.UUID;
-
 import com.jannesoon.enhancedarmaments.config.Config;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemSword;
+import net.minecraft.item.*;
 import net.minecraft.util.DamageSource;
+
+import java.util.UUID;
 
 public class EAUtils
 {
