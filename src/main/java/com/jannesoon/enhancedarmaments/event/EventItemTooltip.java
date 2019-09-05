@@ -1,5 +1,8 @@
 package com.jannesoon.enhancedarmaments.event;
 
+import java.util.Collection;
+import java.util.List;
+
 import com.google.common.collect.Multimap;
 import com.jannesoon.enhancedarmaments.config.Config;
 import com.jannesoon.enhancedarmaments.essentials.Ability;
@@ -8,6 +11,7 @@ import com.jannesoon.enhancedarmaments.essentials.Rarity;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
 import com.sun.jna.platform.KeyboardUtils;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -26,9 +30,6 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
-import java.util.Collection;
-import java.util.List;
 
 /**
  * Displays information about the weapon when hovered over in an inventory.
@@ -122,7 +123,7 @@ public class EventItemTooltip
 		tooltip.set(0, new TextComponentString(stack.getDisplayName() + rarity.getColor() + " (" + TextFormatting.ITALIC + I18n.format("enhancedarmaments.rarity." + rarity.getName()) + ")"));
 		
 		
-		if (tooltip.stream().filter(text -> text.getString().equals("When in main hand")).findAny().map(tooltip::indexOf).get() != -1 && !(stack.getItem() instanceof ItemBow))
+		if (tooltip.stream().filter(text -> text.getString().equals("When in Main Hand")).findAny().map(tooltip::indexOf).get() != -1 && !(stack.getItem() instanceof ItemBow))
 		{
 			Multimap<String, AttributeModifier> map = stack.getItem().getAttributeModifiers(EntityEquipmentSlot.MAINHAND, stack);
 			Collection<AttributeModifier> damageCollection = map.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
@@ -131,7 +132,7 @@ public class EventItemTooltip
 			String d = String.format("%.1f", damage);
 			
 			if(rarity.getEffect() != 0)
-				tooltip.set(tooltip.stream().filter(text -> text.getString().equals("When in main hand")).findAny().map(tooltip::indexOf).get() + 2, new TextComponentString(rarity.getColor() + " " + d + TextFormatting.GRAY +" "+ I18n.format("enhancedarmaments.misc.tooltip.attackdamage")));
+				tooltip.set(tooltip.stream().filter(text -> text.getString().equals("When in Main Hand")).findAny().map(tooltip::indexOf).get() + 2, new TextComponentString(rarity.getColor() + " " + d + TextFormatting.GRAY +" "+ I18n.format("enhancedarmaments.misc.tooltip.attackdamage")));
 		}
 		
 		if (tooltip.stream().filter(text -> text.getString().equals("When on head")).findAny().map(tooltip::indexOf).get() != -1

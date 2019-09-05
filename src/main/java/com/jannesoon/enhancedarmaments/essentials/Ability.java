@@ -1,12 +1,13 @@
 package com.jannesoon.enhancedarmaments.essentials;
 
+import java.util.ArrayList;
+
 import com.jannesoon.enhancedarmaments.config.Config;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
-
-import java.util.ArrayList;
 
 public enum Ability
 {

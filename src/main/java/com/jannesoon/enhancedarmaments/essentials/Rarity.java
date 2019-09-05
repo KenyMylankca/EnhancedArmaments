@@ -1,11 +1,12 @@
 package com.jannesoon.enhancedarmaments.essentials;
 
+import java.util.Random;
+
 import com.jannesoon.enhancedarmaments.config.Config;
 import com.jannesoon.enhancedarmaments.util.RandomCollection;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
-
-import java.util.Random;
 
 public enum Rarity 
 {

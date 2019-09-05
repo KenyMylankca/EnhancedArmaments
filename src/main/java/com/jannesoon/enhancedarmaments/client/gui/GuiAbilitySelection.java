@@ -1,5 +1,8 @@
 package com.jannesoon.enhancedarmaments.client.gui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.jannesoon.enhancedarmaments.EnhancedArmaments;
 import com.jannesoon.enhancedarmaments.config.Config;
 import com.jannesoon.enhancedarmaments.essentials.Ability;
@@ -8,6 +11,7 @@ import com.jannesoon.enhancedarmaments.essentials.Rarity;
 import com.jannesoon.enhancedarmaments.network.PacketGuiAbility;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
+
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -20,9 +24,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
 import net.minecraftforge.fml.client.config.HoverChecker;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GuiAbilitySelection extends GuiScreen
 {
