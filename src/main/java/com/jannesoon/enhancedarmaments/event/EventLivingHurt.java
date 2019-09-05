@@ -60,15 +60,13 @@ public class EventLivingHurt
 	@SubscribeEvent
 	public void onHurt(LivingHurtEvent event)
 	{
-		if (event.getSource().getTrueSource() instanceof EntityPlayer && !(event.getSource().getTrueSource() instanceof FakePlayer)) //PLAYER IS ATTACKER
-		{
+		if (bowfriendlyhand == null) bowfriendlyhand = EnumHand.MAIN_HAND;
+		
+		if (event.getSource().getTrueSource() instanceof EntityPlayer && !(event.getSource().getTrueSource() instanceof FakePlayer))
+		{//PLAYER IS ATTACKER
 			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
 			EntityLivingBase target = event.getEntityLiving();
-			ItemStack stack;
-			if(bowfriendlyhand == null)
-				stack = player.getHeldItem(player.getActiveHand());
-			else
-				stack = player.getHeldItem(bowfriendlyhand);
+			ItemStack stack = player.getHeldItem(bowfriendlyhand);
 			
 			if (stack != ItemStack.EMPTY && EAUtils.canEnhanceWeapon(stack.getItem()))
 			{
@@ -83,6 +81,7 @@ public class EventLivingHurt
 						updateLevel(player, stack, nbt);
 					}
 			}
+			bowfriendlyhand = player.getActiveHand();
 		}
 		else if (event.getEntityLiving() instanceof EntityPlayer)
 		{//PLAYER IS GETTING HURT

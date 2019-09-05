@@ -30,12 +30,7 @@ public class EventLivingDeath
 		if (event.getSource().getTrueSource() instanceof EntityPlayer && !(event.getSource().getTrueSource() instanceof FakePlayer))
 		{
 			EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
-			
-			ItemStack stack;
-			if(EventLivingHurt.bowfriendlyhand == null)
-				stack = player.getHeldItem(player.getActiveHand());
-			else
-				stack = player.getHeldItem(EventLivingHurt.bowfriendlyhand);
+			ItemStack stack = player.getHeldItem(EventLivingHurt.bowfriendlyhand);
 			
 			if (stack != ItemStack.EMPTY && EAUtils.canEnhanceMelee(stack.getItem()))
 			{
