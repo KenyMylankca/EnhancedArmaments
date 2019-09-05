@@ -22,6 +22,8 @@ public class PacketGuiAbility
 		this.index = index;
 	}
 
+
+
 	public static void encode(PacketGuiAbility msg, PacketBuffer buf) {
 		buf.writeLong(msg.index);
 	}
@@ -33,8 +35,8 @@ public class PacketGuiAbility
 	}
 
 	public static void handle(PacketGuiAbility msg, Supplier<NetworkEvent.Context> ctx) {
-		ctx.get().enqueueWork
-		(() ->{
+		ctx.get().enqueueWork(() ->
+				{
 					EntityPlayer player = ctx.get().getSender();
 
 					if (player != null)
@@ -75,6 +77,7 @@ public class PacketGuiAbility
 							}
 						}
 					}
-				});
+				}
+		);
 	}
 }
