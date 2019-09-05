@@ -22,8 +22,8 @@ public class PacketGuiAbility
 		this.index = index;
 	}
 
-	public static void encode(PacketGuiAbility msg, PacketBuffer buffer) {
-		buffer.writeInt(msg.index);
+	public static void encode(PacketGuiAbility msg, PacketBuffer buf) {
+		buf.writeLong(msg.index);
 	}
 
 	public static PacketGuiAbility decode(PacketBuffer buf) {
