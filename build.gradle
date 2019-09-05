@@ -14,7 +14,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = '1.4.1'
-group = 'com.jannesoon'
+group = 'com.jannesoon.enhancedarmaments'
 archivesBaseName = 'enhancedarmaments'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
@@ -25,6 +25,10 @@ minecraft {
         client {
             workingDirectory project.file('run')
 
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            property 'forge.logging.console.level', 'debug'
+
             mods {
                 enhancedarmaments {
                     source sourceSets.main
@@ -34,6 +38,10 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            property 'forge.logging.console.level', 'debug'
 
             mods {
                 enhancedarmaments {
