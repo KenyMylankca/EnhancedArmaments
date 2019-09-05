@@ -1,0 +1,75 @@
+key.enhancedarmaments=Enhanced Armaments
+key.gui.weapon_interface=Клавиша Armament Leveling
+
+enhancedarmaments.rarity.DEFAULT=По умолчанию
+enhancedarmaments.rarity.BASIC=Основной
+enhancedarmaments.rarity.UNCOMMON=Необычный
+enhancedarmaments.rarity.RARE=Редкий
+enhancedarmaments.rarity.ULTRA_RARE=Ультра редкий
+enhancedarmaments.rarity.LEGENDARY=Легендарный
+enhancedarmaments.rarity.ARCHAIC=Архаичный
+
+enhancedarmaments.ability.FIRE=Огонь
+enhancedarmaments.ability.FROST=Мороз
+enhancedarmaments.ability.POISON=Яд
+enhancedarmaments.ability.INNATE=Врожденность
+enhancedarmaments.ability.BOMBASTIC=Напыщенность
+enhancedarmaments.ability.CRITICAL_POINT=Критическая точка
+enhancedarmaments.ability.ILLUMINATION=Озарение
+enhancedarmaments.ability.ETHEREAL=Эфирность
+enhancedarmaments.ability.BLOODTHIRST=Кровожадность
+enhancedarmaments.ability.MOLTEN=Расплавленность
+enhancedarmaments.ability.FROZEN=Замороженность
+enhancedarmaments.ability.TOXIC=Токсичность
+enhancedarmaments.ability.ADRENALINE=Адреналин
+enhancedarmaments.ability.BEASTIAL=Животное
+enhancedarmaments.ability.REMEDIAL=Лечение
+enhancedarmaments.ability.HARDENED=Закаленность
+
+enhancedarmaments.ability.type.active=Активные
+enhancedarmaments.ability.type.passive=Пассивные
+
+enhancedarmaments.abilities.info.FIRE=Поджигает врагов на короткое время.
+enhancedarmaments.abilities.info.FROST=Оглушает врагов, замораживая их на месте на короткое время.
+enhancedarmaments.abilities.info.POISON=Отравляет врагов на короткое время.
+enhancedarmaments.abilities.info.INNATE=Заставляет врагов кровоточить.
+enhancedarmaments.abilities.info.BOMBASTIC=Взрывает целевую область сущностей. Может причинить вам вред тоже. Не работает с животными.
+enhancedarmaments.abilities.info.CRITICAL_POINT=Небольшая вероятность нанести дополнительный урон по отношению к максимальному здоровью противника.
+enhancedarmaments.abilities.info.ILLUMINATION=Ослабляет врагов.
+enhancedarmaments.abilities.info.ETHEREAL=Если вы убьете цель, ваше оружие будет восстановлено.
+enhancedarmaments.abilities.info.BLOODTHIRST=Излечивает пользователя от части нанесенного урона.
+enhancedarmaments.abilities.info.MOLTEN=Поджигает врагов на короткое время.
+enhancedarmaments.abilities.info.FROZEN=Оглушает врагов, замораживая их на месте на короткое время.
+enhancedarmaments.abilities.info.TOXIC=Отравляет врагов на короткое время.
+enhancedarmaments.abilities.info.ADRENALINE=Шанс на восстановление здоровья при получении боли.
+enhancedarmaments.abilities.info.BEASTIAL=При низком здоровье игрок получает бафф урона.
+enhancedarmaments.abilities.info.REMEDIAL=Ваша броня будет регенерировать ваше здоровье каждые 6 секунд.
+enhancedarmaments.abilities.info.HARDENED=Шанс на отрицание всего ущерба, который должен быть нанесен.
+
+enhancedarmaments.abilities.info.duration=Продолжительность
+enhancedarmaments.abilities.info.chance=Шанс
+enhancedarmaments.abilities.info.count=Счет
+enhancedarmaments.abilities.info.bleedingspeed=Скорость кровотечения
+enhancedarmaments.abilities.info.explosionintensity=Интенсивность взрыва
+enhancedarmaments.abilities.info.damagepercentage=Процент урона
+enhancedarmaments.abilities.info.healthpercentage=Процент здоровья
+enhancedarmaments.abilities.info.durability=Сумма ремонта
+enhancedarmaments.abilities.info.seconds=секунд
+enhancedarmaments.abilities.info.heal_amount=Сумма исцеления
+enhancedarmaments.abilities.info.required_exp=Требуется уровень опыта для разблокировки
+enhancedarmaments.abilities.info.required_token=Требуется токенов для обновления
+
+enhancedarmaments.misc.level=Уровень
+enhancedarmaments.misc.max=Макс.
+enhancedarmaments.misc.experience=Опыт
+enhancedarmaments.misc.durability=Прочность
+enhancedarmaments.misc.abilities=Способности
+enhancedarmaments.misc.abilities.shift=Способности (Shift)
+enhancedarmaments.misc.rarity=Редкость
+enhancedarmaments.misc.tier=Уровень
+enhancedarmaments.misc.abilities.tokens=Токены
+enhancedarmaments.misc.abilities.purchased=Приобретенные способности
+enhancedarmaments.misc.rarity.armorreduction=Снижение урона
+enhancedarmaments.misc.rarity.arrowpercentage=Урон от выстрела стрелой
+enhancedarmaments.misc.tooltip.attackdamage=Урон от атаки
+enhancedarmaments.misc.level.leveledup=повышен до уровня
