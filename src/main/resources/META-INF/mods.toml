@@ -24,3 +24,10 @@ This mod gives your weapons and armors unique abilities by respect to the usage 
     ordering="NONE"
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
+# Here's another dependency
+[[dependencies.enhancedarmaments]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.13.2]"
+    ordering="NONE"
+    side="BOTH"
