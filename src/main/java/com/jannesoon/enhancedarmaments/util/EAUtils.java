@@ -1,6 +1,5 @@
 package com.jannesoon.enhancedarmaments.util;
 
-import java.util.List;
 import java.util.UUID;
 
 import com.jannesoon.enhancedarmaments.config.Config;
@@ -16,7 +15,6 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.text.ITextComponent;
 
 public class EAUtils
 {
@@ -84,29 +82,5 @@ public class EAUtils
 	    	}
 
 	    return null;
-	}
-	
-	public static boolean containsString (List<ITextComponent> tooltip, String string)
-	{
-		if(tooltip.size() <= 0) return false;
-		
-		for(int i=0; i<tooltip.size(); i++)
-		{
-			if(tooltip.get(i).getString().equals(string))
-				return true;
-		}
-		return false;
-	}
-	
-	public static int lineContainsString (List<ITextComponent> tooltip, String string)
-	{
-		if(tooltip.size() <= 0) return -1;
-		
-		for(int i=0; i<tooltip.size(); i++)
-		{
-			if(tooltip.get(i).getString().equals(string))
-				return i;
-		}
-		return -1;
 	}
 }

@@ -10,8 +10,8 @@ import com.jannesoon.enhancedarmaments.essentials.Experience;
 import com.jannesoon.enhancedarmaments.essentials.Rarity;
 import com.jannesoon.enhancedarmaments.util.EAUtils;
 import com.jannesoon.enhancedarmaments.util.NBTHelper;
+import com.sun.jna.platform.KeyboardUtils;
 
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -85,7 +85,7 @@ public class EventItemTooltip
 
 				// abilities
 				tooltip.add(new TextComponentString(""));
-				if (GuiScreen.isShiftKeyDown())
+				if (KeyboardUtils.isPressed(75)) //TODO check this out
 				{
 					tooltip.add(new TextComponentString(rarity.getColor() + "" + TextFormatting.ITALIC + I18n.format("enhancedarmaments.misc.abilities")));
 					tooltip.add(new TextComponentString(""));
@@ -120,9 +120,10 @@ public class EventItemTooltip
 	private void changeTooltips(List<ITextComponent> tooltip, ItemStack stack, Rarity rarity)
 	{
 		// rarity after the name
-		tooltip.set(0, new TextComponentString(stack.getDisplayName().getFormattedText() + rarity.getColor() + " (" + TextFormatting.ITALIC + I18n.format("enhancedarmaments.rarity." + rarity.getName()) + ")"));
+		tooltip.set(0, new TextComponentString(stack.getDisplayName() + rarity.getColor() + " (" + TextFormatting.ITALIC + I18n.format("enhancedarmaments.rarity." + rarity.getName()) + ")"));
 		
-		if (EAUtils.containsString(tooltip, "When in main hand:") && !(stack.getItem() instanceof ItemBow))
+		
+		if (tooltip.stream().filter(text -> text.getString().equals("When in main hand")).findAny().map(tooltip::indexOf).get() != -1 && !(stack.getItem() instanceof ItemBow))
 		{
 			Multimap<String, AttributeModifier> map = stack.getItem().getAttributeModifiers(EntityEquipmentSlot.MAINHAND, stack);
 			Collection<AttributeModifier> damageCollection = map.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
@@ -131,18 +132,21 @@ public class EventItemTooltip
 			String d = String.format("%.1f", damage);
 			
 			if(rarity.getEffect() != 0)
-				tooltip.set(EAUtils.lineContainsString(tooltip, "When in main hand:") + 2, new TextComponentString(rarity.getColor() + " " + d + TextFormatting.GRAY +" "+ I18n.format("enhancedarmaments.misc.tooltip.attackdamage")));
+				tooltip.set(tooltip.stream().filter(text -> text.getString().equals("When in main hand")).findAny().map(tooltip::indexOf).get() + 2, new TextComponentString(rarity.getColor() + " " + d + TextFormatting.GRAY +" "+ I18n.format("enhancedarmaments.misc.tooltip.attackdamage")));
 		}
 		
-		if (EAUtils.containsString(tooltip, "When on head:") || EAUtils.containsString(tooltip, "When on body:") || EAUtils.containsString(tooltip, "When on legs:") || EAUtils.containsString(tooltip, "When on feet:"))
+		if (tooltip.stream().filter(text -> text.getString().equals("When on head")).findAny().map(tooltip::indexOf).get() != -1
+				|| tooltip.stream().filter(text -> text.getString().equals("When on body")).findAny().map(tooltip::indexOf).get() != -1
+				|| tooltip.stream().filter(text -> text.getString().equals("When on legs")).findAny().map(tooltip::indexOf).get() != -1
+				|| tooltip.stream().filter(text -> text.getString().equals("When on feet")).findAny().map(tooltip::indexOf).get() != -1)
 		{
 			String p = String.format("%.1f", 100-(100/(1.0F + (rarity.getEffect()/5F))));
 			float percentage = Float.valueOf(p);
 			int line = 2;
-			if(EAUtils.containsString(tooltip, "When on head:")) line = EAUtils.lineContainsString(tooltip, "When on head:");
-			if(EAUtils.containsString(tooltip, "When on body:")) line = EAUtils.lineContainsString(tooltip, "When on body:");
-			if(EAUtils.containsString(tooltip, "When on legs:")) line = EAUtils.lineContainsString(tooltip, "When on legs:");
-			if(EAUtils.containsString(tooltip, "When on feet:")) line = EAUtils.lineContainsString(tooltip, "When on feet:");
+			if(tooltip.stream().filter(text -> text.getString().equals("When on head")).findAny().map(tooltip::indexOf).get() != -1) line = tooltip.stream().filter(text -> text.getString().equals("When on head")).findAny().map(tooltip::indexOf).get();
+			if(tooltip.stream().filter(text -> text.getString().equals("When on body")).findAny().map(tooltip::indexOf).get() != -1) line = tooltip.stream().filter(text -> text.getString().equals("When on body")).findAny().map(tooltip::indexOf).get();
+			if(tooltip.stream().filter(text -> text.getString().equals("When on legs")).findAny().map(tooltip::indexOf).get() != -1) line = tooltip.stream().filter(text -> text.getString().equals("When on legs")).findAny().map(tooltip::indexOf).get();
+			if(tooltip.stream().filter(text -> text.getString().equals("When on feet")).findAny().map(tooltip::indexOf).get() != -1) line = tooltip.stream().filter(text -> text.getString().equals("When on feet")).findAny().map(tooltip::indexOf).get();
 			if(percentage != 0)
 				tooltip.add(line + 1, new TextComponentString(" " + TextFormatting.BLUE + "+" + rarity.getColor() + percentage + TextFormatting.BLUE + "% " + I18n.format("enhancedarmaments.misc.rarity.armorreduction")));
 		}
