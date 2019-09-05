@@ -1,7 +1,6 @@
 package com.jannesoon.enhancedarmaments.essentials;
 
 import com.jannesoon.enhancedarmaments.config.Config;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
