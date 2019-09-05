@@ -154,7 +154,7 @@ public class Config
 		propOrder.add(prop.getName());
 		
 		prop = main.get(category, "extraItems", extraItems);
-		prop.setComment("This is an extra item list to add custom support for such modded items. Be careful on this, it may crash if the item can't be enhanced. Style should be 'modid:item'");
+		prop.setComment("This is an extra item list to add custom support for such modded items. Be careful on this, it may crash if the item can't be enhanced. Style should be 'modid:item'. \nExample: tconstruct:broadsword");
 		extraItems = prop.getStringList();
 		propOrder.add(prop.getName());
 		
