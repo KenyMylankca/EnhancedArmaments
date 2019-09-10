@@ -47,7 +47,7 @@ public class WPCommandRarity extends CommandBase
 		
 		if((args.length < 1) || (args.length > 1)) return;
 		
-		if(!(isInteger(args[0]))) throw new UsageException("Enter an id! \n1:Basic\n2:Uncommon\n3:Rare\n4:Ultra Rare\n5:Legendary\n6:Archaic");
+		if(!(isInteger(args[0]))) throw new UsageException("Enter an id! \n1:Basic\n2:Uncommon\n3:Rare\n4:Ultra Rare\n5:Legendary\n6:Ancient");
 		
 		if((sender instanceof EntityPlayer) && (isInteger(args[0])))
 		{

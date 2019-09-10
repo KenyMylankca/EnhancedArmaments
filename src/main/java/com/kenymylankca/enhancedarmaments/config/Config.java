@@ -83,7 +83,7 @@ public class Config
 	public static double rareChance = 0.10D;
 	public static double ultraRareChance = 0.05D;
 	public static double legendaryChance = 0.02D;
-	public static double archaicChance = 0.01D;
+	public static double ancientChance = 0.01D;
 	
 	//rarity effect
 	public static double basicDamage = 0;
@@ -91,7 +91,7 @@ public class Config
 	public static double rareDamage = 0.305D;
 	public static double ultraRareDamage = 0.38D;
 	public static double legendaryDamage = 0.71D;
-	public static double archaicDamage = 0.91D;
+	public static double ancientDamage = 0.91D;
 	
 	public static void init(File dir)
 	{
@@ -361,9 +361,9 @@ public class Config
 		legendaryChance = prop.getDouble();
 		propOrder.add(prop.getName());
 		
-		prop = rarities.get(category, "archaicChance", archaicChance);
+		prop = rarities.get(category, "ancientChance", ancientChance);
 		prop.setComment("Sets the chance the given rarity will be applied. Default: 0.01");
-		archaicChance = prop.getDouble();
+		ancientChance = prop.getDouble();
 		propOrder.add(prop.getName());
 		
 		/**
@@ -394,9 +394,9 @@ public class Config
 		legendaryDamage = prop.getDouble();
 		propOrder.add(prop.getName());
 		
-		prop = rarities.get(category, "archaicDamage", archaicDamage);
+		prop = rarities.get(category, "ancientDamage", ancientDamage);
 		prop.setComment("Sets the effectiveness for the given rarity. Default: 0.91");
-		archaicDamage = prop.getDouble();
+		ancientDamage = prop.getDouble();
 		propOrder.add(prop.getName());
 		
 		rarities.setCategoryPropertyOrder(category, propOrder);
