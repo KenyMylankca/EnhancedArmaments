@@ -20,3 +20,6 @@ build
 # other
 eclipse
 run
+
+!EnhancedArmaments_Client.launch
+!EnhancedArmaments_Server.launch
