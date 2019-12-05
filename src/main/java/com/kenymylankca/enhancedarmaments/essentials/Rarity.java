@@ -15,8 +15,8 @@ public enum Rarity
 	UNCOMMON(TextFormatting.DARK_GREEN, 0x00AA00, Config.uncommonChance, Config.uncommonDamage),
 	RARE(TextFormatting.AQUA, 0x55FFFF, Config.rareChance, Config.rareDamage),
 	ULTRA_RARE(TextFormatting.DARK_PURPLE, 0xAA00AA, Config.ultraRareChance, Config.ultraRareDamage),
-	LEGENDARY(TextFormatting.LIGHT_PURPLE, 0xFFAA00, Config.legendaryChance, Config.legendaryDamage),
-	ANCIENT(TextFormatting.GOLD, 0xFF55FF, Config.ancientChance, Config.ancientDamage);
+	LEGENDARY(TextFormatting.GOLD, 0xFFAA00, Config.legendaryChance, Config.legendaryDamage),
+	ANCIENT(TextFormatting.LIGHT_PURPLE, 0xFF55FF, Config.ancientChance, Config.ancientDamage);
 	
 	private String color;
 	private int hex;
