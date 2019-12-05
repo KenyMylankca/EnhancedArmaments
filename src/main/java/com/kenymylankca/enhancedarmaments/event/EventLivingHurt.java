@@ -187,7 +187,7 @@ public class EventLivingHurt
 				target.addPotionEffect(new PotionEffect(MobEffects.POISON, (int) (20 * multiplier), Ability.POISON.getLevel(nbt)));
 			}
 			
-			if (Ability.INNATE.hasAbility(nbt) && (int) (Math.random() * Config.innatechance) == 0)
+			if (Ability.INNATE.hasAbility(nbt))
 			{
 				double multiplier = (Ability.INNATE.getLevel(nbt) + Ability.INNATE.getLevel(nbt)*4)/3;
 				target.addPotionEffect(new PotionEffect(MobEffects.WITHER, (int) (20 * multiplier), Ability.INNATE.getLevel(nbt)));

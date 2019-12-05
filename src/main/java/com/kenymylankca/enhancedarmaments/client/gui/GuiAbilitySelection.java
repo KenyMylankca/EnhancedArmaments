@@ -369,18 +369,15 @@ public class GuiAbilitySelection extends GuiScreen
 					}
 					if (i == 3)//INNATE
 					{
-						float chance = (float) ((1.0 / (Config.innatechance))*100);
 						float currentduration = (Ability.INNATE.getLevel(nbt) + Ability.INNATE.getLevel(nbt)*4)/3;
 						float nextlevelduration = (Ability.INNATE.getLevel(nbt)+1 + (Ability.INNATE.getLevel(nbt)+1)*4)/3;
 						float currentbleedingspeed = (Ability.INNATE.getLevel(nbt));
 						float nextlevelbleedingspeed = (Ability.INNATE.getLevel(nbt)+1);
-						int c = (int) chance;
 						
 						if (!(Ability.INNATE.hasAbility(nbt)))
 						{
 							if (buttons[i].enabled)
 							{
-								list.add(I18n.format("enhancedarmaments.abilities.info.chance")+": %0"+ TextFormatting.GREEN + " + %" + c);
 								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": 0 " + I18n.format("enhancedarmaments.abilities.info.seconds")+ TextFormatting.GREEN + " +" + nextlevelduration);
 								list.add(I18n.format("enhancedarmaments.abilities.info.bleedingspeed")+": 0 "+ TextFormatting.GREEN + "+" + nextlevelbleedingspeed);
 							}
@@ -389,13 +386,11 @@ public class GuiAbilitySelection extends GuiScreen
 						{
 							if (buttons[i].enabled)
 							{
-								list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
 								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " +" + (nextlevelduration-currentduration));
 								list.add(I18n.format("enhancedarmaments.abilities.info.bleedingspeed")+": "+ currentbleedingspeed + " " + TextFormatting.GREEN + "+" + (nextlevelbleedingspeed-currentbleedingspeed));
 							}
 							else
 							{
-								list.add(I18n.format("enhancedarmaments.abilities.info.chance") + ": %" + c);
 								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration +" "+ I18n.format("enhancedarmaments.abilities.info.seconds"));
 								list.add(I18n.format("enhancedarmaments.abilities.info.bleedingspeed")+": " + currentbleedingspeed);
 								if(!(Ability.INNATE.canUpgradeLevel(nbt)))

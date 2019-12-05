@@ -63,7 +63,6 @@ public class Config
 	public static int firechance = 4;
 	public static int frostchance = 4;
 	public static int poisonchance = 4;
-	public static int innatechance = 6;
 	public static int bombasticchance = 7;
 	public static int criticalpointchance = 14;
 	//armor
@@ -281,11 +280,6 @@ public class Config
 		prop = abilitychances.get(category, "poisonchance", poisonchance);
 		prop.setComment("Determines how rare the Poison ability will occur. (Higher values=lower occurance) Default: 4");
 		poisonchance = prop.getInt();
-		propOrder.add(prop.getName());
-		
-		prop = abilitychances.get(category, "innatechance", innatechance);
-		prop.setComment("Determines how rare the Innate ability will occur. (Higher values=lower occurance) Default: 6");
-		innatechance = prop.getInt();
 		propOrder.add(prop.getName());
 		
 		prop = abilitychances.get(category, "bombasticchance", bombasticchance);
