@@ -189,8 +189,14 @@ public class EventLivingHurt
 			
 			if (Ability.INNATE.hasAbility(nbt))
 			{
-				double multiplier = (Ability.INNATE.getLevel(nbt) + Ability.INNATE.getLevel(nbt)*4)/3;
-				target.addPotionEffect(new PotionEffect(MobEffects.WITHER, (int) (20 * multiplier), Ability.INNATE.getLevel(nbt)));
+				double duration = 20 * Ability.INNATE.getLevel(nbt) * 1.6;
+				if(target.isPotionActive(MobEffects.WITHER))
+				{
+					if(target.getActivePotionEffect(MobEffects.WITHER).getAmplifier() < 3)
+						target.addPotionEffect(new PotionEffect(MobEffects.WITHER, (int) (duration), target.getActivePotionEffect(MobEffects.WITHER).getAmplifier() + 1));
+				}
+				else
+					target.addPotionEffect(new PotionEffect(MobEffects.WITHER, (int) (duration), 1));
 			}
 
 			if (Ability.BOMBASTIC.hasAbility(nbt) && (int) (Math.random() * Config.bombasticchance) == 0)

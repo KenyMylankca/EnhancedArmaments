@@ -369,30 +369,30 @@ public class GuiAbilitySelection extends GuiScreen
 					}
 					if (i == 3)//INNATE
 					{
-						float currentduration = (Ability.INNATE.getLevel(nbt) + Ability.INNATE.getLevel(nbt)*4)/3;
-						float nextlevelduration = (Ability.INNATE.getLevel(nbt)+1 + (Ability.INNATE.getLevel(nbt)+1)*4)/3;
-						float currentbleedingspeed = (Ability.INNATE.getLevel(nbt));
-						float nextlevelbleedingspeed = (Ability.INNATE.getLevel(nbt)+1);
+						float currentduration = (Ability.INNATE.getLevel(nbt)) * 1.6f;
+						float nextlevelduration = (Ability.INNATE.getLevel(nbt) + 1) * 1.6f;
+						float currentmaxwounds = (Ability.INNATE.getLevel(nbt));
+						float nextlevelmaxwounds = (Ability.INNATE.getLevel(nbt)) + 1;
 						
 						if (!(Ability.INNATE.hasAbility(nbt)))
 						{
 							if (buttons[i].enabled)
 							{
 								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": 0 " + I18n.format("enhancedarmaments.abilities.info.seconds")+ TextFormatting.GREEN + " +" + nextlevelduration);
-								list.add(I18n.format("enhancedarmaments.abilities.info.bleedingspeed")+": 0 "+ TextFormatting.GREEN + "+" + nextlevelbleedingspeed);
+								list.add(I18n.format("enhancedarmaments.abilities.info.maxwounds")+": 0 "+ TextFormatting.GREEN + "+" + nextlevelmaxwounds);
 							}
 						}
 						else
 						{
 							if (buttons[i].enabled)
 							{
-								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " +" + (nextlevelduration-currentduration));
-								list.add(I18n.format("enhancedarmaments.abilities.info.bleedingspeed")+": "+ currentbleedingspeed + " " + TextFormatting.GREEN + "+" + (nextlevelbleedingspeed-currentbleedingspeed));
+								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration + " " + I18n.format("enhancedarmaments.abilities.info.seconds") + TextFormatting.GREEN + " +" + 1.6);
+								list.add(I18n.format("enhancedarmaments.abilities.info.maxwounds")+": "+ currentmaxwounds + " " + TextFormatting.GREEN + "+" + 1.0);
 							}
 							else
 							{
 								list.add(I18n.format("enhancedarmaments.abilities.info.duration")+": " + currentduration +" "+ I18n.format("enhancedarmaments.abilities.info.seconds"));
-								list.add(I18n.format("enhancedarmaments.abilities.info.bleedingspeed")+": " + currentbleedingspeed);
+								list.add(I18n.format("enhancedarmaments.abilities.info.maxwounds")+": " + currentmaxwounds);
 								if(!(Ability.INNATE.canUpgradeLevel(nbt)))
 									list.add(TextFormatting.RED + I18n.format("enhancedarmaments.misc.max")+" " + I18n.format("enhancedarmaments.misc.level"));
 							}
