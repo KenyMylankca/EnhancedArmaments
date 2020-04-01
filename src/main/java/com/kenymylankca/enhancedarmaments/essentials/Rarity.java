@@ -21,16 +21,16 @@ public enum Rarity
 	private String color;
 	private int hex;
 	private double weight;
-	private double effect;
+	private double level;
 	private static final Rarity[] RARITIES = Rarity.values();
 	private static final RandomCollection<Rarity> RANDOM_RARITIES = new RandomCollection<Rarity>();
 	
-	Rarity(Object color, int hex, double weight, double effect)
+	Rarity(Object color, int hex, double weight, double level)
 	{
 		this.color = color.toString();
 		this.hex = hex;
 		this.weight = weight;
-		this.effect = effect;
+		this.level = level;
 	}
 	
 	/**
@@ -82,9 +82,9 @@ public enum Rarity
 		return hex;
 	}
 	
-	public double getEffect()
+	public double getLevel()
 	{
-		return effect;
+		return level;
 	}
 
 	static
