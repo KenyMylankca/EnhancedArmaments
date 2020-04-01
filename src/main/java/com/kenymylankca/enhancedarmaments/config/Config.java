@@ -85,12 +85,12 @@ public class Config
 	public static double ancientChance = 0.01D;
 	
 	//rarity effect
-	public static double basicDamage = 0;
-	public static double uncommonDamage = 0.155D;
-	public static double rareDamage = 0.305D;
-	public static double ultraRareDamage = 0.38D;
-	public static double legendaryDamage = 0.71D;
-	public static double ancientDamage = 0.91D;
+	public static double basicEffect = 0;
+	public static double uncommonEffect = 0.155D;
+	public static double rareEffect = 0.305D;
+	public static double ultraRareEffect = 0.38D;
+	public static double legendaryEffect = 0.71D;
+	public static double ancientEffect = 0.91D;
 	
 	public static void init(File dir)
 	{
@@ -361,36 +361,36 @@ public class Config
 		propOrder.add(prop.getName());
 		
 		/**
-		Damage Multipliers
+		Effect Multipliers
 		*/
-		prop = rarities.get(category, "basicDamage", basicDamage);
+		prop = rarities.get(category, "basicEffect", basicEffect);
 		prop.setComment("Sets the effectiveness for the given rarity. Default: 0");
-		basicDamage = prop.getDouble();
+		basicEffect = prop.getDouble();
 		propOrder.add(prop.getName());
 		
-		prop = rarities.get(category, "uncommonDamage", uncommonDamage);
+		prop = rarities.get(category, "uncommonEffect", uncommonEffect);
 		prop.setComment("Sets the effectiveness for the given rarity. Default: 0.155");
-		uncommonDamage = prop.getDouble();
+		uncommonEffect = prop.getDouble();
 		propOrder.add(prop.getName());
 		
-		prop = rarities.get(category, "rareDamage", rareDamage);
+		prop = rarities.get(category, "rareEffect", rareEffect);
 		prop.setComment("Sets the effectiveness for the given rarity. Default: 0.305");
-		rareDamage = prop.getDouble();
+		rareEffect = prop.getDouble();
 		propOrder.add(prop.getName());
 		
-		prop = rarities.get(category, "ultraRareDamage", ultraRareDamage);
+		prop = rarities.get(category, "ultraRareEffect", ultraRareEffect);
 		prop.setComment("Sets the effectiveness for the given rarity. Default: 0.38");
-		ultraRareDamage = prop.getDouble();
+		ultraRareEffect = prop.getDouble();
 		propOrder.add(prop.getName());
 		
-		prop = rarities.get(category, "legendaryDamage", legendaryDamage);
+		prop = rarities.get(category, "legendaryEffect", legendaryEffect);
 		prop.setComment("Sets the effectiveness for the given rarity. Default: 0.71");
-		legendaryDamage = prop.getDouble();
+		legendaryEffect = prop.getDouble();
 		propOrder.add(prop.getName());
 		
-		prop = rarities.get(category, "ancientDamage", ancientDamage);
+		prop = rarities.get(category, "ancientEffect", ancientEffect);
 		prop.setComment("Sets the effectiveness for the given rarity. Default: 0.91");
-		ancientDamage = prop.getDouble();
+		ancientEffect = prop.getDouble();
 		propOrder.add(prop.getName());
 		
 		rarities.setCategoryPropertyOrder(category, propOrder);
