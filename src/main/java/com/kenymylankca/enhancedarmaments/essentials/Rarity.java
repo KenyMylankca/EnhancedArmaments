@@ -11,12 +11,12 @@ import net.minecraft.util.text.TextFormatting;
 public enum Rarity 
 {
 	DEFAULT("", 0, 0.0, 0.0),
-	BASIC(TextFormatting.WHITE, 0xFFFFFF, Config.basicChance, Config.basicDamage),
-	UNCOMMON(TextFormatting.DARK_GREEN, 0x00AA00, Config.uncommonChance, Config.uncommonDamage),
-	RARE(TextFormatting.AQUA, 0x55FFFF, Config.rareChance, Config.rareDamage),
-	ULTRA_RARE(TextFormatting.DARK_PURPLE, 0xAA00AA, Config.ultraRareChance, Config.ultraRareDamage),
-	LEGENDARY(TextFormatting.GOLD, 0xFFAA00, Config.legendaryChance, Config.legendaryDamage),
-	ANCIENT(TextFormatting.LIGHT_PURPLE, 0xFF55FF, Config.ancientChance, Config.ancientDamage);
+	BASIC(TextFormatting.WHITE, 0xFFFFFF, Config.basicChance, Config.basicEffect),
+	UNCOMMON(TextFormatting.DARK_GREEN, 0x00AA00, Config.uncommonChance, Config.uncommonEffect),
+	RARE(TextFormatting.AQUA, 0x55FFFF, Config.rareChance, Config.rareEffect),
+	ULTRA_RARE(TextFormatting.DARK_PURPLE, 0xAA00AA, Config.ultraRareChance, Config.ultraRareEffect),
+	LEGENDARY(TextFormatting.GOLD, 0xFFAA00, Config.legendaryChance, Config.legendaryEffect),
+	ANCIENT(TextFormatting.LIGHT_PURPLE, 0xFF55FF, Config.ancientChance, Config.ancientEffect);
 	
 	private String color;
 	private int hex;
