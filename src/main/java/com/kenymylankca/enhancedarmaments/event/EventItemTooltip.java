@@ -14,8 +14,10 @@ import com.kenymylankca.enhancedarmaments.util.EAUtils;
 import com.kenymylankca.enhancedarmaments.util.NBTHelper;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
@@ -126,11 +128,16 @@ public class EventItemTooltip
 			Multimap<String, AttributeModifier> map = stack.getItem().getAttributeModifiers(EntityEquipmentSlot.MAINHAND, stack);
 			Collection<AttributeModifier> damageCollection = map.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
 			AttributeModifier damageModifier = (AttributeModifier) damageCollection.toArray()[0];
-			double damage = ((damageModifier.getAmount() + 1) * rarity.getLevel()) + damageModifier.getAmount() + 1;
-			String d = String.format("%.1f", damage);
+			double originalDamage = damageModifier.getAmount() + 1;
+			if(stack.isItemEnchanted())
+				if(EnchantmentHelper.getEnchantmentLevel(Enchantments.SHARPNESS, stack) > 0)
+					originalDamage += (EnchantmentHelper.getEnchantmentLevel(Enchantments.SHARPNESS, stack) + 1) / 2;
 			
-			if(rarity.getLevel() != 0)
-				tooltip.set(tooltip.indexOf("When in main hand:") + 2, rarity.getColor()+" " + d + TextFormatting.GRAY +" "+ I18n.format("enhancedarmaments.misc.tooltip.attackdamage"));
+			double damage = (originalDamage * rarity.getEffect()) + originalDamage;
+			String attackDamageString = String.format("%.1f", damage);
+			
+			if(rarity.getEffect() != 0)
+				tooltip.set(tooltip.indexOf("When in main hand:") + 2, rarity.getColor()+" " + attackDamageString + TextFormatting.GRAY +" "+ I18n.format("enhancedarmaments.misc.tooltip.attackdamage"));
 		}
 		if (tooltip.indexOf("When on head:") != -1 || tooltip.indexOf("When on body:") != -1 || tooltip.indexOf("When on legs:") != -1 || tooltip.indexOf("When on feet:") != -1)
 		{
