@@ -134,7 +134,7 @@ public class EventItemTooltip
 		}
 		if (tooltip.indexOf("When on head:") != -1 || tooltip.indexOf("When on body:") != -1 || tooltip.indexOf("When on legs:") != -1 || tooltip.indexOf("When on feet:") != -1)
 		{
-			String p = String.format("%.1f", 100-(100/(1.0F + (rarity.getLevel()/5F))));
+			String p = String.format("%.1f", 100-(100/(1.0F + (rarity.getEffect()/5F))));
 			float percentage = Float.valueOf(p);
 			int line = 2;
 			if(tooltip.indexOf("When on head:") != -1) line = tooltip.indexOf("When on head:");
@@ -145,9 +145,9 @@ public class EventItemTooltip
 				tooltip.add(line + 1," " + TextFormatting.BLUE + "+" + rarity.getColor() + percentage + TextFormatting.BLUE + "% " + I18n.format("enhancedarmaments.misc.rarity.armorreduction"));
 		}
 		
-		if(EAUtils.canEnhanceRanged(stack.getItem()) && rarity.getLevel() != 0)
+		if(EAUtils.canEnhanceRanged(stack.getItem()) && rarity.getEffect() != 0)
 		{
-			String b = String.format("%.1f", rarity.getLevel()/3*100);
+			String b = String.format("%.1f", rarity.getEffect()/3*100);
 			tooltip.add(1, I18n.format("enhancedarmaments.misc.rarity.arrowpercentage") + " " + rarity.getColor() + "+" + b + "%");
 		}
 	}

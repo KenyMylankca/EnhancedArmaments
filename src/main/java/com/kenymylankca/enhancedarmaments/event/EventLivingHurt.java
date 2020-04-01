@@ -146,15 +146,15 @@ public class EventLivingHurt
 				Collection<AttributeModifier> damageCollection = map.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
 				AttributeModifier damageModifier = (AttributeModifier) damageCollection.toArray()[0];
 				double damage = damageModifier.getAmount();
-				event.setAmount((float) (event.getAmount() + damage * rarity.getLevel()));
+				event.setAmount((float) (event.getAmount() + damage * rarity.getEffect()));
 			}
 			else if(EAUtils.canEnhanceRanged(stack.getItem()))
 			{
-				float newdamage = (float) (event.getAmount() + (event.getAmount() * rarity.getLevel()/3));
+				float newdamage = (float) (event.getAmount() + (event.getAmount() * rarity.getEffect()/3));
 				event.setAmount(newdamage);
 			}
 			else if (EAUtils.canEnhanceArmor(stack.getItem()))
-				event.setAmount((float) (event.getAmount() / (1.0F + (rarity.getLevel()/5F))));
+				event.setAmount((float) (event.getAmount() / (1.0F + (rarity.getEffect()/5F))));
 	}
 	
 	/**
