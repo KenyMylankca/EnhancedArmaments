@@ -21,8 +21,8 @@ public class Config
 	
 	// experience
 	public static int maxLevel = 10;
-	public static int level1Experience = 100;
-	public static double experienceMultiplier = 1.8;
+	public static int level1Experience = 120;
+	public static double experienceMultiplier = 1.9;
 	
 	// misc
 	public static boolean showDurability = true;
