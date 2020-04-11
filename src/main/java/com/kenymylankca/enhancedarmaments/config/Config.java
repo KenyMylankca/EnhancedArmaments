@@ -125,12 +125,12 @@ public class Config
 		propOrder.add(prop.getName());
 		
 		prop = main.get(category, "level1Experience", level1Experience);
-		prop.setComment("The experience amount needed for the first level(1). Default: 100");
+		prop.setComment("The experience amount needed for the first level(1). Default: 120");
 		level1Experience = prop.getInt();
 		propOrder.add(prop.getName());
 		
 		prop = main.get(category, "experienceMultiplier", experienceMultiplier);
-		prop.setComment("The experience multiplier for each level based on the first level experience. Default: 1.8");
+		prop.setComment("The experience multiplier for each level based on the first level experience. Default: 1.9");
 		experienceMultiplier = prop.getDouble();
 		propOrder.add(prop.getName());
 		
