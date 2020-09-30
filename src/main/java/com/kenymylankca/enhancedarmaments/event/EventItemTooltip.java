@@ -60,7 +60,6 @@ public class EventItemTooltip
 					int level = Experience.getLevel(nbt);
 					int experience = Experience.getExperience(nbt);
 					int maxExperience = Experience.getMaxLevelExp(level);
-					
 					changeTooltips(tooltip, stack, rarity);
 					
 				// add tooltips
@@ -136,8 +135,11 @@ public class EventItemTooltip
 			double damage = (originalDamage * rarity.getEffect()) + originalDamage;
 			String attackDamageString = String.format("%.1f", damage);
 			
-			if(rarity.getEffect() != 0)
-				tooltip.set(tooltip.indexOf("When in main hand:") + 2, rarity.getColor()+" " + attackDamageString + TextFormatting.GRAY +" "+ I18n.format("enhancedarmaments.misc.tooltip.attackdamage"));
+			if(rarity.getEffect() != 0) {
+				for(int i=0; i<tooltip.size(); i++)
+					if(tooltip.get(i).contains("Attack Damage"))
+						tooltip.set(i, rarity.getColor()+" " + attackDamageString + TextFormatting.GRAY +" "+ I18n.format("enhancedarmaments.misc.tooltip.attackdamage"));
+			}
 		}
 		if (tooltip.indexOf("When on head:") != -1 || tooltip.indexOf("When on body:") != -1 || tooltip.indexOf("When on legs:") != -1 || tooltip.indexOf("When on feet:") != -1)
 		{
