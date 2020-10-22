@@ -1,7 +1,5 @@
 package com.kenymylankca.enhancedarmaments.event;
 
-import java.util.Random;
-
 import com.kenymylankca.enhancedarmaments.config.Config;
 import com.kenymylankca.enhancedarmaments.essentials.Ability;
 import com.kenymylankca.enhancedarmaments.essentials.Experience;
@@ -66,31 +64,30 @@ public class EventLivingUpdate
 								{
 									if (!Experience.isEnabled(nbt))
 									{
-										boolean okay = true;
+										boolean flag = true;
 										
 										for (int j = 0; j < Config.itemBlacklist.length; j++)
 										{
 											if (Config.itemBlacklist[j].equals(stack.getItem().getRegistryName().getResourceDomain() + ":" + stack.getItem().getRegistryName().getResourcePath()))
-												okay=false;
+												flag=false;
 										}
 										
 										if (Config.itemWhitelist.length != 0)
 										{
-											okay=false;
+											flag=false;
 											for(int k = 0; k < Config.itemWhitelist.length; k++)
 												if(Config.itemWhitelist[k].equals(stack.getItem().getRegistryName().getResourceDomain() + ":" + stack.getItem().getRegistryName().getResourcePath()))
-													okay=true;
+													flag=true;
 										}
 										
-										if (okay)
+										if (flag)
 										{
 											Experience.enable(nbt, true);
 											Rarity rarity = Rarity.getRarity(nbt);
-											Random rand = player.world.rand;
 											
 											if (rarity == Rarity.DEFAULT)
 											{
-												rarity = Rarity.getRandomRarity(rand);
+												rarity = Rarity.createRandomRarity();
 												rarity.setRarity(nbt);
 												NBTHelper.saveStackNBT(stack, nbt);
 											}

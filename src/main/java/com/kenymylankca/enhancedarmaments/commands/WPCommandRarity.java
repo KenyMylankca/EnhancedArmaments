@@ -3,7 +3,6 @@ package com.kenymylankca.enhancedarmaments.commands;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.kenymylankca.enhancedarmaments.essentials.Rarity;
 import com.kenymylankca.enhancedarmaments.util.EAUtils;
 import com.kenymylankca.enhancedarmaments.util.NBTHelper;
 
@@ -57,18 +56,17 @@ public class WPCommandRarity extends CommandBase
 	
 	public static void ChangeRarity(EntityPlayer player, String rarityid) throws UsageException
 	{
-		int id = Integer.parseInt(rarityid);
-		String raritynumber = Integer.toString(id);
+		int rarityNumber = Integer.parseInt(rarityid);
 		
-		if((id < 1) || (id > 6)) throw new UsageException("Rarity ID must be 1, 2, 3, 4, 5 or 6!");
+		if((rarityNumber < 1) || (rarityNumber > 6)) throw new UsageException("Rarity ID must be 1, 2, 3, 4, 5 or 6!");
 		
-		if(EAUtils.canEnhance(player.getHeldItemMainhand().getItem()) && (id <7 && id > 0))
+		if(EAUtils.canEnhance(player.getHeldItemMainhand().getItem()) && (rarityNumber <7 && rarityNumber > 0))
 		{
-		ItemStack item = player.getHeldItemMainhand();
-		NBTTagCompound nbt = NBTHelper.loadStackNBT(item);
-		Rarity.setRarity(nbt, raritynumber);
-		NBTHelper.saveStackNBT(item, nbt);
-		player.setHeldItem(EnumHand.MAIN_HAND, item);
+			ItemStack item = player.getHeldItemMainhand();
+			NBTTagCompound nbt = NBTHelper.loadStackNBT(item);
+			nbt.setInteger("RARITY", rarityNumber);
+			NBTHelper.saveStackNBT(item, nbt);
+			player.setHeldItem(EnumHand.MAIN_HAND, item);
 		}
 		
 		if (!EAUtils.canEnhance(player.getHeldItemMainhand().getItem())) throw new UsageException("Hold a weapon or an armor in your mainhand!");

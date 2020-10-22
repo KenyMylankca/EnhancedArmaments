@@ -38,8 +38,9 @@ public enum Rarity
 	 * @param random
 	 * @return
 	 */
-	public static Rarity getRandomRarity(Random random)
+	public static Rarity createRandomRarity()
 	{
+		Random random = new Random();
 		return RANDOM_RARITIES.next(random);
 	}
 
@@ -50,7 +51,7 @@ public enum Rarity
 	 */
 	public static Rarity getRarity(NBTTagCompound nbt)
 	{
-		return nbt != null && nbt.hasKey("RARITY") ? RARITIES[nbt.getInteger("RARITY")] : DEFAULT;
+		return RARITIES[nbt.getInteger("RARITY")];
 	}
 	
 	public void setRarity(NBTTagCompound nbt)
@@ -59,12 +60,6 @@ public enum Rarity
 		{
 			nbt.setInteger("RARITY", ordinal());
 		}
-	}
-	
-	public static void setRarity(NBTTagCompound nbt, String rarityName)
-	{
-		int rarity = Integer.parseInt(rarityName);
-		nbt.setInteger("RARITY", rarity);
 	}
 
 	public String getName()

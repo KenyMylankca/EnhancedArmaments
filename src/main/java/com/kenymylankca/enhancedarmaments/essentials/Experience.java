@@ -106,6 +106,9 @@ public class Experience
 	
 	public static boolean isEnabled(NBTTagCompound nbt)
 	{
-		return nbt != null ? nbt.getBoolean("EA_ENABLED") : false;
+		if(nbt != null)
+			if(nbt.hasKey("EA_ENABLED"))
+				return true;
+		return false;
 	}
 }
